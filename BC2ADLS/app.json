@@ -2,30 +2,53 @@
   "id": "7a4530b3-2449-40ad-9779-97f4663ce51f",
   "name": "BC2ADLS",
   "publisher": "The bc2adls team",
-  "version": "1.0.0.0",
-  "brief": "",
-  "description": "",
-  "privacyStatement": "",
-  "EULA": "",
-  "help": "",
-  "url": "",
-  "logo": "",
-  "dependencies": [],
+  "brief": "Sync data from Business Central to the Azure storage",
+  "description": "Exports data in chosen tables to the Azure Data Lake and keeps it in sync by incremental updates. Before you use this tool, please read the SUPPORT.md file at https://github.com/microsoft/bc2adls.",
+  "version": "27.44.0.0",
+  "privacyStatement": "https://go.microsoft.com/fwlink/?LinkId=724009",
+  "EULA": "https://go.microsoft.com/fwlink/?linkid=2009120",
+  "help": "https://github.com/Bertverbeek4PS/bc2adls?tab=readme-ov-file#introduction",
+  "url": "https://github.com/Bertverbeek4PS/bc2adls",
+  "contextSensitiveHelpUrl": "https://github.com/Bertverbeek4PS/bc2adls?tab=readme-ov-file#introduction",
+  "logo": "../../.assets/bc2adls_logo.png",
   "screenshots": [],
-  "platform": "1.0.0.0",
-  "application": "22.0.0.0",
+  "platform": "27.0.0.0",
+  "application": "27.0.0.0",
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "applicationInsightsConnectionString": "InstrumentationKey=616da95e-ebb7-425e-97c2-3fb20a2b7a2c;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/;ApplicationId=73864054-3efe-4089-a51f-1dd006298a7f",
   "idRanges": [
     {
       "from": 11344437,
       "to": 11344456
     }
   ],
-  "features": [
-    "NoImplicitWith"
+  "internalsVisibleTo": [
+    {
+      "publisher": "Microsoft",
+      "name": "Tests-TestLibraries",
+      "id": "5d86850b-0d76-4eca-bd7b-951ad998e997"
+    },
+    {
+      "publisher": "The bc2adls team",
+      "name": "Azure Data Lake Storage Export Tests",
+      "id": "03486619-1622-4261-ae0e-b366b3c96e3c"
+    }
   ],
-  "resourceExposurePolicy": {
-    "allowDebugging": true,
-    "allowDownloadingSource": false,
-    "includeSourceInSymbolFile": false
-  }
+  "target": "Cloud",
+  "runtime": "16.0",
+  "features": [
+          "TranslationFile"
+              ],
+  "supportedLocales": [
+                        "en-US", 
+                        "nl-NL",                        
+                        "en-GB", 
+                        "en-AU",
+                        "en-CA",
+                        "en-NZ"
+                      ]
 }

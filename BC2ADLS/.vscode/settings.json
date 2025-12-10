@@ -1,0 +1,21 @@
+{
+  "al.enableCodeAnalysis": true,
+  "al.codeAnalyzers": [
+    "${CodeCop}",
+    "${UICop}",
+    "${AppSourceCop}",
+    "${analyzerFolder}BusinessCentral.LinterCop.dll"
+  ],
+  "al.ruleSetPath": "./.vscode/custom.ruleset.json",
+  "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+  "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+  "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+  "CRS.RemovePrefixFromFilename": true,
+  "linterCop.repositories": [
+    {
+      "url": "https://github.com/StefanMaron/BusinessCentral.LinterCop",
+      "shortName": "BcLntr",
+      "fileName": "BusinessCentral.LinterCop.dll"
+    }
+  ]
+}
