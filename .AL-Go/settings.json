@@ -4,7 +4,7 @@
   "appSourceCopMandatoryAffixes": [
     "ADLSE"
   ],
-  "appFolders": [],
-  "testFolders": [],
+  "appFolders": ["BC2ADLS"],
+  "testFolders": ["BC2ADLS.Test"],
   "bcptTestFolders": []
 }
