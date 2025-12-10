@@ -3,5 +3,6 @@
         "US",
         "NL"
     ],
-    "mandatorySuffix": "ADLSE"
+    "mandatorySuffix": "ADLSE",
+    "mandatoryAffixes": ["ADLSE"]
 }
