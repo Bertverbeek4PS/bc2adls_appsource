@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="en-us" original="Azure Data Lake Storage Export.g.xlf">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="Azure Data Lake Storage Export.g.xlf">
     <body>
       <group id="body">
         <trans-unit id="Table 4003818636 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">

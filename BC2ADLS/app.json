@@ -43,12 +43,12 @@
   "features": [
           "TranslationFile"
               ],
-  "supportedLocales": [
-                        "en-US", 
+  "supportedLocales": [ 
                         "nl-NL",                        
                         "en-GB", 
                         "en-AU",
                         "en-CA",
-                        "en-NZ"
+                        "en-NZ",
+                        "en-US"
                       ]
 }
