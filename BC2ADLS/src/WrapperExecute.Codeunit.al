@@ -1,14 +1,14 @@
 namespace bc2adls;
 
-codeunit 11344455 "ADLSE Wrapper Execute"
+codeunit 11344455 "ADL Wrapper Execute"
 {
     Access = Internal;
-    TableNo = "ADLSE Table";
+    TableNo = "ADL Table";
 
     trigger OnRun()
     var
-        ADLSEExecute: Codeunit "ADLSE Execute";
-        ADLSEExecution: Codeunit "ADLSE Execution";
+        ADLSEExecute: Codeunit "ADL Execute";
+        ADLSEExecution: Codeunit "ADL Execution";
         CustomDimensions: Dictionary of [Text, Text];
     begin
         if not ADLSEExecute.Run(Rec) then begin

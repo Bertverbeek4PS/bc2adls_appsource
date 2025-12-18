@@ -2,18 +2,18 @@ namespace bc2adls;
 
 using System.Reflection;
 
-table 11344439 "ADLSE Deleted Table Filter"
+table 11344439 "ADL Deleted Table Filter"
 {
     DataClassification = ToBeClassified;
-    Caption = 'ADLSE Deleted Table Filter';
-    LookupPageId = "ADLSE Deleted Table Filter";
-    DrillDownPageId = "ADLSE Deleted Table Filter";
+    Caption = 'ADL Deleted Table Filter';
+    LookupPageId = "ADL Deleted Table Filter";
+    DrillDownPageId = "ADL Deleted Table Filter";
 
     fields
     {
         field(1; TableId; Integer)
         {
-            TableRelation = "ADLSE Table"."Table ID";
+            TableRelation = "ADL Table"."Table ID";
             Caption = 'Table ID';
             ToolTip = 'Specify the ID of the table that should not be tracked for deletes.';
             DataClassification = CustomerContent;

@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-interface "ADLSE Session Method Interface"
+interface "ADL Session Method Interface"
 {
     /// <summary>
     /// Executes the session method with the provided parameters

@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-permissionset 11344437 "ADLSE - API"
+permissionset 11344437 "ADL - API"
 {
     /// <summary>
     /// The permission set to be used when using the API.
@@ -11,17 +11,17 @@ permissionset 11344437 "ADLSE - API"
     Assignable = true;
     Caption = 'ADLS - Api', MaxLength = 30;
 
-    Permissions = table "ADLSE Setup" = x,
-                  tabledata "ADLSE Table" = RMI,
-                  tabledata "ADLSE Setup" = R,
-                  tabledata "ADLSE Current Session" = R,
-                  tabledata "ADLSE Run" = R,
-                  tabledata "ADLSE Field" = RI,
-                  page "ADLSE Table API v12" = X,
-                  page "ADLSE Setup API v12" = X,
-                  page "ADLSE Field API v12" = X,
-                  page "ADLSE CurrentSession API" = X,
-                  page "ADLSE Run API v12" = X,
-                  codeunit "ADLSE External Events Helper" = X,
-                  codeunit "ADLSE External Events" = X;
+    Permissions = table "ADL Setup" = x,
+                  tabledata "ADL Table" = RMI,
+                  tabledata "ADL Setup" = R,
+                  tabledata "ADL Current Session" = R,
+                  tabledata "ADL Run" = R,
+                  tabledata "ADL Field" = RI,
+                  page "ADL Table API v12" = X,
+                  page "ADL Setup API v12" = X,
+                  page "ADL Field API v12" = X,
+                  page "ADL CurrentSession API" = X,
+                  page "ADL Run API v12" = X,
+                  codeunit "ADL External Events Helper" = X,
+                  codeunit "ADL External Events" = X;
 }

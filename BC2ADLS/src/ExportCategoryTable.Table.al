@@ -1,11 +1,11 @@
 namespace bc2adls;
 
-table 11344442 "ADLSE Export Category Table"
+table 11344442 "ADL Export Category Table"
 {
     Caption = 'Export Category Table';
     DataClassification = ToBeClassified;
-    LookupPageId = "ADLSE Export Categories";
-    DrillDownPageId = "ADLSE Export Categories";
+    LookupPageId = "ADL Export Categories";
+    DrillDownPageId = "ADL Export Categories";
     DataPerCompany = false;
 
     fields

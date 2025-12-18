@@ -5,7 +5,7 @@ namespace bc2adls;
 using System.Environment;
 using System.Reflection;
 using Microsoft.Finance.GeneralLedger.Ledger;
-codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.microsoft.com/en-us/common-data-model/sdk/overview
+codeunit 11344438 "ADL CDM Util" // Refer Common Data Model https://docs.microsoft.com/en-us/common-data-model/sdk/overview
 {
     Access = Internal;
 
@@ -24,8 +24,8 @@ codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.micro
 
     procedure CreateEntityContent(TableID: Integer; FieldIdList: List of [Integer]) Content: JsonObject
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEUtil: Codeunit "ADL Util";
         Definition: JsonObject;
         Definitions: JsonArray;
         Import: JsonObject;
@@ -52,9 +52,9 @@ codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.micro
 
     procedure CreateEntityContent(TableID: Integer) Content: JsonObject
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEUtil: Codeunit "ADLSE Util";
-        ADLSEExecute: Codeunit "ADLSE Execute";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEExecute: Codeunit "ADL Execute";
         RecordRef: RecordRef;
         SystemIdFieldRef: FieldRef;
         FieldRef: FieldRef;
@@ -115,9 +115,9 @@ codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.micro
         Content.Add('fileFormat', 'csv');
     end;
 
-    procedure UpdateDefaultManifestContent(ExistingContent: JsonObject; TableID: Integer; Folder: Text; ADLSECdmFormat: Enum "ADLSE CDM Format") Content: JsonObject
+    procedure UpdateDefaultManifestContent(ExistingContent: JsonObject; TableID: Integer; Folder: Text; ADLSECdmFormat: Enum "ADL CDM Format") Content: JsonObject
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
         Entities: JsonArray;
         EntityToken: JsonToken;
         Entity: JsonObject;
@@ -146,7 +146,7 @@ codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.micro
             DataPartitionPattern.Add('name', EntityName);
             DataPartitionPattern.Add('rootLocation', Folder + '/' + EntityName);
             case ADLSECdmFormat of
-                "ADLSE CDM Format"::Csv:
+                "ADL CDM Format"::Csv:
                     begin
                         DataPartitionPattern.Add('globPattern', '/*.csv');
                         ExhibitsTrait.Add('traitReference', 'is.partition.format.CSV');
@@ -189,8 +189,8 @@ codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.micro
 
     local procedure CreateAttributes(TableID: Integer; FieldIdList: List of [Integer]) Result: JsonArray
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEUtil: Codeunit "ADL Util";
         RecordRef: RecordRef;
         FieldRef: FieldRef;
         FieldId: Integer;
@@ -280,7 +280,7 @@ codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.micro
 
     procedure CheckChangeInEntities(EntityContentOld: JsonObject; EntityContentNew: JsonObject; EntityName: Text)
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
         OldAttributes: JsonArray;
         OldAttribute: JsonToken;
         NewAttributes: JsonArray;
@@ -383,7 +383,7 @@ codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.micro
 
     local procedure GetCDMDataFormat(FieldType: FieldType): Text
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
     begin
         // Refer https://docs.microsoft.com/en-us/common-data-model/sdk/list-of-datatypes
         // Refer https://docs.microsoft.com/en-us/common-data-model/1.0om/api-reference/cdm/dataformat
@@ -430,7 +430,7 @@ codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.micro
 
     local procedure GetOpenMirrorDataFormat(FieldType: FieldType): Text
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
     begin
         case FieldType of
             FieldType::BigInteger:
@@ -473,7 +473,7 @@ codeunit 11344438 "ADLSE CDM Util" // Refer Common Data Model https://docs.micro
 
     local procedure CompareAttributeField(Attribute1: JsonToken; Attribute2: JsonToken; FieldName: Text; Index: Integer)
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
         Value1: Text;
         Value2: Text;
     begin

@@ -5,12 +5,12 @@ namespace bc2adls;
 using System.Globalization;
 using System.Threading;
 
-page 11344447 "ADLSE Setup"
+page 11344447 "ADL Setup"
 {
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "ADLSE Setup";
+    SourceTable = "ADL Setup";
     InsertAllowed = false;
     DeleteAllowed = false;
     Caption = 'Export to Azure Data Lake Storage';
@@ -188,7 +188,7 @@ page 11344447 "ADLSE Setup"
                 }
             }
 
-            part(Tables; "ADLSE Setup Tables")
+            part(Tables; "ADL Setup Tables")
             {
                 Caption = 'Tables';
                 UpdatePropagation = Both;
@@ -210,7 +210,7 @@ page 11344447 "ADLSE Setup"
 
                 trigger OnAction()
                 var
-                    ADLSEExecution: Codeunit "ADLSE Execution";
+                    ADLSEExecution: Codeunit "ADL Execution";
                 begin
                     ADLSEExecution.StartExport();
                     CurrPage.Update();
@@ -226,7 +226,7 @@ page 11344447 "ADLSE Setup"
 
                 trigger OnAction()
                 var
-                    ADLSEExecution: Codeunit "ADLSE Execution";
+                    ADLSEExecution: Codeunit "ADL Execution";
                 begin
                     ADLSEExecution.StopExport();
                     CurrPage.Update();
@@ -241,7 +241,7 @@ page 11344447 "ADLSE Setup"
 
                 trigger OnAction()
                 var
-                    ADLSEExecution: Codeunit "ADLSE Execution";
+                    ADLSEExecution: Codeunit "ADL Execution";
                 begin
                     ADLSEExecution.SchemaExport();
                     CurrPage.Update();
@@ -256,7 +256,7 @@ page 11344447 "ADLSE Setup"
 
                 trigger OnAction()
                 var
-                    ADLSEExecution: Codeunit "ADLSE Execution";
+                    ADLSEExecution: Codeunit "ADL Execution";
                 begin
                     ADLSEExecution.ClearSchemaExportedOn();
                     CurrPage.Update();
@@ -272,7 +272,7 @@ page 11344447 "ADLSE Setup"
 
                 trigger OnAction()
                 var
-                    ADLSEExecution: Codeunit "ADLSE Execution";
+                    ADLSEExecution: Codeunit "ADL Execution";
                 begin
                     ADLSEExecution.ScheduleExport();
                 end;
@@ -282,13 +282,13 @@ page 11344447 "ADLSE Setup"
             {
                 ApplicationArea = All;
                 Caption = 'Clear tracked deleted records';
-                ToolTip = 'Removes the entries in the deleted record list that have already been exported. The codeunit ADLSE Clear Tracked Deletions may be invoked using a job queue entry for the same end.';
+                ToolTip = 'Removes the entries in the deleted record list that have already been exported. The codeunit ADL Clear Tracked Deletions may be invoked using a job queue entry for the same end.';
                 Image = ClearLog;
                 Enabled = TrackedDeletedRecordsExist;
 
                 trigger OnAction()
                 begin
-                    Codeunit.Run(Codeunit::"ADLSE Clear Tracked Deletions");
+                    Codeunit.Run(Codeunit::"ADL Clear Tracked Deletions");
                     CurrPage.Update();
                 end;
             }
@@ -303,7 +303,7 @@ page 11344447 "ADLSE Setup"
 
                 trigger OnAction()
                 var
-                    ADLSERun: Record "ADLSE Run";
+                    ADLSERun: Record "ADL Run";
                 begin
                     ADLSERun.DeleteOldRuns();
                     CurrPage.Update();
@@ -319,7 +319,7 @@ page 11344447 "ADLSE Setup"
 
                 trigger OnAction()
                 var
-                    ADLSESetup: Codeunit "ADLSE Setup";
+                    ADLSESetup: Codeunit "ADL Setup";
                 begin
                     ADLSESetup.FixIncorrectData();
                 end;
@@ -333,7 +333,7 @@ page 11344447 "ADLSE Setup"
                 Caption = 'Enum translations';
                 ToolTip = 'Show the translations for the enums used in the selected tables.';
                 Image = Translations;
-                RunObject = page "ADLSE Enum Translations";
+                RunObject = page "ADL Enum Translations";
             }
             action(DeletedTablesNotToSync)
             {
@@ -341,7 +341,7 @@ page 11344447 "ADLSE Setup"
                 Caption = 'Deleted tables not to sync';
                 ToolTip = 'Shows all the tables that are specified not to be tracked for deletes.';
                 Image = Delete;
-                RunObject = page "ADLSE Deleted Table Filter";
+                RunObject = page "ADL Deleted Table Filter";
             }
             action("Job Queue")
             {
@@ -353,7 +353,7 @@ page 11344447 "ADLSE Setup"
                 var
                     JobQueueEntry: Record "Job Queue Entry";
                 begin
-                    JobQueueEntry.SetFilter("Object ID to Run", '%1|%2', Codeunit::"ADLSE Execution", Report::"ADLSE Schedule Task Assignment");
+                    JobQueueEntry.SetFilter("Object ID to Run", '%1|%2', Codeunit::"ADL Execution", Report::"ADL Schedule Task Assignment");
                     Page.Run(Page::"Job Queue Entries", JobQueueEntry);
                 end;
             }
@@ -363,7 +363,7 @@ page 11344447 "ADLSE Setup"
                 ApplicationArea = All;
                 ToolTip = 'Specifies the Export Categories available for scheduling the export to Datalake.';
                 Image = Export;
-                RunObject = page "ADLSE Export Categories";
+                RunObject = page "ADL Export Categories";
             }
         }
         area(Promoted)
@@ -405,9 +405,9 @@ page 11344447 "ADLSE Setup"
 
     trigger OnAfterGetRecord()
     var
-        ADLSEDeletedRecord: Record "ADLSE Deleted Record";
-        ADLSECurrentSession: Record "ADLSE Current Session";
-        ADLSERun: Record "ADLSE Run";
+        ADLSEDeletedRecord: Record "ADL Deleted Record";
+        ADLSECurrentSession: Record "ADL Current Session";
+        ADLSERun: Record "ADL Run";
     begin
         ExportInProgress := ADLSECurrentSession.AreAnySessionsActive();
         TrackedDeletedRecordsExist := not ADLSEDeletedRecord.IsEmpty();
@@ -418,7 +418,7 @@ page 11344447 "ADLSE Setup"
     end;
 
     var
-        ADLSECredentials: Codeunit "ADLSE Credentials";
+        ADLSECredentials: Codeunit "ADL Credentials";
         TrackedDeletedRecordsExist: Boolean;
         ExportInProgress: Boolean;
         [NonDebuggable]
@@ -431,20 +431,20 @@ page 11344447 "ADLSE Setup"
         FailureNotificationID: Guid;
         ExportFailureNotificationMsg: Label 'Data from one or more tables failed to export on the last run. Please check the tables below to see the error(s).';
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
     local procedure UpdateNotificationIfAnyTableExportFailed()
     var
-        ADLSETable: Record "ADLSE Table";
-        ADLSERun: Record "ADLSE Run";
+        ADLSETable: Record "ADL Table";
+        ADLSERun: Record "ADL Run";
         FailureNotification: Notification;
-        Status: Enum "ADLSE Run State";
+        Status: Enum "ADL Run State";
         LastStarted: DateTime;
         ErrorIfAny: Text[2048];
     begin
         if ADLSETable.FindSet() then
             repeat
                 ADLSERun.GetLastRunDetails(ADLSETable."Table ID", Status, LastStarted, ErrorIfAny);
-                if Status = "ADLSE Run State"::Failed then begin
+                if Status = "ADL Run State"::Failed then begin
                     FailureNotification.Message := ExportFailureNotificationMsg;
                     FailureNotification.Scope := NotificationScope::LocalScope;
 

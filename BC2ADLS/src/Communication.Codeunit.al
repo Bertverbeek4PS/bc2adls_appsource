@@ -2,12 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-codeunit 11344440 "ADLSE Communication"
+codeunit 11344440 "ADL Communication"
 {
     Access = Internal;
 
     var
-        ADLSECredentials: Codeunit "ADLSE Credentials";
+        ADLSECredentials: Codeunit "ADL Credentials";
         TableID: Integer;
         FieldIdList: List of [Integer];
         DataBlobPath: Text;
@@ -42,7 +42,7 @@ codeunit 11344440 "ADLSE Communication"
 
     procedure SetupBlobStorage()
     var
-        ADLSEGen2Util: Codeunit "ADLSE Gen 2 Util";
+        ADLSEGen2Util: Codeunit "ADL Gen 2 Util";
     begin
         ADLSECredentials.Init();
 
@@ -52,7 +52,7 @@ codeunit 11344440 "ADLSE Communication"
 
     local procedure GetBaseUrl(): Text
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
         ValidGuid: Guid;
     begin
         ADLSESetup.GetSingleton();
@@ -76,9 +76,9 @@ codeunit 11344440 "ADLSE Communication"
 
     procedure Init(TableIDValue: Integer; FieldIdListValue: List of [Integer]; LastFlushedTimeStampValue: BigInteger; EmitTelemetryValue: Boolean)
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEUtil: Codeunit "ADLSE Util";
-        ADLSEExecution: Codeunit "ADLSE Execution";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEExecution: Codeunit "ADL Execution";
         CustomDimensions: Dictionary of [Text, Text];
     begin
         TableID := TableIDValue;
@@ -94,15 +94,15 @@ codeunit 11344440 "ADLSE Communication"
         if EmitTelemetry then begin
             CustomDimensions.Add('Entity', EntityName);
             CustomDimensions.Add('Last flushed time stamp', Format(LastFlushedTimeStampValue));
-            ADLSEExecution.Log('ADLSE-041', 'Initialized ADLSE Communication to write to the lake.', Verbosity::Verbose);
+            ADLSEExecution.Log('ADLSE-041', 'Initialized ADL Communication to write to the lake.', Verbosity::Verbose);
         end;
     end;
 
-    procedure CheckEntity(CdmDataFormat: Enum "ADLSE CDM Format"; var EntityJsonNeedsUpdate: Boolean; var ManifestJsonsNeedsUpdate: Boolean; SchemaUpdate: Boolean)
+    procedure CheckEntity(CdmDataFormat: Enum "ADL CDM Format"; var EntityJsonNeedsUpdate: Boolean; var ManifestJsonsNeedsUpdate: Boolean; SchemaUpdate: Boolean)
     var
-        ADLSECdmUtil: Codeunit "ADLSE CDM Util";
-        ADLSEGen2Util: Codeunit "ADLSE Gen 2 Util";
-        ADLSEExecution: Codeunit "ADLSE Execution";
+        ADLSECdmUtil: Codeunit "ADL CDM Util";
+        ADLSEGen2Util: Codeunit "ADL Gen 2 Util";
+        ADLSEExecution: Codeunit "ADL Execution";
         OldJson: JsonObject;
         NewJson: JsonObject;
         BlobExists: Boolean;
@@ -138,8 +138,8 @@ codeunit 11344440 "ADLSE Communication"
 
     procedure CreateEntityContent()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSECdmUtil: Codeunit "ADLSE CDM Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSECdmUtil: Codeunit "ADL CDM Util";
     begin
         ADLSESetup.GetSingleton();
         if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then
@@ -151,7 +151,7 @@ codeunit 11344440 "ADLSE Communication"
 
     local procedure JsonsDifferent(Json1: JsonObject; Json2: JsonObject) Result: Boolean
     var
-        ADLSEExecution: Codeunit "ADLSE Execution";
+        ADLSEExecution: Codeunit "ADL Execution";
         CustomDimensions: Dictionary of [Text, Text];
         Content1: Text;
         Content2: Text;
@@ -166,20 +166,20 @@ codeunit 11344440 "ADLSE Communication"
         end;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rm')]
     local procedure CreateDataBlob(): Boolean
     begin
         exit(CreateDataBlob(false));
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rm')]
     local procedure CreateDataBlob(CheckOnly: Boolean) Created: Boolean
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETable: Record "ADLSE Table";
-        ADLSEUtil: Codeunit "ADLSE Util";
-        ADLSEGen2Util: Codeunit "ADLSE Gen 2 Util";
-        ADLSEExecution: Codeunit "ADLSE Execution";
+        ADLSESetup: Record "ADL Setup";
+        ADLSETable: Record "ADL Table";
+        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEGen2Util: Codeunit "ADL Gen 2 Util";
+        ADLSEExecution: Codeunit "ADL Execution";
         CustomDimension: Dictionary of [Text, Text];
         FileIdentifer: Guid;
         FileIdentiferTxt: Text;
@@ -232,11 +232,11 @@ codeunit 11344440 "ADLSE Communication"
             end;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rm')]
     local procedure RenameDataBlob(): Boolean
     var
-        ADLSEGen2Util: Codeunit "ADLSE Gen 2 Util";
-        ADLSEExecution: Codeunit "ADLSE Execution";
+        ADLSEGen2Util: Codeunit "ADL Gen 2 Util";
+        ADLSEExecution: Codeunit "ADL Execution";
         CustomDimensions: Dictionary of [Text, Text];
         SourcePath, TargetPath : Text;
         RenameParametersErr: Label 'Attempt to rename non existing blob or target blob. From: %1, to: %2', Comment = '%1 = source blob path, %2 = target blob path';
@@ -264,7 +264,7 @@ codeunit 11344440 "ADLSE Communication"
     [TryFunction]
     procedure TryCollectAndSendRecord(RecordRef: RecordRef; RecordTimeStamp: BigInteger; var LastTimestampExported: BigInteger; Deletes: Boolean)
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
         DataBlobCreated: Boolean;
     begin
         ClearLastError();
@@ -275,8 +275,8 @@ codeunit 11344440 "ADLSE Communication"
 
     local procedure CollectAndSendRecord(RecordRef: RecordRef; RecordTimeStamp: BigInteger; DataBlobCreated: Boolean; Deletes: Boolean) LastTimestampExported: BigInteger
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEUtil: Codeunit "ADL Util";
         RecordPayLoad: Text;
     begin
         ADLSESetup.GetSingleton();
@@ -312,7 +312,7 @@ codeunit 11344440 "ADLSE Communication"
 
     local procedure Finish() LastTimestampExported: BigInteger
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
     begin
         if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then
             if DataBlobPath = '' then
@@ -336,10 +336,10 @@ codeunit 11344440 "ADLSE Communication"
 
     local procedure FlushPayload()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEGen2Util: Codeunit "ADLSE Gen 2 Util";
-        ADLSEExecution: Codeunit "ADLSE Execution";
-        ADLSE: Codeunit ADLSE;
+        ADLSESetup: Record "ADL Setup";
+        ADLSEGen2Util: Codeunit "ADL Gen 2 Util";
+        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSE: Codeunit ADL;
         CustomDimensions: Dictionary of [Text, Text];
         BlockID: Text;
     begin
@@ -398,8 +398,8 @@ codeunit 11344440 "ADLSE Communication"
 
     procedure UpdateCdmJsons(EntityJsonNeedsUpdate: Boolean; ManifestJsonsNeedsUpdate: Boolean)
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEGen2Util: Codeunit "ADLSE Gen 2 Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEGen2Util: Codeunit "ADL Gen 2 Util";
         LeaseID: Text;
         BlobPath: Text;
         BlobExists: Boolean;
@@ -429,16 +429,16 @@ codeunit 11344440 "ADLSE Communication"
             // manifest. Semaphore applied.
             UpdateManifest(GetBaseUrl() + StrSubstNo(CorpusJsonPathTxt, DataCdmManifestNameTxt), 'data', ADLSESetup.DataFormat);
 
-            UpdateManifest(GetBaseUrl() + StrSubstNo(CorpusJsonPathTxt, DeltaCdmManifestNameTxt), 'deltas', "ADLSE CDM Format"::Csv);
+            UpdateManifest(GetBaseUrl() + StrSubstNo(CorpusJsonPathTxt, DeltaCdmManifestNameTxt), 'deltas', "ADL CDM Format"::Csv);
             Commit(); // to release the lock above
         end;
     end;
 
-    local procedure UpdateManifest(BlobPath: Text; Folder: Text; ADLSECdmFormat: Enum "ADLSE CDM Format")
+    local procedure UpdateManifest(BlobPath: Text; Folder: Text; ADLSECdmFormat: Enum "ADL CDM Format")
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSECdmUtil: Codeunit "ADLSE CDM Util";
-        ADLSEGen2Util: Codeunit "ADLSE Gen 2 Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSECdmUtil: Codeunit "ADL CDM Util";
+        ADLSEGen2Util: Codeunit "ADL Gen 2 Util";
         ManifestJson: JsonObject;
         LeaseID: Text;
         BlobExists: Boolean;
@@ -463,9 +463,9 @@ codeunit 11344440 "ADLSE Communication"
 
     procedure ResetTableExport(ltableId: Integer; AllCompanies: Boolean)
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEUtil: Codeunit "ADLSE Util";
-        ADLSEGen2Util: Codeunit "ADLSE Gen 2 Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEGen2Util: Codeunit "ADL Gen 2 Util";
         Body: JsonObject;
     begin
         ADLSESetup.GetSingleton();
@@ -477,20 +477,20 @@ codeunit 11344440 "ADLSE Communication"
                     AllCompanies := true;
 
         case ADLSESetup."Storage Type" of
-            "ADLSE Storage Type"::"Microsoft Fabric":
+            "ADL Storage Type"::"Microsoft Fabric":
                 ADLSEGen2Util.CreateOrUpdateJsonBlob(GetBaseUrl() + StrSubstNo(ResetTableExportTxt, ADLSEUtil.GetDataLakeCompliantTableName(ltableId)), ADLSECredentials, '', Body);
-            "ADLSE Storage Type"::"Azure Data Lake":
+            "ADL Storage Type"::"Azure Data Lake":
                 ADLSEGen2Util.RemoveDeltasFromDataLake(ADLSEUtil.GetDataLakeCompliantTableName(ltableId), ADLSECredentials, AllCompanies);
-            "ADLSE Storage Type"::"Open Mirroring":
+            "ADL Storage Type"::"Open Mirroring":
                 ADLSEGen2Util.DropTableFromOpenMirroring(ADLSEUtil.GetDataLakeCompliantTableName(ltableId), ADLSECredentials, AllCompanies);
         end;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
     local procedure UpdateInProgressTimeStampOnTable(TableIDToUpdate: Integer; Timestamp: BigInteger; Deletes: Boolean)
     var
-        ADLSETable: Record "ADLSE Table";
-        ADLSEExecute: Codeunit "ADLSE Execute";
+        ADLSETable: Record "ADL Table";
+        ADLSEExecute: Codeunit "ADL Execute";
     begin
         ADLSETable.Get(TableIDToUpdate);
         ADLSEExecute.UpdateInProgressTableTimestamp(ADLSETable, Timestamp, Deletes);
@@ -501,11 +501,11 @@ codeunit 11344440 "ADLSE Communication"
         IncreaseExportFileNumber_InCurrSession(TableIdToUpdate);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rm')]
     procedure IncreaseExportFileNumber_InCurrSession(TableIdToUpdate: Integer)
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETable: Record "ADLSE Table";
+        ADLSESetup: Record "ADL Setup";
+        ADLSETable: Record "ADL Table";
     begin
         if (ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring") then begin
             ADLSETable.Get(TableIdToUpdate);
@@ -515,3 +515,4 @@ codeunit 11344440 "ADLSE Communication"
         end;
     end;
 }
+

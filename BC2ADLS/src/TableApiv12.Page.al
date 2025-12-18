@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-page 11344450 "ADLSE Table API v12"
+page 11344450 "ADL Table API v12"
 {
     PageType = API;
     APIPublisher = 'bc2adlsTeamMicrosoft';
@@ -10,7 +10,7 @@ page 11344450 "ADLSE Table API v12"
     APIVersion = 'v1.2';
     EntityName = 'adlseTable';
     EntitySetName = 'adlseTables';
-    SourceTable = "ADLSE Table";
+    SourceTable = "ADL Table";
     InsertAllowed = true;
     ModifyAllowed = false;
     DeleteAllowed = false;
@@ -46,7 +46,7 @@ page 11344450 "ADLSE Table API v12"
                     Editable = false;
                 }
             }
-            part(adlseField; "ADLSE Field API v12")
+            part(adlseField; "ADL Field API v12")
             {
                 EntityName = 'adlseField';
                 EntitySetName = 'adlseFields';
@@ -58,7 +58,7 @@ page 11344450 "ADLSE Table API v12"
     [ServiceEnabled]
     procedure Reset(var ActionContext: WebServiceActionContext)
     var
-        SelectedADLSETable: Record "ADLSE Table";
+        SelectedADLSETable: Record "ADL Table";
     begin
         CurrPage.SetSelectionFilter(SelectedADLSETable);
         SelectedADLSETable.ResetSelected();
@@ -68,7 +68,7 @@ page 11344450 "ADLSE Table API v12"
     [ServiceEnabled]
     procedure Enable(var ActionContext: WebServiceActionContext)
     var
-        SelectedADLSETable: Record "ADLSE Table";
+        SelectedADLSETable: Record "ADL Table";
     begin
         CurrPage.SetSelectionFilter(SelectedADLSETable);
         if SelectedADLSETable.FindSet(true) then
@@ -82,7 +82,7 @@ page 11344450 "ADLSE Table API v12"
     [ServiceEnabled]
     procedure Disable(var ActionContext: WebServiceActionContext)
     var
-        SelectedADLSETable: Record "ADLSE Table";
+        SelectedADLSETable: Record "ADL Table";
     begin
         CurrPage.SetSelectionFilter(SelectedADLSETable);
         if SelectedADLSETable.FindSet(true) then
@@ -110,7 +110,7 @@ page 11344450 "ADLSE Table API v12"
     local procedure SetActionResponse(var ActionContext: WebServiceActionContext; AdlsId: Guid)
     var
     begin
-        SetActionResponse(ActionContext, Page::"ADLSE Table API v12", AdlsId);
+        SetActionResponse(ActionContext, Page::"ADL Table API v12", AdlsId);
     end;
 
     local procedure SetActionResponse(var ActionContext: WebServiceActionContext; PageId: Integer; DocumentId: Guid)

@@ -5,16 +5,16 @@ namespace bc2adls;
 using System.Reflection;
 
 #pragma warning disable LC0015
-table 11344450 "ADLSE Table"
+table 11344450 "ADL Table"
 #pragma warning restore
 {
     Access = Internal;
-    Caption = 'ADLSE Table';
+    Caption = 'ADL Table';
     DataClassification = CustomerContent;
     DataPerCompany = false;
-    Permissions = tabledata "ADLSE Field" = rd,
-                  tabledata "ADLSE Table Last Timestamp" = d,
-                  tabledata "ADLSE Deleted Record" = d;
+    Permissions = tabledata "ADL Field" = rd,
+                  tabledata "ADL Table Last Timestamp" = d,
+                  tabledata "ADL Deleted Record" = d;
 
     fields
     {
@@ -32,10 +32,10 @@ table 11344450 "ADLSE Table"
 
             trigger OnValidate()
             var
-                ADLSEExternalEvents: Codeunit "ADLSE External Events";
-                ADLSETableErr: Label 'The ADLSE Table table cannot be disabled.';
+                ADLSEExternalEvents: Codeunit "ADL External Events";
+                ADLSETableErr: Label 'The ADL Table table cannot be disabled.';
             begin
-                if Rec."Table ID" = Database::"ADLSE Table" then
+                if Rec."Table ID" = Database::"ADL Table" then
                     if xRec.Enabled = false then
                         Error(ADLSETableErr);
 
@@ -48,7 +48,7 @@ table 11344450 "ADLSE Table"
         field(10; ExportCategory; Code[50])
         {
             Caption = 'Export Category';
-            TableRelation = "ADLSE Export Category Table";
+            TableRelation = "ADL Export Category Table";
             ToolTip = 'Specifies the Export Category which can be linked to tables which are part of the export to Azure Datalake. The Category can be used to schedule the export.';
         }
         field(15; ExportFileNumber; Integer)
@@ -83,7 +83,7 @@ table 11344450 "ADLSE Table"
 
     trigger OnInsert()
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
     begin
         ADLSESetup.SchemaExported();
 
@@ -92,11 +92,11 @@ table 11344450 "ADLSE Table"
 
     trigger OnDelete()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETableField: Record "ADLSE Field";
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
-        ADLSEDeletedRecord: Record "ADLSE Deleted Record";
-        ADLSEExternalEvents: Codeunit "ADLSE External Events";
+        ADLSESetup: Record "ADL Setup";
+        ADLSETableField: Record "ADL Field";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
+        ADLSEDeletedRecord: Record "ADL Deleted Record";
+        ADLSEExternalEvents: Codeunit "ADL External Events";
     begin
         ADLSESetup.SchemaExported();
 
@@ -114,7 +114,7 @@ table 11344450 "ADLSE Table"
 
     trigger OnModify()
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
     begin
         if (Rec."Table ID" <> xRec."Table ID") or (Rec.Enabled <> xRec.Enabled) then begin
             ADLSESetup.SchemaExported();
@@ -132,17 +132,17 @@ table 11344450 "ADLSE Table"
 
     procedure FieldsChosen(): Integer
     var
-        ADLSEField: Record "ADLSE Field";
+        ADLSEField: Record "ADL Field";
     begin
         ADLSEField.SetRange("Table ID", Rec."Table ID");
         ADLSEField.SetRange(Enabled, true);
         exit(ADLSEField.Count());
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'i')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'i')]
     procedure Add(TableID: Integer)
     var
-        ADLSEExternalEvents: Codeunit "ADLSE External Events";
+        ADLSEExternalEvents: Codeunit "ADL External Events";
     begin
         if not CheckTableCanBeExportedFrom(TableID) then
             Error(TableCannotBeExportedErr, TableID, GetLastErrorText());
@@ -167,7 +167,7 @@ table 11344450 "ADLSE Table"
     local procedure CheckTableOfTypeNormal(TableID: Integer)
     var
         TableMetadata: Record "Table Metadata";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
         TableCaption: Text;
     begin
         TableCaption := ADLSEUtil.GetTableCaption(TableID);
@@ -181,16 +181,16 @@ table 11344450 "ADLSE Table"
 
     procedure CheckNotExporting()
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
     begin
-        if GetLastRunState() = "ADLSE Run State"::InProcess then
+        if GetLastRunState() = "ADL Run State"::InProcess then
             Error(TableExportingDataErr, ADLSEUtil.GetTableCaption(Rec."Table ID"));
     end;
 
-    local procedure GetLastRunState(): Enum "ADLSE Run State"
+    local procedure GetLastRunState(): Enum "ADL Run State"
     var
-        ADLSERun: Record "ADLSE Run";
-        LastState: Enum "ADLSE Run State";
+        ADLSERun: Record "ADL Run";
+        LastState: Enum "ADL Run State";
         LastStarted: DateTime;
         LastErrorText: Text[2048];
     begin
@@ -198,20 +198,20 @@ table 11344450 "ADLSE Table"
         exit(LastState);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rm')]
     procedure ResetSelected()
     begin
         ResetSelected(false);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'rm')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table Last Timestamp", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'rm')]
     procedure ResetSelected(AllCompanies: Boolean)
     var
-        ADLSEDeletedRecord: Record "ADLSE Deleted Record";
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSECommunication: Codeunit "ADLSE Communication";
+        ADLSEDeletedRecord: Record "ADL Deleted Record";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
+        ADLSESetup: Record "ADL Setup";
+        ADLSECommunication: Codeunit "ADL Communication";
         Counter: Integer;
     begin
         if Rec.FindSet(true) then
@@ -261,12 +261,12 @@ table 11344450 "ADLSE Table"
             Message(TablesResetTxt, Counter, '.');
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Field", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'r')]
     local procedure CheckExportingOnlyValidFields()
     var
-        ADLSEField: Record "ADLSE Field";
+        ADLSEField: Record "ADL Field";
         Field: Record Field;
-        ADLSESetup: Codeunit "ADLSE Setup";
+        ADLSESetup: Codeunit "ADL Setup";
     begin
         ADLSEField.SetRange("Table ID", Rec."Table ID");
         ADLSEField.SetRange(Enabled, true);
@@ -277,13 +277,13 @@ table 11344450 "ADLSE Table"
             until ADLSEField.Next() = 0;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Field", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'r')]
     procedure ListInvalidFieldsBeingExported() FieldList: List of [Text]
     var
-        ADLSEField: Record "ADLSE Field";
-        ADLSESetup: Codeunit "ADLSE Setup";
-        ADLSEUtil: Codeunit "ADLSE Util";
-        ADLSEExecution: Codeunit "ADLSE Execution";
+        ADLSEField: Record "ADL Field";
+        ADLSESetup: Codeunit "ADL Setup";
+        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEExecution: Codeunit "ADL Execution";
         CustomDimensions: Dictionary of [Text, Text];
         RemovedFieldNameLbl: Label '#[%1]', Locked = true;
     begin
@@ -305,10 +305,10 @@ table 11344450 "ADLSE Table"
         end;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Field", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'rm')]
     procedure AddAllFields()
     var
-        ADLSEFields: Record "ADLSE Field";
+        ADLSEFields: Record "ADL Field";
     begin
         ADLSEFields.InsertForTable(Rec);
         ADLSEFields.SetRange("Table ID", Rec."Table ID");
@@ -321,10 +321,10 @@ table 11344450 "ADLSE Table"
             until ADLSEFields.Next() = 0;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table Last Timestamp", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'r')]
     procedure GetLastHeartbeat(): DateTime
     var
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
     begin
         ADLSETableLastTimestamp.ReadIsolation(ReadIsolation::ReadUncommitted);
         if not ADLSETableLastTimestamp.ExistsUpdatedLastTimestamp(Rec."Table ID") then
@@ -343,10 +343,10 @@ table 11344450 "ADLSE Table"
             exit(ExpSessionId);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Current Session", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'r')]
     procedure GetCurrentSessionId(): Integer
     var
-        CurrentSession: Record "ADLSE Current Session";
+        CurrentSession: Record "ADL Current Session";
     begin
         CurrentSession.ReadIsolation(ReadIsolation::ReadUncommitted);
         if CurrentSession.Get(Rec."Table ID", CompanyName()) then
@@ -354,13 +354,13 @@ table 11344450 "ADLSE Table"
         exit(0);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Current Session", 'd')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Run", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Run", 'm')]
     procedure StopActiveSession()
     var
-        CurrentSession: Record "ADLSE Current Session";
-        Run: Record "ADLSE Run";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        CurrentSession: Record "ADL Current Session";
+        Run: Record "ADL Run";
+        ADLSEUtil: Codeunit "ADL Util";
         ExpSessionId: Integer;
     begin
         ExpSessionId := GetActiveSessionId();
@@ -371,11 +371,11 @@ table 11344450 "ADLSE Table"
         Run.CancelRun(Rec."Table ID");
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Field", 'ri')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'ri')]
     local procedure AddPrimaryKeyFields()
     var
         Field: Record Field;
-        ADLSEField: Record "ADLSE Field";
+        ADLSEField: Record "ADL Field";
     begin
         Field.SetRange(TableNo, Rec."Table ID");
         Field.SetRange(IsPartOfPrimaryKey, true);
@@ -391,7 +391,7 @@ table 11344450 "ADLSE Table"
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterResetSelected(ADLSETable: Record "ADLSE Table")
+    local procedure OnAfterResetSelected(ADLSETable: Record "ADL Table")
     begin
 
     end;

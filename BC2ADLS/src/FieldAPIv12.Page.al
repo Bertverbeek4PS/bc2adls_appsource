@@ -2,7 +2,7 @@ namespace bc2adls;
 
 // Create an API page for table and field
 
-page 11344443 "ADLSE Field API v12"
+page 11344443 "ADL Field API v12"
 {
     PageType = API;
     APIPublisher = 'bc2adlsTeamMicrosoft';
@@ -10,7 +10,7 @@ page 11344443 "ADLSE Field API v12"
     APIVersion = 'v1.2';
     EntityName = 'adlseField';
     EntitySetName = 'adlseFields';
-    SourceTable = "ADLSE Field";
+    SourceTable = "ADL Field";
     InsertAllowed = true;
     ModifyAllowed = false;
     DeleteAllowed = false;
@@ -47,7 +47,7 @@ page 11344443 "ADLSE Field API v12"
     [ServiceEnabled]
     procedure Disable(var ActionContext: WebServiceActionContext)
     var
-        SelectedADLSEField: Record "ADLSE Field";
+        SelectedADLSEField: Record "ADL Field";
     begin
         CurrPage.SetSelectionFilter(SelectedADLSEField);
         if SelectedADLSEField.FindSet(true) then
@@ -61,7 +61,7 @@ page 11344443 "ADLSE Field API v12"
     [ServiceEnabled]
     procedure Enable(var ActionContext: WebServiceActionContext)
     var
-        SelectedADLSEField: Record "ADLSE Field";
+        SelectedADLSEField: Record "ADL Field";
     begin
         CurrPage.SetSelectionFilter(SelectedADLSEField);
         if SelectedADLSEField.FindSet(true) then
@@ -76,7 +76,7 @@ page 11344443 "ADLSE Field API v12"
     local procedure SetActionResponse(var ActionContext: WebServiceActionContext; AdlsId: Guid)
     var
     begin
-        SetActionResponse(ActionContext, Page::"ADLSE Field API v12", AdlsId);
+        SetActionResponse(ActionContext, Page::"ADL Field API v12", AdlsId);
     end;
 
     local procedure SetActionResponse(var ActionContext: WebServiceActionContext; PageId: Integer; DocumentId: Guid)

@@ -5,7 +5,7 @@ namespace bc2adls;
 using System.Reflection;
 using System.Utilities;
 
-codeunit 11344446 "ADLSE Setup"
+codeunit 11344446 "ADL Setup"
 {
     Access = Internal;
 
@@ -18,11 +18,11 @@ codeunit 11344446 "ADLSE Setup"
     procedure AddTableToExport()
     var
         AllObjWithCaption: Record AllObjWithCaption;
-        ADLSETable: Record "ADLSE Table";
+        ADLSETable: Record "ADL Table";
         AllObjectsWithCaption: Page "All Objects with Caption";
     begin
         AllObjWithCaption.SetRange("Object Type", AllObjWithCaption."Object Type"::Table);
-        AllObjWithCaption.SetFilter("Object ID", '<>%1', Database::"ADLSE Deleted Record");
+        AllObjWithCaption.SetFilter("Object ID", '<>%1', Database::"ADL Deleted Record");
 
         AllObjectsWithCaption.Caption(SelectTableLbl);
         AllObjectsWithCaption.SetTableView(AllObjWithCaption);
@@ -36,14 +36,14 @@ codeunit 11344446 "ADLSE Setup"
         end;
     end;
 
-    procedure ChooseFieldsToExport(ADLSETable: Record "ADLSE Table")
+    procedure ChooseFieldsToExport(ADLSETable: Record "ADL Table")
     var
-        ADLSEField: Record "ADLSE Field";
+        ADLSEField: Record "ADL Field";
     begin
         ADLSEField.SetRange("Table ID", ADLSETable."Table ID");
         ADLSEField.InsertForTable(ADLSETable);
         Commit(); // changes made to the field table go into the database before RunModal is called
-        Page.RunModal(Page::"ADLSE Setup Fields", ADLSEField, ADLSEField.Enabled);
+        Page.RunModal(Page::"ADL Setup Fields", ADLSEField, ADLSEField.Enabled);
     end;
 
     procedure CanFieldBeExported(TableID: Integer; FieldID: Integer): Boolean
@@ -80,10 +80,10 @@ codeunit 11344446 "ADLSE Setup"
         exit(true);
     end;
 
-    procedure CheckSetup(var ADLSESetup: Record "ADLSE Setup")
+    procedure CheckSetup(var ADLSESetup: Record "ADL Setup")
     var
-        ADLSECurrentSession: Record "ADLSE Current Session";
-        ADLSECredentials: Codeunit "ADLSE Credentials";
+        ADLSECurrentSession: Record "ADL Current Session";
+        ADLSECredentials: Codeunit "ADL Credentials";
     begin
         ADLSESetup.GetSingleton();
         if ADLSESetup."Storage Type" = ADLSESetup."Storage Type"::"Azure Data Lake" then
@@ -101,16 +101,16 @@ codeunit 11344446 "ADLSE Setup"
         ADLSECredentials.Check();
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Field", 'rd')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'rd')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Setup", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'rd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Setup", 'm')]
     procedure FixIncorrectData()
     var
-        ADLSEField: Record "ADLSE Field";
-        ADLSETable: Record "ADLSE Table";
-        ADLSESetupRec: Record "ADLSE Setup";
+        ADLSEField: Record "ADL Field";
+        ADLSETable: Record "ADL Table";
+        ADLSESetupRec: Record "ADL Setup";
         TableMetadata: Record "Table Metadata";
-        ADLSESetup: Codeunit "ADLSE Setup";
+        ADLSESetup: Codeunit "ADL Setup";
         ConfirmManagement: Codeunit "Confirm Management";
         ShowMessage: Boolean;
         ShowMessageLbl: Label 'Incorrect data has been removed from the table. Please export the schema again and reset all tables.';

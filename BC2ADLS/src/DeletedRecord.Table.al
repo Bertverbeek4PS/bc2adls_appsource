@@ -3,11 +3,11 @@
 namespace bc2adls;
 
 #pragma warning disable LC0015
-table 11344438 "ADLSE Deleted Record"
+table 11344438 "ADL Deleted Record"
 #pragma warning restore
 {
     Access = Internal;
-    Caption = 'ADLSE Deleted Record';
+    Caption = 'ADL Deleted Record';
     DataClassification = SystemMetadata;
 
     fields
@@ -58,8 +58,8 @@ table 11344438 "ADLSE Deleted Record"
 
     procedure TrackDeletedRecord(RecordRef: RecordRef)
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEUtil: Codeunit "ADL Util";
         SystemIdFieldRef: FieldRef;
         TimestampFieldRef: FieldRef;
     begin

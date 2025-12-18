@@ -5,11 +5,11 @@ namespace bc2adls;
 using System.Environment;
 
 #pragma warning disable LC0015
-table 11344446 "ADLSE Setup"
+table 11344446 "ADL Setup"
 #pragma warning restore
 {
     Access = Internal;
-    Caption = 'ADLSE Setup';
+    Caption = 'ADL Setup';
     DataClassification = CustomerContent;
     DataPerCompany = false;
     DataCaptionFields = Container;
@@ -64,7 +64,7 @@ table 11344446 "ADLSE Setup"
             MinValue = 1;
         }
 
-        field(4; DataFormat; Enum "ADLSE CDM Format")
+        field(4; DataFormat; Enum "ADL CDM Format")
         {
             Caption = 'CDM data format';
             ToolTip = 'Specifies the format in which to store the exported data in the ''data'' CDM folder. The Parquet format is recommended for storing the data with the best fidelity.';
@@ -85,7 +85,7 @@ table 11344446 "ADLSE Setup"
             ToolTip = 'Specifies that records are not sorted by row version before export. May affect incremental data export.';
         }
 
-        field(25; "Storage Type"; Enum "ADLSE Storage Type")
+        field(25; "Storage Type"; Enum "ADL Storage Type")
         {
             Caption = 'Storage type';
             ToolTip = 'Specifies the type of storage type to use.';
@@ -274,7 +274,7 @@ table 11344446 "ADLSE Setup"
         Insert();
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Setup", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Setup", 'r')]
     procedure Exists(): Boolean
     begin
         exit(Rec.Get(GetPrimaryKeyValue()));
@@ -285,7 +285,7 @@ table 11344446 "ADLSE Setup"
         Evaluate(PKValue, PrimaryKeyValueLbl, 9);
     end;
 
-    procedure GetStorageType(): Enum "ADLSE Storage Type"
+    procedure GetStorageType(): Enum "ADL Storage Type"
     begin
         Rec.GetSingleton();
         exit(Rec."Storage Type");
@@ -301,7 +301,7 @@ table 11344446 "ADLSE Setup"
             FixitErrorInfo := ErrorInfo.Create(SchemaAlreadyExportedErr, true);
             FixitErrorInfo.AddAction(
                 ClearSchemaExportDateLbl,
-                Codeunit::"ADLSE Execution",
+                Codeunit::"ADL Execution",
                 'ClearSchemaExportedOn'
             );
             Error(FixitErrorInfo);

@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-permissionset 11344438 "ADLSE - Execute"
+permissionset 11344438 "ADL - Execute"
 {
     /// <summary>
     /// The permission set to be used when running the Azure Data Lake Storage export tool.
@@ -11,31 +11,31 @@ permissionset 11344438 "ADLSE - Execute"
     Assignable = true;
     Caption = 'ADLS - Execute', MaxLength = 30;
 
-    Permissions = table "ADLSE Setup" = x,
-                  table "ADLSE Table Last Timestamp" = x,
-                  tabledata "ADLSE Setup" = RM,
-                  tabledata "ADLSE Table" = RM,
-                  tabledata "ADLSE Field" = R,
-                  tabledata "ADLSE Deleted Record" = R,
-                  tabledata "ADLSE Current Session" = RIMD,
-                  tabledata "ADLSE Table Last Timestamp" = RIMD,
-                  tabledata "ADLSE Run" = RIMD,
-                  tabledata "ADLSE Enum Translation" = RIMD,
-                  tabledata "ADLSE Enum Translation Lang" = RIMD,
-                  tabledata "ADLSE Deleted Table Filter" = R,
-                  tabledata "ADLSE Export Category Table" = R,
-                  codeunit "ADLSE UpgradeTagNewCompanySubs" = X,
-                  codeunit "ADLSE Upgrade" = X,
-                  codeunit "ADLSE Util" = X,
-                  codeunit ADLSE = X,
-                  codeunit "ADLSE CDM Util" = X,
-                  codeunit "ADLSE Communication" = X,
-                  codeunit "ADLSE Session Manager" = X,
-                  codeunit "ADLSE Http" = X,
-                  codeunit "ADLSE Gen 2 Util" = X,
-                  codeunit "ADLSE Execute" = X,
-                  codeunit "ADLSE Execution" = X,
-                  codeunit "ADLSE Wrapper Execute" = X,
-                  report "ADLSE Seek Data" = X,
-                  xmlport "ADLSE BC2ADLS Export" = X;
+    Permissions = table "ADL Setup" = x,
+                  table "ADL Table Last Timestamp" = x,
+                  tabledata "ADL Setup" = RM,
+                  tabledata "ADL Table" = RM,
+                  tabledata "ADL Field" = R,
+                  tabledata "ADL Deleted Record" = R,
+                  tabledata "ADL Current Session" = RIMD,
+                  tabledata "ADL Table Last Timestamp" = RIMD,
+                  tabledata "ADL Run" = RIMD,
+                  tabledata "ADL Enum Translation" = RIMD,
+                  tabledata "ADL Enum Translation Lang" = RIMD,
+                  tabledata "ADL Deleted Table Filter" = R,
+                  tabledata "ADL Export Category Table" = R,
+                  codeunit "ADL UpgradeTagNewCompanySubs" = X,
+                  codeunit "ADL Upgrade" = X,
+                  codeunit "ADL Util" = X,
+                  codeunit ADL = X,
+                  codeunit "ADL CDM Util" = X,
+                  codeunit "ADL Communication" = X,
+                  codeunit "ADL Session Manager" = X,
+                  codeunit "ADL Http" = X,
+                  codeunit "ADL Gen 2 Util" = X,
+                  codeunit "ADL Execute" = X,
+                  codeunit "ADL Execution" = X,
+                  codeunit "ADL Wrapper Execute" = X,
+                  report "ADL Seek Data" = X,
+                  xmlport "ADL BC2ADLS Export" = X;
 }

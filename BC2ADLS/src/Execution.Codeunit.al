@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Environment;
 
-codeunit 11344443 "ADLSE Execution"
+codeunit 11344443 "ADL Execution"
 {
     trigger OnRun()
     begin
@@ -20,26 +20,26 @@ codeunit 11344443 "ADLSE Execution"
         ClearSchemaExportedOnMsg: Label 'The schema export date has been cleared.';
 
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'r')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Field", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'r')]
     internal procedure StartExport()
     var
-        ADLSETable: Record "ADLSE Table";
+        ADLSETable: Record "ADL Table";
     begin
         StartExport(ADLSETable);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'r')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Field", 'r')]
-    internal procedure StartExport(var ADLSETable: Record "ADLSE Table")
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'r')]
+    internal procedure StartExport(var ADLSETable: Record "ADL Table")
     var
-        ADLSESetupRec: Record "ADLSE Setup";
-        ADLSEField: Record "ADLSE Field";
-        ADLSECurrentSession: Record "ADLSE Current Session";
-        ADLSESetup: Codeunit "ADLSE Setup";
-        ADLSECommunication: Codeunit "ADLSE Communication";
-        ADLSESessionManager: Codeunit "ADLSE Session Manager";
-        ADLSEExternalEvents: Codeunit "ADLSE External Events";
+        ADLSESetupRec: Record "ADL Setup";
+        ADLSEField: Record "ADL Field";
+        ADLSECurrentSession: Record "ADL Current Session";
+        ADLSESetup: Codeunit "ADL Setup";
+        ADLSECommunication: Codeunit "ADL Communication";
+        ADLSESessionManager: Codeunit "ADL Session Manager";
+        ADLSEExternalEvents: Codeunit "ADL External Events";
         Counter: Integer;
         Started: Integer;
     begin
@@ -70,14 +70,14 @@ codeunit 11344443 "ADLSE Execution"
             Log('ADLSE-001', StrSubstNo(ExportStartedTxt, Started, Counter), Verbosity::Normal);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Setup", 'r')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Current Session", 'rd')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Run", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Setup", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'rd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Run", 'm')]
     internal procedure StopExport()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSERun: Record "ADLSE Run";
-        ADLSECurrentSession: Record "ADLSE Current Session";
+        ADLSESetup: Record "ADL Setup";
+        ADLSERun: Record "ADL Run";
+        ADLSECurrentSession: Record "ADL Current Session";
     begin
         ADLSESetup.GetSingleton();
         if ADLSESetup."Emit telemetry" then
@@ -92,16 +92,16 @@ codeunit 11344443 "ADLSE Execution"
             Log('ADLSE-019', 'Stopped export sessions', Verbosity::Normal);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table", 'r')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Setup", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Setup", 'm')]
     internal procedure SchemaExport()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETable: Record "ADLSE Table";
-        ADLSECurrentSession: Record "ADLSE Current Session";
+        ADLSESetup: Record "ADL Setup";
+        ADLSETable: Record "ADL Table";
+        ADLSECurrentSession: Record "ADL Current Session";
         AllObjWithCaption: Record AllObjWithCaption;
-        ADLSEExecute: Codeunit "ADLSE Execute";
-        ADLSEExternalEvents: Codeunit "ADLSE External Events";
+        ADLSEExecute: Codeunit "ADL Execute";
+        ADLSEExternalEvents: Codeunit "ADL External Events";
         ProgressWindowDialog: Dialog;
         Progress1Msg: Label 'Current Table:           #1##########\', Comment = '#1: table caption';
     begin
@@ -143,11 +143,11 @@ codeunit 11344443 "ADLSE Execution"
         ClearSchemaExportedOn();
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Setup", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Setup", 'm')]
     internal procedure ClearSchemaExportedOn()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEExternalEvents: Codeunit "ADLSE External Events";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEExternalEvents: Codeunit "ADL External Events";
     begin
         ADLSESetup.GetSingleton();
         ADLSESetup."Schema Exported On" := 0DT;
@@ -161,7 +161,7 @@ codeunit 11344443 "ADLSE Execution"
     internal procedure ScheduleExport()
     var
         JobQueueEntry: Record "Job Queue Entry";
-        ADLSEScheduleTaskAssignment: Report "ADLSE Schedule Task Assignment";
+        ADLSEScheduleTaskAssignment: Report "ADL Schedule Task Assignment";
         SavedData: Text;
         xmldata: Text;
         Handled: Boolean;
@@ -172,7 +172,7 @@ codeunit 11344443 "ADLSE Execution"
 
         JobQueueEntry.SetFilter("User ID", UserId());
         JobQueueEntry.SetRange("Object Type to Run", JobQueueEntry."Object Type to Run"::Report);
-        JobQueueEntry.SetRange("Object ID to Run", Report::"ADLSE Schedule Task Assignment");
+        JobQueueEntry.SetRange("Object ID to Run", Report::"ADL Schedule Task Assignment");
         JobQueueEntry.SetCurrentKey(SystemCreatedAt);
         JobQueueEntry.SetAscending(SystemCreatedAt, false);
 
@@ -200,12 +200,12 @@ codeunit 11344443 "ADLSE Execution"
         Session.LogMessage(EventId, Message, Verbosity, DataClassification::SystemMetadata, TelemetryScope::All, CustomDimensions);
     end;
 
-    [InherentPermissions(PermissionObjectType::Table, Database::"ADLSE Table Last Timestamp", 'X')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table Last Timestamp", 'R')]
+    [InherentPermissions(PermissionObjectType::Table, Database::"ADL Table Last Timestamp", 'X')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'R')]
     [EventSubscriber(ObjectType::Codeunit, Codeunit::GlobalTriggerManagement, OnAfterGetDatabaseTableTriggerSetup, '', false, false)]
     local procedure GetDatabaseTableTriggerSetup(TableId: Integer; var OnDatabaseInsert: Boolean; var OnDatabaseModify: Boolean; var OnDatabaseDelete: Boolean; var OnDatabaseRename: Boolean)
     var
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
     begin
         if CompanyName() = '' then
             exit;
@@ -215,20 +215,20 @@ codeunit 11344443 "ADLSE Execution"
             OnDatabaseDelete := true;
     end;
 
-    [InherentPermissions(PermissionObjectType::Table, Database::"ADLSE Table Last Timestamp", 'X')]
-    [InherentPermissions(PermissionObjectType::Table, Database::"ADLSE Deleted Record", 'X')]
-    [InherentPermissions(PermissionObjectType::Table, Database::"ADLSE Deleted Table Filter", 'X')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Table Last Timestamp", 'R')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Deleted Record", 'RI')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Deleted Table Filter", 'r')]
+    [InherentPermissions(PermissionObjectType::Table, Database::"ADL Table Last Timestamp", 'X')]
+    [InherentPermissions(PermissionObjectType::Table, Database::"ADL Deleted Record", 'X')]
+    [InherentPermissions(PermissionObjectType::Table, Database::"ADL Deleted Table Filter", 'X')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'R')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Deleted Record", 'RI')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Deleted Table Filter", 'r')]
     [EventSubscriber(ObjectType::Codeunit, Codeunit::GlobalTriggerManagement, OnAfterOnDatabaseDelete, '', false, false)]
     local procedure OnAfterOnDatabaseDelete(RecRef: RecordRef)
     var
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
-        ADLSEDeletedRecord: Record "ADLSE Deleted Record";
-        DeletedTablesNottoSync: Record "ADLSE Deleted Table Filter";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
+        ADLSEDeletedRecord: Record "ADL Deleted Record";
+        DeletedTablesNottoSync: Record "ADL Deleted Table Filter";
     begin
-        if RecRef.Number() = Database::"ADLSE Deleted Record" then
+        if RecRef.Number() = Database::"ADL Deleted Record" then
             exit;
 
         if RecRef.CurrentCompany() <> CompanyName() then //workarround for records which are deleted usings changecompany

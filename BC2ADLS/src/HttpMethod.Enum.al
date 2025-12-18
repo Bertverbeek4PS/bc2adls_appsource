@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-enum 11344438 "ADLSE Http Method"
+enum 11344438 "ADL Http Method"
 {
     Access = Internal;
     Extensible = false;

@@ -4,14 +4,14 @@ using System.Reflection;
 using System.IO;
 
 #pragma warning disable LC0015
-table 11344440 "ADLSE Enum Translation"
+table 11344440 "ADL Enum Translation"
 #pragma warning restore
 {
     DataClassification = ToBeClassified;
-    Caption = 'ADLSE Enum Translation';
+    Caption = 'ADL Enum Translation';
     Access = Internal;
-    LookupPageId = "ADLSE Enum Translations";
-    DrillDownPageId = "ADLSE Enum Translations";
+    LookupPageId = "ADL Enum Translations";
+    DrillDownPageId = "ADL Enum Translations";
 
     fields
     {
@@ -59,10 +59,10 @@ table 11344440 "ADLSE Enum Translation"
         }
     }
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Enum Translation", 'i')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Enum Translation", 'i')]
     local procedure InsertEnum(TableId: Integer; FieldNo: Integer; FieldName: Text[30])
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
     begin
         Rec.Init();
         Rec."Table Id" := TableId;
@@ -72,17 +72,17 @@ table 11344440 "ADLSE Enum Translation"
         Rec.Insert(true);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE table", 'r')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Enum Translation", 'd')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Enum Translation Lang", 'd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Enum Translation", 'd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Enum Translation Lang", 'd')]
     procedure RefreshOptions()
     var
-        ADLSETable: Record "ADLSE Table";
-        ADLSEEnumTranslation: Record "ADLSE Enum Translation";
-        ADLSEEnumTranslationLang: Record "ADLSE Enum Translation Lang";
-        ADLSESetupRec: Record "ADLSE Setup";
+        ADLSETable: Record "ADL Table";
+        ADLSEEnumTranslation: Record "ADL Enum Translation";
+        ADLSEEnumTranslationLang: Record "ADL Enum Translation Lang";
+        ADLSESetupRec: Record "ADL Setup";
         RecordField: Record Field;
-        ADLSEExternalEvents: Codeunit "ADLSE External Events";
+        ADLSEExternalEvents: Codeunit "ADL External Events";
         ADLSERecordRef: RecordRef;
     begin
         ADLSEEnumTranslation.DeleteAll(false);
@@ -115,8 +115,8 @@ table 11344440 "ADLSE Enum Translation"
 
     local procedure InsertEnums(ADLSERecordRef: RecordRef; FieldRec: Record Field)
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSEEnumTranslationLang: Record "ADLSE Enum Translation Lang";
+        ADLSESetup: Record "ADL Setup";
+        ADLSEEnumTranslationLang: Record "ADL Enum Translation Lang";
         TranslationHelper: Codeunit "Translation Helper";
         FieldRef: FieldRef;
         i: Integer;

@@ -1,6 +1,6 @@
 namespace bc2adls;
 
-enum 11344440 "ADLSE Storage Type"
+enum 11344440 "ADL Storage Type"
 {
     Access = Internal;
     Extensible = false;

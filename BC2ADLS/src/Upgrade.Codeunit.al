@@ -4,15 +4,15 @@ namespace bc2adls;
 
 using System.Upgrade;
 
-codeunit 11344452 "ADLSE Upgrade"
+codeunit 11344452 "ADL Upgrade"
 {
     Subtype = Upgrade;
     Access = Internal;
 
     trigger OnCheckPreconditionsPerDatabase()
     var
-        ADLSEInstaller: Codeunit "ADLSE Installer";
-        ADLSEExecution: Codeunit "ADLSE Execution";
+        ADLSEInstaller: Codeunit "ADL Installer";
+        ADLSEExecution: Codeunit "ADL Execution";
         InvalidFieldsMap: Dictionary of [Integer, List of [Text]];
     begin
         InvalidFieldsMap := ADLSEInstaller.ListInvalidFieldsBeingExported();
@@ -36,7 +36,7 @@ codeunit 11344452 "ADLSE Upgrade"
 
     local procedure RetenPolLogEntryAdded()
     var
-        ADLSEInstaller: Codeunit "ADLSE Installer";
+        ADLSEInstaller: Codeunit "ADL Installer";
         UpgradeTag: Codeunit "Upgrade Tag";
     begin
         if UpgradeTag.HasUpgradeTag(GetRetenPolLogEntryAddedUpgradeTag()) then
@@ -57,17 +57,17 @@ codeunit 11344452 "ADLSE Upgrade"
 
     local procedure ConcatenateTableFieldPairs(TableIDFieldNameList: Dictionary of [Integer, List of [Text]]) Result: Text
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
         TableID: Integer;
     begin
         foreach TableID in TableIDFieldNameList.Keys() do
             Result += StrSubstNo(TableFieldsTok, ADLSEUtil.GetTableCaption(TableID), ADLSEUtil.Concatenate(TableIDFieldNameList.Get(TableID)));
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Setup", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Setup", 'm')]
     local procedure DoContainerFieldFromIsolatedStorageToSetupField()
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
         AccountName: Text;
         StorageAccountKeyNameTok: Label 'adlse-storage-account', Locked = true;
     begin

@@ -1,6 +1,6 @@
 namespace bc2adls;
 
-page 11344437 "ADLSE Assign Export Category"
+page 11344437 "ADL Assign Export Category"
 {
     ApplicationArea = Basic, Suite;
     Caption = 'Assign Export Category';
@@ -15,7 +15,7 @@ page 11344437 "ADLSE Assign Export Category"
             field("Export Category"; ExportCategory)
             {
                 Caption = 'Export Catgory';
-                TableRelation = "ADLSE Export Category Table".Code;
+                TableRelation = "ADL Export Category Table".Code;
                 ToolTip = 'Specifies Unique Code of an Export Category which can be linked to tables which are part of the export to Azure Datalake.';
             }
         }
@@ -28,3 +28,4 @@ page 11344437 "ADLSE Assign Export Category"
         exit(ExportCategory);
     end;
 }
+

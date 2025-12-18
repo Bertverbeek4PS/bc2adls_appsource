@@ -2,12 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-page 11344444 "ADLSE Run"
+page 11344444 "ADL Run"
 {
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "ADLSE Run";
+    SourceTable = "ADL Run";
     Editable = false;
     InsertAllowed = false;
     ModifyAllowed = false;
@@ -58,7 +58,7 @@ page 11344444 "ADLSE Run"
 
                 trigger OnAction()
                 var
-                    ADLSERun: Record "ADLSE Run";
+                    ADLSERun: Record "ADL Run";
                 begin
                     LogsFound := false;
                     ADLSERun.DeleteOldRuns(Rec."Table ID");
@@ -77,7 +77,7 @@ page 11344444 "ADLSE Run"
 
     trigger OnAfterGetRecord()
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
     begin
         NameOfTable := ADLSEUtil.GetTableCaption(Rec."Table ID");
         LogsFound := true;

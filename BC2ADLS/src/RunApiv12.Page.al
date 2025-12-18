@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-page 11344445 "ADLSE Run API v12"
+page 11344445 "ADL Run API v12"
 {
     PageType = API;
     APIPublisher = 'bc2adlsTeamMicrosoft';
@@ -10,7 +10,7 @@ page 11344445 "ADLSE Run API v12"
     APIVersion = 'v1.2';
     EntityName = 'adlseRun';
     EntitySetName = 'adlseRun';
-    SourceTable = "ADLSE Run";
+    SourceTable = "ADL Run";
     InsertAllowed = false;
     DeleteAllowed = false;
     ModifyAllowed = false;

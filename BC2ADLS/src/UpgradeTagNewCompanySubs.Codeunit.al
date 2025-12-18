@@ -4,15 +4,15 @@ namespace bc2adls;
 
 using System.Upgrade;
 
-codeunit 11344453 "ADLSE UpgradeTagNewCompanySubs"
+codeunit 11344453 "ADL UpgradeTagNewCompanySubs"
 {
     Access = Internal;
 
-    [InherentPermissions(PermissionObjectType::Codeunit, Codeunit::"ADLSE Upgrade", 'X')]
+    [InherentPermissions(PermissionObjectType::Codeunit, Codeunit::"ADL Upgrade", 'X')]
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Upgrade Tag", OnGetPerCompanyUpgradeTags, '', false, false)]
     local procedure OnGetPerCompanyTags(var PerCompanyUpgradeTags: List of [Code[250]])
     var
-        ADLSEUpgrade: Codeunit "ADLSE Upgrade";
+        ADLSEUpgrade: Codeunit "ADL Upgrade";
     begin
         PerCompanyUpgradeTags.Add(ADLSEUpgrade.GetRetenPolLogEntryAddedUpgradeTag());
         PerCompanyUpgradeTags.Add(ADLSEUpgrade.GetContainerFieldFromIsolatedStorageToSetupFieldUpgradeTag());

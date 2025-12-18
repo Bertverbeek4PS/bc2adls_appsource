@@ -1,11 +1,11 @@
 namespace bc2adls;
 
-page 11344442 "ADLSE Export Categories"
+page 11344442 "ADL Export Categories"
 {
     ApplicationArea = Basic, Suite;
     Caption = 'Export Catgories';
     PageType = List;
-    SourceTable = "ADLSE Export Category Table";
+    SourceTable = "ADL Export Category Table";
     UsageCategory = None;
 
     layout
@@ -26,4 +26,5 @@ page 11344442 "ADLSE Export Categories"
         }
     }
 }
+
 

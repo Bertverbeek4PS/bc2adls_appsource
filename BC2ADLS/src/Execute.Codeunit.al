@@ -2,21 +2,21 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-codeunit 11344442 "ADLSE Execute"
+codeunit 11344442 "ADL Execute"
 {
     Access = Internal;
-    TableNo = "ADLSE Table";
-    Permissions = tabledata "ADLSE Table" = rm;
+    TableNo = "ADL Table";
+    Permissions = tabledata "ADL Table" = rm;
 
     trigger OnRun()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSERun: Record "ADLSE Run";
-        ADLSECurrentSession: Record "ADLSE Current Session";
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
-        ADLSECommunication: Codeunit "ADLSE Communication";
-        ADLSEExecution: Codeunit "ADLSE Execution";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSERun: Record "ADL Run";
+        ADLSECurrentSession: Record "ADL Current Session";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
+        ADLSECommunication: Codeunit "ADL Communication";
+        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEUtil: Codeunit "ADL Util";
         CustomDimensions: Dictionary of [Text, Text];
         TableCaption: Text;
         UpdatedLastTimestamp: BigInteger;
@@ -40,7 +40,7 @@ codeunit 11344442 "ADLSE Execute"
         // Register session started
         ADLSECurrentSession.Start(Rec."Table ID");
         ADLSERun.RegisterStarted(Rec."Table ID");
-        Commit(); // to release locks on the "ADLSE Current Session" record thus allowing other sessions to check for it being active when they are nearing the last step.
+        Commit(); // to release locks on the "ADL Current Session" record thus allowing other sessions to check for it being active when they are nearing the last step.
         if EmitTelemetry then
             ADLSEExecution.Log('ADLSE-018', 'Registered session to export table', Verbosity::Normal, CustomDimensions);
 
@@ -100,15 +100,15 @@ codeunit 11344442 "ADLSE Execute"
         TimestampAscendingSortViewTxt: Label 'Sorting(Timestamp) Order(Ascending)', Locked = true;
         InsufficientReadPermErr: Label 'You do not have sufficient permissions to read from the table.';
         EmitTelemetry: Boolean;
-        CDMDataFormat: Enum "ADLSE CDM Format";
+        CDMDataFormat: Enum "ADL CDM Format";
 
     [TryFunction]
-    local procedure TryExportTableData(TableID: Integer; var ADLSECommunication: Codeunit "ADLSE Communication";
+    local procedure TryExportTableData(TableID: Integer; var ADLSECommunication: Codeunit "ADL Communication";
         var UpdatedLastTimeStamp: BigInteger; var DeletedLastEntryNo: BigInteger;
         var EntityJsonNeedsUpdate: Boolean; var ManifestJsonsNeedsUpdate: Boolean)
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSECommunicationDeletions: Codeunit "ADLSE Communication";
+        ADLSESetup: Record "ADL Setup";
+        ADLSECommunicationDeletions: Codeunit "ADL Communication";
         FieldIdList: List of [Integer];
         DidUpserts: Boolean;
     begin
@@ -130,7 +130,7 @@ codeunit 11344442 "ADLSE Execute"
 
     procedure UpdatedRecordsExist(TableID: Integer; UpdatedLastTimeStamp: BigInteger): Boolean
     var
-        ADLSESeekData: Report "ADLSE Seek Data";
+        ADLSESeekData: Report "ADL Seek Data";
         RecordRef: RecordRef;
         TimeStampFieldRef: FieldRef;
     begin
@@ -147,12 +147,12 @@ codeunit 11344442 "ADLSE Execute"
         TimeStampFieldRef.SetFilter('>%1', UpdatedLastTimeStamp);
     end;
 
-    local procedure ExportTableUpdates(TableID: Integer; FieldIdList: List of [Integer]; ADLSECommunication: Codeunit "ADLSE Communication"; var UpdatedLastTimeStamp: BigInteger; var DidUpserts: Boolean)
+    local procedure ExportTableUpdates(TableID: Integer; FieldIdList: List of [Integer]; ADLSECommunication: Codeunit "ADL Communication"; var UpdatedLastTimeStamp: BigInteger; var DidUpserts: Boolean)
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSESeekData: Report "ADLSE Seek Data";
-        ADLSEExecution: Codeunit "ADLSE Execution";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSESeekData: Report "ADL Seek Data";
+        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEUtil: Codeunit "ADL Util";
         RecordRef: RecordRef;
         TimeStampFieldRef: FieldRef;
         FieldRef: FieldRef;
@@ -241,29 +241,29 @@ codeunit 11344442 "ADLSE Execute"
 
     procedure DeletedRecordsExist(TableID: Integer; DeletedLastEntryNo: BigInteger): Boolean
     var
-        ADLSEDeletedRecord: Record "ADLSE Deleted Record";
-        ADLSESeekData: Report "ADLSE Seek Data";
+        ADLSEDeletedRecord: Record "ADL Deleted Record";
+        ADLSESeekData: Report "ADL Seek Data";
     begin
         SetFilterForDeletes(TableID, DeletedLastEntryNo, ADLSEDeletedRecord);
         exit(ADLSESeekData.RecordsExist(ADLSEDeletedRecord));
     end;
 
-    local procedure SetFilterForDeletes(TableID: Integer; DeletedLastEntryNo: BigInteger; var ADLSEDeletedRecord: Record "ADLSE Deleted Record")
+    local procedure SetFilterForDeletes(TableID: Integer; DeletedLastEntryNo: BigInteger; var ADLSEDeletedRecord: Record "ADL Deleted Record")
     begin
         ADLSEDeletedRecord.SetView(TimestampAscendingSortViewTxt);
         ADLSEDeletedRecord.SetRange("Table ID", TableID);
         ADLSEDeletedRecord.SetFilter("Entry No.", '>%1', DeletedLastEntryNo);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Deleted Record", 'r')]
-    local procedure ExportTableDeletes(TableID: Integer; ADLSECommunication: Codeunit "ADLSE Communication"; var DeletedLastEntryNo: BigInteger; DidUpserts: Boolean)
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Deleted Record", 'r')]
+    local procedure ExportTableDeletes(TableID: Integer; ADLSECommunication: Codeunit "ADL Communication"; var DeletedLastEntryNo: BigInteger; DidUpserts: Boolean)
     var
-        ADLSEDeletedRecord: Record "ADLSE Deleted Record";
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETable: Record "ADLSE Table";
-        ADLSESeekData: Report "ADLSE Seek Data";
-        ADLSEUtil: Codeunit "ADLSE Util";
-        ADLSEExecution: Codeunit "ADLSE Execution";
+        ADLSEDeletedRecord: Record "ADL Deleted Record";
+        ADLSESetup: Record "ADL Setup";
+        ADLSETable: Record "ADL Table";
+        ADLSESeekData: Report "ADL Seek Data";
+        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEExecution: Codeunit "ADL Execution";
         RecordRef: RecordRef;
         CustomDimensions: Dictionary of [Text, Text];
         TableCaption: Text;
@@ -316,8 +316,8 @@ codeunit 11344442 "ADLSE Execute"
             ADLSEExecution.Log('ADLSE-011', 'Deleted records exported', Verbosity::Normal, CustomDimensions);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Deleted Record", 'rd')]
-    procedure FixDeletedRecordThatAreInTable(var ADLSEDeletedRecord: Record "ADLSE Deleted Record")
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Deleted Record", 'rd')]
+    procedure FixDeletedRecordThatAreInTable(var ADLSEDeletedRecord: Record "ADL Deleted Record")
     var
         RecordRef: RecordRef;
     begin
@@ -336,11 +336,11 @@ codeunit 11344442 "ADLSE Execute"
             until ADLSEDeletedRecord.Next() = 0;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Field", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'r')]
     procedure CreateFieldListForTable(TableID: Integer) FieldIdList: List of [Integer]
     var
-        ADLSEField: Record "ADLSE Field";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEField: Record "ADL Field";
+        ADLSEUtil: Codeunit "ADL Util";
     begin
         ADLSEField.SetRange("Table ID", TableID);
         ADLSEField.SetRange(Enabled, true);
@@ -351,14 +351,14 @@ codeunit 11344442 "ADLSE Execute"
         ADLSEUtil.AddSystemFields(FieldIdList);
     end;
 
-    local procedure SetStateFinished(var ADLSETable: Record "ADLSE Table"; TableCaption: Text)
+    local procedure SetStateFinished(var ADLSETable: Record "ADL Table"; TableCaption: Text)
     var
-        ADLSERun: Record "ADLSE Run";
-        ADLSECurrentSession: Record "ADLSE Current Session";
-        ADLSESetupRec: Record "ADLSE Setup";
-        ADLSESessionManager: Codeunit "ADLSE Session Manager";
-        ADLSEExecution: Codeunit "ADLSE Execution";
-        ADLSEExternalEvents: Codeunit "ADLSE External Events";
+        ADLSERun: Record "ADL Run";
+        ADLSECurrentSession: Record "ADL Current Session";
+        ADLSESetupRec: Record "ADL Setup";
+        ADLSESessionManager: Codeunit "ADL Session Manager";
+        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEExternalEvents: Codeunit "ADL External Events";
         CustomDimensions: Dictionary of [Text, Text];
     begin
         ADLSERun.RegisterEnded(ADLSETable."Table ID", EmitTelemetry, TableCaption);
@@ -392,11 +392,11 @@ codeunit 11344442 "ADLSE Execute"
         end;
     end;
 
-    procedure UpdateInProgressTableTimestamp(var Rec: Record "ADLSE Table"; LastTimestamp: BigInteger; Deletes: Boolean)
+    procedure UpdateInProgressTableTimestamp(var Rec: Record "ADL Table"; LastTimestamp: BigInteger; Deletes: Boolean)
     var
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
-        ADLSEExecution: Codeunit "ADLSE Execution";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
+        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEUtil: Codeunit "ADL Util";
         CustomDimensions: Dictionary of [Text, Text];
         TableCaption: Text;
         TimestampUpdated: Boolean;
@@ -431,11 +431,11 @@ codeunit 11344442 "ADLSE Execute"
 
     procedure ExportSchema(tableId: Integer)
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
-        ADLSECommunication: Codeunit "ADLSE Communication";
-        ADLSEExecution: Codeunit "ADLSE Execution";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Record "ADL Setup";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
+        ADLSECommunication: Codeunit "ADL Communication";
+        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEUtil: Codeunit "ADL Util";
         TableCaption: Text;
         UpdatedLastTimestamp: BigInteger;
         CustomDimensions: Dictionary of [Text, Text];

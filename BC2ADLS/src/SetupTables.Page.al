@@ -4,12 +4,12 @@ namespace bc2adls;
 
 using System.Reflection;
 
-page 11344451 "ADLSE Setup Tables"
+page 11344451 "ADL Setup Tables"
 {
     Caption = 'Tables';
     LinksAllowed = false;
     PageType = ListPart;
-    SourceTable = "ADLSE Table";
+    SourceTable = "ADL Table";
     InsertAllowed = false;
     DeleteAllowed = false;
 
@@ -137,7 +137,7 @@ page 11344451 "ADLSE Setup Tables"
 
                 trigger OnAction()
                 var
-                    ADLSESetup: Codeunit "ADLSE Setup";
+                    ADLSESetup: Codeunit "ADL Setup";
                 begin
                     ADLSESetup.AddTableToExport();
                     CurrPage.Update();
@@ -183,9 +183,9 @@ page 11344451 "ADLSE Setup Tables"
 
                 trigger OnAction()
                 var
-                    SelectedADLSETable: Record "ADLSE Table";
-                    ADLSESetup: Record "ADLSE Setup";
-                    ADLSEExecution: Codeunit "ADLSE Execution";
+                    SelectedADLSETable: Record "ADL Table";
+                    ADLSESetup: Record "ADL Setup";
+                    ADLSEExecution: Codeunit "ADL Execution";
                     Options: Text[50];
                     OptionStringLbl: Label 'Current Company,All Companies';
                     ResetTablesForAllCompaniesQst: Label 'Do you want to reset the selected tables for all companies?';
@@ -228,7 +228,7 @@ page 11344451 "ADLSE Setup Tables"
 
                 trigger OnAction()
                 var
-                    ADLSERun: Page "ADLSE Run";
+                    ADLSERun: Page "ADL Run";
                 begin
                     ADLSERun.SetDisplayForTable(Rec."Table ID");
                     ADLSERun.Run();
@@ -244,9 +244,9 @@ page 11344451 "ADLSE Setup Tables"
 
                 trigger OnAction()
                 var
-                    ADLSETable: Record "ADLSE Table";
+                    ADLSETable: Record "ADL Table";
                 begin
-                    XmlPort.Run(XmlPort::"ADLSE BC2ADLS Import", false, true, ADLSETable);
+                    XmlPort.Run(XmlPort::"ADL BC2ADLS Import", false, true, ADLSETable);
                     CurrPage.Update(false);
                 end;
             }
@@ -259,10 +259,10 @@ page 11344451 "ADLSE Setup Tables"
 
                 trigger OnAction()
                 var
-                    ADLSETable: Record "ADLSE Table";
+                    ADLSETable: Record "ADL Table";
                 begin
                     ADLSETable.Reset();
-                    XmlPort.Run(XmlPort::"ADLSE BC2ADLS Export", false, false, ADLSETable);
+                    XmlPort.Run(XmlPort::"ADL BC2ADLS Export", false, false, ADLSETable);
                     CurrPage.Update(false);
                 end;
             }
@@ -275,8 +275,8 @@ page 11344451 "ADLSE Setup Tables"
 
                 trigger OnAction()
                 var
-                    ADLSETable: Record "ADLSE Table";
-                    AssignExportCategory: Page "ADLSE Assign Export Category";
+                    ADLSETable: Record "ADL Table";
+                    AssignExportCategory: Page "ADL Assign Export Category";
                 begin
                     CurrPage.SetSelectionFilter(ADLSETable);
                     AssignExportCategory.LookupMode(true);
@@ -302,7 +302,7 @@ page 11344451 "ADLSE Setup Tables"
 
     trigger OnInit()
     var
-        ADLSECurrentSession: Record "ADLSE Current Session";
+        ADLSECurrentSession: Record "ADL Current Session";
     begin
         NoExportInProgress := not ADLSECurrentSession.AreAnySessionsActive();
     end;
@@ -310,9 +310,9 @@ page 11344451 "ADLSE Setup Tables"
     trigger OnAfterGetRecord()
     var
         TableMetadata: Record "Table Metadata";
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
-        ADLSERun: Record "ADLSE Run";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
+        ADLSERun: Record "ADL Run";
+        ADLSEUtil: Codeunit "ADL Util";
     begin
         if TableMetadata.Get(Rec."Table ID") then begin
             TableCaptionValue := ADLSEUtil.GetTableCaption(Rec."Table ID");
@@ -340,7 +340,7 @@ page 11344451 "ADLSE Setup Tables"
         UpdatedLastTimestamp: BigInteger;
         DeletedRecordLastEntryNo: BigInteger;
         AbsentTableCaptionLbl: Label 'Table%1', Comment = '%1 = Table ID';
-        LastRunState: Enum "ADLSE Run State";
+        LastRunState: Enum "ADL Run State";
         LastStarted: DateTime;
         LastRunError: Text[2048];
         NoExportInProgress: Boolean;
@@ -350,8 +350,8 @@ page 11344451 "ADLSE Setup Tables"
 
     local procedure DoChooseFields()
     var
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
-        ADLSESetup: Codeunit "ADLSE Setup";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
+        ADLSESetup: Codeunit "ADL Setup";
     begin
         if ADLSETableLastTimestamp.ExistsUpdatedLastTimestamp(Rec."Table ID") then
             if not Confirm(WarnOfSchemaChangeQst, false) then
@@ -362,7 +362,7 @@ page 11344451 "ADLSE Setup Tables"
 
     local procedure IssueNotificationIfInvalidFieldsConfiguredToBeExported()
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
         InvalidFieldNotification: Notification;
         InvalidFieldList: List of [Text];
     begin
@@ -377,3 +377,4 @@ page 11344451 "ADLSE Setup Tables"
         InvalidFieldNotificationSent.Add(Rec."Table ID");
     end;
 }
+

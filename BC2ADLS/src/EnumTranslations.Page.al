@@ -1,13 +1,13 @@
 namespace bc2adls;
 
 //A list page that is build on table Enum Translation
-page 11344440 "ADLSE Enum Translations"
+page 11344440 "ADL Enum Translations"
 {
     PageType = List;
     ApplicationArea = All;
-    Caption = 'ADLSE Enum Translations';
+    Caption = 'ADL Enum Translations';
     UsageCategory = Lists;
-    SourceTable = "ADLSE Enum Translation";
+    SourceTable = "ADL Enum Translation";
 
 
     layout
@@ -56,8 +56,8 @@ page 11344440 "ADLSE Enum Translations"
 
                 trigger OnAction()
                 var
-                    ADLSEEnumTranslationLang: Record "ADLSE Enum Translation Lang";
-                    ADLSEEnumTranslationsLang: Page "ADLSE Enum Translations Lang";
+                    ADLSEEnumTranslationLang: Record "ADL Enum Translation Lang";
+                    ADLSEEnumTranslationsLang: Page "ADL Enum Translations Lang";
                 begin
                     ADLSEEnumTranslationLang.SetRange("Table Id", Rec."Table Id");
                     ADLSEEnumTranslationLang.SetRange("Field Id", Rec."Field Id");
@@ -76,3 +76,4 @@ page 11344440 "ADLSE Enum Translations"
         }
     }
 }
+

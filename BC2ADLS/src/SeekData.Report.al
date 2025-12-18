@@ -4,7 +4,7 @@ namespace bc2adls;
 
 using System.Utilities;
 
-report 11344440 "ADLSE Seek Data"
+report 11344440 "ADL Seek Data"
 {
     ProcessingOnly = true;
     DataAccessIntent = ReadOnly;
@@ -51,14 +51,14 @@ report 11344440 "ADLSE Seek Data"
         exit(GetResult(RecordRef));
     end;
 
-    internal procedure RecordsExist(var ADLSEDeletedRecord: Record "ADLSE Deleted Record") Result: Boolean
+    internal procedure RecordsExist(var ADLSEDeletedRecord: Record "ADL Deleted Record") Result: Boolean
     begin
         CurrRecordRef.GetTable(ADLSEDeletedRecord);
         Result := RecordsExist(CurrRecordRef);
         CurrRecordRef.SetTable(ADLSEDeletedRecord);
     end;
 
-    internal procedure FindRecords(var ADLSEDeletedRecord: Record "ADLSE Deleted Record") Result: Boolean
+    internal procedure FindRecords(var ADLSEDeletedRecord: Record "ADL Deleted Record") Result: Boolean
     begin
         CurrRecordRef.GetTable(ADLSEDeletedRecord);
         Result := FindRecords(CurrRecordRef);

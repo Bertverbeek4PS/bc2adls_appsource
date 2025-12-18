@@ -2,13 +2,13 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-codeunit 11344450 "ADLSE Http"
+codeunit 11344450 "ADL Http"
 {
     Access = Internal;
 
     var
-        Credentials: Codeunit "ADLSE Credentials";
-        HttpMethod: Enum "ADLSE Http Method";
+        Credentials: Codeunit "ADL Credentials";
+        HttpMethod: Enum "ADL Http Method";
         Url: Text;
         Body: Text;
         ContentTypeJson: Boolean;
@@ -22,7 +22,7 @@ codeunit 11344450 "ADLSE Http"
         BearerTok: Label 'Bearer %1', Comment = '%1: access token', Locked = true;
         AcquireTokenBodyTok: Label 'resource=%1&scope=%2&client_id=%3&client_secret=%4&grant_type=client_credentials', Comment = '%1: encoded resource url, %2: encoded scope url, %3: client ID, %4: client secret', Locked = true;
 
-    procedure SetMethod(HttpMethodValue: Enum "ADLSE Http Method")
+    procedure SetMethod(HttpMethodValue: Enum "ADL Http Method")
     begin
         HttpMethod := HttpMethodValue;
     end;
@@ -39,7 +39,7 @@ codeunit 11344450 "ADLSE Http"
 
     procedure AddHeader(HeaderKey: Text; HeaderValue: Integer)
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
     begin
         AdditionalRequestHeaders.Add(HeaderKey, ADLSEUtil.ConvertNumberToText(HeaderValue));
     end;
@@ -64,7 +64,7 @@ codeunit 11344450 "ADLSE Http"
         exit(ContentTypePlainTextTok);
     end;
 
-    procedure SetAuthorizationCredentials(ADLSECredentials: Codeunit "ADLSE Credentials")
+    procedure SetAuthorizationCredentials(ADLSECredentials: Codeunit "ADL Credentials")
     begin
         Credentials := ADLSECredentials;
     end;
@@ -103,7 +103,7 @@ codeunit 11344450 "ADLSE Http"
     [NonDebuggable]
     procedure InvokeRestApi(var Response: Text; var StatusCode: Integer) Success: Boolean
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
         HttpClient: HttpClient;
         Headers: HttpHeaders;
         HttpRequestMessage: HttpRequestMessage;
@@ -130,18 +130,18 @@ codeunit 11344450 "ADLSE Http"
             end;
 
         case HttpMethod of
-            "ADLSE Http Method"::Get:
+            "ADL Http Method"::Get:
                 HttpClient.Get(Url, HttpResponseMessage);
-            "ADLSE Http Method"::Put:
+            "ADL Http Method"::Put:
                 begin
                     HttpRequestMessage.Method('PUT');
                     HttpRequestMessage.SetRequestUri(Url);
                     AddContent(HttpContent);
                     HttpClient.Put(Url, HttpContent, HttpResponseMessage);
                 end;
-            "ADLSE Http Method"::Delete:
+            "ADL Http Method"::Delete:
                 HttpClient.Delete(Url, HttpResponseMessage);
-            "ADLSE Http Method"::Patch:
+            "ADL Http Method"::Patch:
                 begin
                     HttpRequestMessage.Method('PATCH');
                     HttpRequestMessage.SetRequestUri(Url);
@@ -149,7 +149,7 @@ codeunit 11344450 "ADLSE Http"
                     HttpRequestMessage.Content(HttpContent);
                     HttpClient.Send(HttpRequestMessage, HttpResponseMessage);
                 end;
-            "ADLSE Http Method"::Head:
+            "ADL Http Method"::Head:
                 begin
                     HttpRequestMessage.Method('HEAD');
                     HttpRequestMessage.SetRequestUri(Url);
@@ -169,7 +169,7 @@ codeunit 11344450 "ADLSE Http"
 
     local procedure AddContent(var HttpContent: HttpContent)
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
         Headers: HttpHeaders;
     begin
 
@@ -193,7 +193,7 @@ codeunit 11344450 "ADLSE Http"
     [NonDebuggable]
     local procedure AddAuthorization(HttpClient: HttpClient; var Response: Text) Success: Boolean
     var
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEUtil: Codeunit "ADL Util";
         Headers: HttpHeaders;
         AccessToken: SecretText;
         AuthError: Text;
@@ -219,8 +219,8 @@ codeunit 11344450 "ADLSE Http"
     [NonDebuggable]
     local procedure AcquireTokenOAuth2(var AuthError: Text) AccessToken: Text
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Record "ADL Setup";
+        ADSEUtil: Codeunit "ADL Util";
         HttpClient: HttpClient;
         HttpRequestMessage: HttpRequestMessage;
         HttpContent: HttpContent;

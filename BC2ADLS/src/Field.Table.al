@@ -5,14 +5,14 @@ namespace bc2adls;
 using System.Reflection;
 
 #pragma warning disable LC0015
-table 11344443 "ADLSE Field"
+table 11344443 "ADL Field"
 #pragma warning restore
 {
     Access = Internal;
-    Caption = 'ADLSE Field';
+    Caption = 'ADL Field';
     DataClassification = CustomerContent;
     DataPerCompany = false;
-    Permissions = tabledata "ADLSE Table" = r;
+    Permissions = tabledata "ADL Table" = r;
 
     fields
     {
@@ -21,11 +21,11 @@ table 11344443 "ADLSE Field"
             AllowInCustomizations = AsReadOnly;
             Editable = false;
             Caption = 'Table ID';
-            TableRelation = "ADLSE Table"."Table ID";
+            TableRelation = "ADL Table"."Table ID";
 
             trigger OnValidate()
             var
-                ADLSETable: Record "ADLSE Table";
+                ADLSETable: Record "ADL Table";
             begin
                 if not ADLSETable.Get(Rec."Table ID") then
                     Error(TableDoesNotExistErr, Rec."Table ID")
@@ -44,7 +44,7 @@ table 11344443 "ADLSE Field"
 
             trigger OnValidate()
             var
-                ADLSEExternalEvents: Codeunit "ADLSE External Events";
+                ADLSEExternalEvents: Codeunit "ADL External Events";
             begin
                 if Rec.Enabled then
                     Rec.CheckFieldToBeEnabled();
@@ -85,15 +85,15 @@ table 11344443 "ADLSE Field"
 
     trigger OnInsert()
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
     begin
         ADLSESetup.SchemaExported();
     end;
 
     trigger OnModify()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETable: Record "ADLSE Table";
+        ADLSESetup: Record "ADL Setup";
+        ADLSETable: Record "ADL Table";
     begin
         ADLSESetup.SchemaExported();
 
@@ -103,7 +103,7 @@ table 11344443 "ADLSE Field"
 
     trigger OnDelete()
     var
-        ADLSESetup: Record "ADLSE Setup";
+        ADLSESetup: Record "ADL Setup";
     begin
         ADLSESetup.SchemaExported();
     end;
@@ -111,11 +111,11 @@ table 11344443 "ADLSE Field"
     var
         TableDoesNotExistErr: Label 'Table with ID %1 has not been set to be exported.', Comment = '%1 is the table ID';
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADLSE Field", 'ri')]
-    procedure InsertForTable(ADLSETable: Record "ADLSE Table")
+    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'ri')]
+    procedure InsertForTable(ADLSETable: Record "ADL Table")
     var
         Field: Record Field;
-        ADLSEField: Record "ADLSE Field";
+        ADLSEField: Record "ADL Field";
     begin
         Field.SetRange(TableNo, ADLSETable."Table ID");
         Field.SetFilter("No.", '<%1', 2000000000); // no system fields
@@ -135,8 +135,8 @@ table 11344443 "ADLSE Field"
     procedure CheckFieldToBeEnabled()
     var
         Field: Record Field;
-        ADLSESetup: Codeunit "ADLSE Setup";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Codeunit "ADL Setup";
+        ADLSEUtil: Codeunit "ADL Util";
     begin
         Field.Get(Rec."Table ID", Rec."Field ID");
         ADLSEUtil.CheckFieldTypeForExport(Field);
