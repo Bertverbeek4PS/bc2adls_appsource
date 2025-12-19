@@ -8,18 +8,18 @@ codeunit 85563 "ADLSE Delete Tests"
     end;
 
     var
-        ADLSETable: Record "ADLSE Table";
+        ADLSETable: Record "ADL Table";
         ADLSELibrarybc2adls: Codeunit "ADLSE Library - bc2adls";
         LibraryUtility: Codeunit "Library - Utility";
         LibraryAssert: Codeunit "Library Assert";
-        "Storage Type": Enum "ADLSE Storage Type";
+        "Storage Type": Enum "ADL Storage Type";
         IsInitialized: Boolean;
 
     [Test]
     procedure DeleteARecordAndVerifyInADLSEDeletedRecord()
     var
         PaymentTerms: Record "Payment Terms";
-        ADLSEDeletedRecord: Record "ADLSE Deleted Record";
+        ADLSEDeletedRecord: Record "ADL Deleted Record";
         PaymentTermGuid: Guid;
     begin
         // [SCENARIO 201] Delete a record, where this action is tracked in the "ADSLE Deleted Record" table
@@ -53,7 +53,7 @@ codeunit 85563 "ADLSE Delete Tests"
     [HandlerFunctions('MessageHandler')]
     procedure ResetTable()
     var
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
         PaymentTerms: Record "Payment Terms";
         BigInt: BigInteger;
     begin
@@ -114,10 +114,10 @@ codeunit 85563 "ADLSE Delete Tests"
         DeletePaymentTerms(PaymentTerms, PaymentTermGuid);
 
         // [WHEN] When the user clears the tracked deleted records
-        Codeunit.Run(Codeunit::"ADLSE Clear Tracked Deletions");
+        Codeunit.Run(Codeunit::"ADL Clear Tracked Deletions");
 
         // [THEN] Check if the record is marked as deleted in the "ADLSE Deleted Record" table
-        LibraryAssert.TableIsEmpty(Database::"ADLSE Deleted Record");
+        LibraryAssert.TableIsEmpty(Database::"ADL Deleted Record");
     end;
 
     local procedure InsertPaymentTerms(var PaymentTerms: Record "Payment Terms")

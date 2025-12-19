@@ -7,8 +7,8 @@ codeunit 85567 "ADLSE Gen 2 Util Mock"
         _contents: Dictionary of [Text, Text];
         _body: Text;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADLSE Gen 2 Util", OnBeforeGetBlobContent, '', false, false)]
-    local procedure OnBeforeGetBlobContentOnGen2Util(BlobPath: Text; ADLSECredentials: Codeunit "ADLSE Credentials"; var BlobExists: Boolean; var Content: JsonObject; var IsHandled: Boolean)
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADL Gen 2 Util", OnBeforeGetBlobContent, '', false, false)]
+    local procedure OnBeforeGetBlobContentOnGen2Util(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials"; var BlobExists: Boolean; var Content: JsonObject; var IsHandled: Boolean)
     var
         StringifiedJson: Text;
     begin
@@ -20,26 +20,26 @@ codeunit 85567 "ADLSE Gen 2 Util Mock"
         IsHandled := true;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADLSE Gen 2 Util", OnBeforeCreateBlockBlob, '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADL Gen 2 Util", OnBeforeCreateBlockBlob, '', false, false)]
     local procedure OnBeforeCreateBlockBlobOnGen2Util(var IsHandled: Boolean)
     begin
         IsHandled := true;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADLSE Gen 2 Util", OnBeforeGetBlobContentLength, '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADL Gen 2 Util", OnBeforeGetBlobContentLength, '', false, false)]
     local procedure OnBeforeGetBlobContentLengthOnGen2Util(var IsHandled: Boolean)
     begin
         IsHandled := true;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADLSE Gen 2 Util", OnBeforeAddBlockToDataBlob, '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADL Gen 2 Util", OnBeforeAddBlockToDataBlob, '', false, false)]
     local procedure OnBeforeAddBlockToDataBlobOnGen2Util(Body: Text; var IsHandled: Boolean)
     begin
         _body := Body;
         IsHandled := true;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADLSE Gen 2 Util", OnBeforeCommitAllBlocksOnDataBlob, '', false, false)]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"ADL Gen 2 Util", OnBeforeCommitAllBlocksOnDataBlob, '', false, false)]
     local procedure OnBeforeCommitAllBlocksOnDataBlobOnGen2Util(var IsHandled: Boolean)
     begin
         IsHandled := true;

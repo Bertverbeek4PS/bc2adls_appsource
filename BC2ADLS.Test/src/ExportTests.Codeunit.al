@@ -8,22 +8,22 @@ codeunit 85566 "ADLSE Export Tests"
     end;
 
     var
-        ADLSETable: Record "ADLSE Table";
+        ADLSETable: Record "ADL Table";
         ADLSLibrarybc2adls: Codeunit "ADLSE Library - bc2adls";
         LibraryAssert: Codeunit "Library Assert";
         LibraryDialogHandler: Codeunit "Library - Dialog Handler";
         LibraryERM: Codeunit "Library - ERM";
         IsInitialized: Boolean;
-        "Storage Type": Enum "ADLSE Storage Type";
+        "Storage Type": Enum "ADL Storage Type";
 
     [Test]
     procedure ExportSingleEntityFirstRun()
     var
-        ADLSERun: Record "ADLSE Run";
+        ADLSERun: Record "ADL Run";
         ReasonCode: Record "Reason Code";
-        ADLSEExecute: Codeunit "ADLSE Execute";
+        ADLSEExecute: Codeunit "ADL Execute";
         ADLSEGen2UtilMock: Codeunit "ADLSE Gen 2 Util Mock";
-        ADLSESessionManager: Codeunit "ADLSE Session Manager";
+        ADLSESessionManager: Codeunit "ADL Session Manager";
         i: Integer;
         ExpectedEntityBlobPathTok: Label 'https://bc2adls.blob.core.windows.net/bc2adls/ReasonCode-231.cdm.json', Locked = true;
         ExpectedEntityJsonTok: Label '{"jsonSchemaSemanticVersion":"1.0.0","imports":[{"corpusPath":"cdm:/foundations.cdm.json"}],"definitions":[{"entityName":"ReasonCode-231","exhibitsTraits":[],"displayName":"Reason Code","description":"Represents the table Reason Code","hasAttributes":[{"name":"Code-1","dataFormat":"String","appliedTraits":[],"displayName":"Code","maximumLength":10,"isPrimaryKey":true},{"name":"timestamp-0","dataFormat":"Int64","appliedTraits":[],"displayName":"timestamp","maximumLength":8},{"name":"systemId-2000000000","dataFormat":"Guid","appliedTraits":[],"displayName":"$systemId","maximumLength":16},{"name":"SystemCreatedAt-2000000001","dataFormat":"DateTime","appliedTraits":[],"displayName":"SystemCreatedAt","maximumLength":8},{"name":"SystemCreatedBy-2000000002","dataFormat":"Guid","appliedTraits":[],"displayName":"SystemCreatedBy","maximumLength":16},{"name":"SystemModifiedAt-2000000003","dataFormat":"DateTime","appliedTraits":[],"displayName":"SystemModifiedAt","maximumLength":8},{"name":"SystemModifiedBy-2000000004","dataFormat":"Guid","appliedTraits":[],"displayName":"SystemModifiedBy","maximumLength":16},{"name":"$Company","dataFormat":"String","appliedTraits":[],"displayName":"$Company","maximumLength":30}]}]}', Locked = true;
@@ -66,11 +66,11 @@ codeunit 85566 "ADLSE Export Tests"
     [Test]
     procedure ExportDelta()
     var
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
+        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
         ReasonCode: Record "Reason Code";
-        ADLSEExecute: Codeunit "ADLSE Execute";
+        ADLSEExecute: Codeunit "ADL Execute";
         ADLSEGen2UtilMock: Codeunit "ADLSE Gen 2 Util Mock";
-        ADLSESessionManager: Codeunit "ADLSE Session Manager";
+        ADLSESessionManager: Codeunit "ADL Session Manager";
         TempBlob: Codeunit "Temp Blob";
         FieldRef: FieldRef;
         RecordRef: RecordRef;
