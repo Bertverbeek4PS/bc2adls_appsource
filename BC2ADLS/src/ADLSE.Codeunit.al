@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-codeunit 11344437 ADL
+codeunit 11344437 AZD
 {
     /// <summary>
     /// This is the main facade of Azure Data Lake Storage Export (ADLSE).

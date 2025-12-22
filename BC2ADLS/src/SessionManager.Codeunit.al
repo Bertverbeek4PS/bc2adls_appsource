@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-codeunit 11344447 "ADL Session Manager"
+codeunit 11344447 "AZD Session Manager"
 {
     Access = Internal;
 
@@ -26,13 +26,13 @@ codeunit 11344447 "ADL Session Manager"
         StartExport(TableID, true, false, EmitTelemetry);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'r')]
     local procedure StartExport(TableID: Integer; ExportWasPending: Boolean; ForceExport: Boolean; EmitTelemetry: Boolean) Started: Boolean
     var
-        ADLSETable: Record "ADL Table";
-        ADLSESetup: Record "ADL Setup";
-        ADLSEExecution: Codeunit "ADL Execution";
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSETable: Record "AZD Table";
+        ADLSESetup: Record "AZD Setup";
+        ADLSEExecution: Codeunit "AZD Execution";
+        ADLSEUtil: Codeunit "AZD Util";
         CustomDimensions: Dictionary of [Text, Text];
         NewSessionID: Integer;
     begin
@@ -45,7 +45,7 @@ codeunit 11344447 "ADL Session Manager"
                     if (ADLSESetup."Export Company Database Tables" <> CompanyName()) then
                         exit;
 
-            Started := Session.StartSession(NewSessionID, Codeunit::"ADL Wrapper Execute", CompanyName(), ADLSETable);
+            Started := Session.StartSession(NewSessionID, Codeunit::"AZD Wrapper Execute", CompanyName(), ADLSETable);
             CustomDimensions.Add('Entity', ADLSEUtil.GetTableCaption(TableID));
             CustomDimensions.Add('ExportWasPending', Format(ExportWasPending));
             if Started then begin
@@ -75,8 +75,8 @@ codeunit 11344447 "ADL Session Manager"
 
     local procedure DataChangesExist(TableID: Integer): Boolean
     var
-        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
-        ADLSEExecute: Codeunit "ADL Execute";
+        ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
+        ADLSEExecute: Codeunit "AZD Execute";
         UpdatedLastTimestamp: BigInteger;
         DeletedLastEntryNo: BigInteger;
     begin
@@ -91,16 +91,16 @@ codeunit 11344447 "ADL Session Manager"
 
     local procedure LastRunFailed(TableID: Integer; EmitTelemetry: Boolean) Result: Boolean
     var
-        ADLSERun: Record "ADL Run";
-        ADLSEUtil: Codeunit "ADL Util";
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSERun: Record "AZD Run";
+        ADLSEUtil: Codeunit "AZD Util";
+        ADLSEExecution: Codeunit "AZD Execution";
         CustomDimensions: Dictionary of [Text, Text];
-        Status: Enum "ADL Run State";
+        Status: Enum "AZD Run State";
         StartedAt: DateTime;
         Error: Text[2048];
     begin
         ADLSERun.GetLastRunDetails(TableID, Status, StartedAt, Error);
-        Result := Status = "ADL Run State"::Failed;
+        Result := Status = "AZD Run State"::Failed;
         if Result and EmitTelemetry then begin
             CustomDimensions.Add('Entity', ADLSEUtil.GetTableCaption(TableID));
             ADLSEExecution.Log('ADLSE-027', 'Last run failed.', Verbosity::Normal, CustomDimensions);
@@ -109,8 +109,8 @@ codeunit 11344447 "ADL Session Manager"
 
     procedure StartExportFromPendingTables()
     var
-        ADLSESetup: Record "ADL Setup";
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSESetup: Record "AZD Setup";
+        ADLSEExecution: Codeunit "AZD Execution";
         CustomDimensions: Dictionary of [Text, Text];
         TableID: Integer;
     begin

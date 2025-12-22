@@ -4,12 +4,12 @@ namespace bc2adls;
 
 using System.Reflection;
 
-page 11344449 "ADL Setup Fields"
+page 11344449 "AZD Setup Fields"
 {
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "ADL Field";
+    SourceTable = "AZD Field";
     SourceTableTemporary = true;
     InsertAllowed = false;
     DeleteAllowed = false;
@@ -117,7 +117,7 @@ page 11344449 "ADL Setup Fields"
     trigger OnAfterGetRecord()
     var
         Field: Record Field;
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         if not Field.Get(Rec."Table ID", Rec."Field ID") then begin
             ADLSFieldName := ADLSEUtil.GetDataLakeCompliantFieldName(Rec."Table ID", Rec."Field ID");

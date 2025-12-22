@@ -4,7 +4,7 @@ namespace bc2adls;
 
 using System.Environment;
 
-table 11344451 "ADL Table Last Timestamp"
+table 11344451 "AZD Table Last Timestamp"
 {
     /// <summary>
     /// Keeps track of the last exported timestamps of different tables.
@@ -28,7 +28,7 @@ table 11344451 "ADL Table Last Timestamp"
         {
             Editable = false;
             Caption = 'Table ID';
-            TableRelation = "ADL Table"."Table ID";
+            TableRelation = "AZD Table"."Table ID";
         }
         field(3; "Updated Last Timestamp"; BigInteger)
         {
@@ -64,16 +64,16 @@ table 11344451 "ADL Table Last Timestamp"
         SaveUpsertLastTimestampFailedErr: Label 'Could not save the last time stamp for the upserts on table %1.', Comment = '%1: table caption';
         SaveDeletionLastTimestampFailedErr: Label 'Could not save the last time stamp for the deletions on table %1.', Comment = '%1: table caption';
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table Last Timestamp", 'r')]
     procedure ExistsUpdatedLastTimestamp(TableID: Integer): Boolean
     begin
         exit(Rec.Get(GetCompanyNameToLookFor(TableID), TableID));
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'r')]
     procedure GetUpdatedLastTimestamp(TableID: Integer): BigInteger
     var
-        ADLSETable: Record "ADL Table";
+        ADLSETable: Record "AZD Table";
         InitialLoadStartDate: Date;
         MinTimestamp: BigInteger;
     begin
@@ -125,7 +125,7 @@ table 11344451 "ADL Table Last Timestamp"
         exit(MinTimestamp);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table Last Timestamp", 'r')]
     procedure GetDeletedLastEntryNo(TableID: Integer): BigInteger
     begin
         if Rec.Get(GetCompanyNameToLookFor(TableID), TableID) then
@@ -134,8 +134,8 @@ table 11344451 "ADL Table Last Timestamp"
 
     procedure TrySaveUpdatedLastTimestamp(TableID: Integer; Timestamp: BigInteger; EmitTelemetry: Boolean) Result: Boolean
     var
-        ADLSEExecution: Codeunit "ADL Execution";
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEExecution: Codeunit "AZD Execution";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         Result := RecordUpsertLastTimestamp(TableID, Timestamp);
         if EmitTelemetry and (not Result) then
@@ -144,7 +144,7 @@ table 11344451 "ADL Table Last Timestamp"
 
     procedure SaveUpdatedLastTimestamp(TableID: Integer; Timestamp: BigInteger)
     var
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         if not RecordUpsertLastTimestamp(TableID, Timestamp) then
             Error(SaveUpsertLastTimestampFailedErr, ADLSEUtil.GetTableCaption(TableID));
@@ -157,8 +157,8 @@ table 11344451 "ADL Table Last Timestamp"
 
     procedure TrySaveDeletedLastEntryNo(TableID: Integer; Timestamp: BigInteger; EmitTelemetry: Boolean) Result: Boolean
     var
-        ADLSEExecution: Codeunit "ADL Execution";
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEExecution: Codeunit "AZD Execution";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         Result := RecordDeletedLastTimestamp(TableID, Timestamp);
         if EmitTelemetry and (not Result) then
@@ -167,7 +167,7 @@ table 11344451 "ADL Table Last Timestamp"
 
     procedure SaveDeletedLastEntryNo(TableID: Integer; Timestamp: BigInteger)
     var
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         if not RecordDeletedLastTimestamp(TableID, Timestamp) then
             Error(SaveDeletionLastTimestampFailedErr, ADLSEUtil.GetTableCaption(TableID));
@@ -178,13 +178,13 @@ table 11344451 "ADL Table Last Timestamp"
         exit(RecordLastTimestamp(TableID, Timestamp, false));
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'rmi')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table Last Timestamp", 'rmi')]
     local procedure RecordLastTimestamp(TableID: Integer; Timestamp: BigInteger; Upsert: Boolean): Boolean
     begin
         exit(RecordLastTimestamp_InCurrSession(TableID, Timestamp, Upsert))
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table Last Timestamp", 'rm')]
     procedure RecordLastTimestamp_InCurrSession(TableID: Integer; Timestamp: BigInteger; Upsert: Boolean): Boolean
     var
         Company: Text;
@@ -212,7 +212,7 @@ table 11344451 "ADL Table Last Timestamp"
 
     local procedure GetCompanyNameToLookFor(TableID: Integer): Text
     var
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         if ADLSEUtil.IsTablePerCompany(TableID) then
             exit(CurrentCompany());

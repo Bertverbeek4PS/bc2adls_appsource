@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-page 11344438 "ADL CurrentSession API"
+page 11344438 "AZD CurrentSession API"
 {
     PageType = API;
     APIPublisher = 'bc2adlsTeamMicrosoft';
@@ -10,7 +10,7 @@ page 11344438 "ADL CurrentSession API"
     APIVersion = 'v1.1', 'v1.2';
     EntityName = 'adlseCurrentSession';
     EntitySetName = 'adlseCurrentSessions';
-    SourceTable = "ADL Current Session";
+    SourceTable = "AZD Current Session";
     InsertAllowed = false;
     DeleteAllowed = false;
     ModifyAllowed = false;

@@ -1,13 +1,13 @@
 namespace bc2adls;
 
 //A list page that is build on table Enum Translation
-page 11344440 "ADL Enum Translations"
+page 11344440 "AZD Enum Translations"
 {
     PageType = List;
     ApplicationArea = All;
     Caption = 'ADL Enum Translations';
     UsageCategory = Lists;
-    SourceTable = "ADL Enum Translation";
+    SourceTable = "AZD Enum Translation";
 
 
     layout
@@ -56,8 +56,8 @@ page 11344440 "ADL Enum Translations"
 
                 trigger OnAction()
                 var
-                    ADLSEEnumTranslationLang: Record "ADL Enum Translation Lang";
-                    ADLSEEnumTranslationsLang: Page "ADL Enum Translations Lang";
+                    ADLSEEnumTranslationLang: Record "AZD Enum Translation Lang";
+                    ADLSEEnumTranslationsLang: Page "AZD Enum Translations Lang";
                 begin
                     ADLSEEnumTranslationLang.SetRange("Table Id", Rec."Table Id");
                     ADLSEEnumTranslationLang.SetRange("Field Id", Rec."Field Id");

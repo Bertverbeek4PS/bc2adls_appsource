@@ -5,7 +5,7 @@ namespace bc2adls;
 using System.Environment;
 
 #pragma warning disable LC0015
-table 11344437 "ADL Current Session"
+table 11344437 "AZD Current Session"
 #pragma warning restore
 {
     Access = Internal;
@@ -65,10 +65,10 @@ table 11344437 "ADL Current Session"
         InsertFailedErr: Label 'Could not start the export as there is already an active export running for the table %1. If this is not so, please stop all exports and try again.', Comment = '%1 = table caption';
         CouldNotStopSessionErr: Label 'Could not delete the export table session %1 for table on company %2.', Comment = '%1: session id, %2: company name';
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'i')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'i')]
     procedure Start(ADLSETableID: Integer)
     var
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         Rec.Init();
         Rec."Table ID" := ADLSETableID;
@@ -79,10 +79,10 @@ table 11344437 "ADL Current Session"
             Error(InsertFailedErr, ADLSEUtil.GetTableCaption(ADLSETableID));
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'rd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'rd')]
     procedure Stop(ADLSETableID: Integer; EmitTelemetry: Boolean; TableCaption: Text)
     var
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEExecution: Codeunit "AZD Execution";
         CustomDimensions: Dictionary of [Text, Text];
     begin
         if not Rec.Get(ADLSETableID, CompanyName()) then
@@ -100,7 +100,7 @@ table 11344437 "ADL Current Session"
             Error(ExportDataInProgressErr);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'r')]
     procedure AreAnySessionsActive() AnyActive: Boolean
     begin
         Rec.SetRange("Company Name", CopyStr(CompanyName(), 1, 30));
@@ -113,17 +113,17 @@ table 11344437 "ADL Current Session"
             until Rec.Next() = 0;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'd')]
     procedure CleanupSessions()
     begin
         Rec.SetRange("Company Name", CopyStr(CompanyName(), 1, 30));
         Rec.DeleteAll(false);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'rd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'rd')]
     procedure CancelAll()
     var
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         if Rec.FindSet(false) then
             repeat

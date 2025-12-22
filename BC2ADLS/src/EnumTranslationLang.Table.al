@@ -1,14 +1,14 @@
 namespace bc2adls;
 
 #pragma warning disable LC0015
-table 11344441 "ADL Enum Translation Lang"
+table 11344441 "AZD Enum Translation Lang"
 #pragma warning restore
 {
     DataClassification = ToBeClassified;
     Caption = 'ADL Enum Translation Language';
     Access = Internal;
-    LookupPageId = "ADL Enum Translations Lang";
-    DrillDownPageId = "ADL Enum Translations Lang";
+    LookupPageId = "AZD Enum Translations Lang";
+    DrillDownPageId = "AZD Enum Translations Lang";
 
     fields
     {
@@ -74,10 +74,10 @@ table 11344441 "ADL Enum Translation Lang"
         }
     }
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Enum Translation Lang", 'i')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Enum Translation Lang", 'i')]
     procedure InsertEnumLanguage(LanguageCode: Code[10]; TableId: Integer; FieldNo: Integer; FieldName: Text[30]; EnumValueOrdinal: Integer; EnumValueName: Text)
     var
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         Rec.Init();
         Rec."Language Code" := LanguageCode;

@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-permissionset 11344438 "ADL - Execute"
+permissionset 11344438 "AZD - Execute"
 {
     /// <summary>
     /// The permission set to be used when running the Azure Data Lake Storage export tool.
@@ -11,31 +11,31 @@ permissionset 11344438 "ADL - Execute"
     Assignable = true;
     Caption = 'ADLS - Execute', MaxLength = 30;
 
-    Permissions = table "ADL Setup" = x,
-                  table "ADL Table Last Timestamp" = x,
-                  tabledata "ADL Setup" = RM,
-                  tabledata "ADL Table" = RM,
-                  tabledata "ADL Field" = R,
-                  tabledata "ADL Deleted Record" = R,
-                  tabledata "ADL Current Session" = RIMD,
-                  tabledata "ADL Table Last Timestamp" = RIMD,
-                  tabledata "ADL Run" = RIMD,
-                  tabledata "ADL Enum Translation" = RIMD,
-                  tabledata "ADL Enum Translation Lang" = RIMD,
-                  tabledata "ADL Deleted Table Filter" = R,
-                  tabledata "ADL Export Category Table" = R,
-                  codeunit "ADL UpgradeTagNewCompanySubs" = X,
-                  codeunit "ADL Upgrade" = X,
-                  codeunit "ADL Util" = X,
-                  codeunit ADL = X,
-                  codeunit "ADL CDM Util" = X,
-                  codeunit "ADL Communication" = X,
-                  codeunit "ADL Session Manager" = X,
-                  codeunit "ADL Http" = X,
-                  codeunit "ADL Gen 2 Util" = X,
-                  codeunit "ADL Execute" = X,
-                  codeunit "ADL Execution" = X,
-                  codeunit "ADL Wrapper Execute" = X,
-                  report "ADL Seek Data" = X,
-                  xmlport "ADL BC2ADLS Export" = X;
+    Permissions = table "AZD Setup" = x,
+                  table "AZD Table Last Timestamp" = x,
+                  tabledata "AZD Setup" = RM,
+                  tabledata "AZD Table" = RM,
+                  tabledata "AZD Field" = R,
+                  tabledata "AZD Deleted Record" = R,
+                  tabledata "AZD Current Session" = RIMD,
+                  tabledata "AZD Table Last Timestamp" = RIMD,
+                  tabledata "AZD Run" = RIMD,
+                  tabledata "AZD Enum Translation" = RIMD,
+                  tabledata "AZD Enum Translation Lang" = RIMD,
+                  tabledata "AZD Deleted Table Filter" = R,
+                  tabledata "AZD Export Category Table" = R,
+                  codeunit "AZD UpgradeTagNewCompanySubs" = X,
+                  codeunit "AZD Upgrade" = X,
+                  codeunit "AZD Util" = X,
+                  codeunit AZD = X,
+                  codeunit "AZD CDM Util" = X,
+                  codeunit "AZD Communication" = X,
+                  codeunit "AZD Session Manager" = X,
+                  codeunit "AZD Http" = X,
+                  codeunit "AZD Gen 2 Util" = X,
+                  codeunit "AZD Execute" = X,
+                  codeunit "AZD Execution" = X,
+                  codeunit "AZD Wrapper Execute" = X,
+                  report "AZD Seek Data" = X,
+                  xmlport "AZD BC2ADLS Export" = X;
 }

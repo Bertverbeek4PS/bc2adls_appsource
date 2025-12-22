@@ -8,15 +8,15 @@ codeunit 85565 "ADLSE Setup Tests"
     end;
 
     var
-        ADLSESetup: Record "ADL Setup";
-        ADLSETable: Record "ADL Table";
-        ADLSEField: Record "ADL Field";
+        ADLSESetup: Record "AZD Setup";
+        ADLSETable: Record "AZD Table";
+        ADLSEField: Record "AZD Field";
         ADLSELibrarybc2adls: Codeunit "ADLSE Library - bc2adls";
         LibraryUtility: Codeunit "Library - Utility";
         LibraryRandom: Codeunit "Library - Random";
         LibraryAssert: Codeunit "Library Assert";
         LibraryDialogHandler: Codeunit "Library - Dialog Handler";
-        "Storage Type": Enum "ADL Storage Type";
+        "Storage Type": Enum "AZD Storage Type";
         IsInitialized: Boolean;
 
     [Test]
@@ -165,7 +165,7 @@ codeunit 85565 "ADLSE Setup Tests"
     procedure ScheduleAnExportforJobQueue()
     var
         JobQueueEntry: Record "Job Queue Entry";
-        ADLSEScheduleTaskAssignment: Report "ADL Schedule Task Assignment";
+        ADLSEScheduleTaskAssignment: Report "AZD Schedule Task Assignment";
         JobScheduledTxt: Label 'The job has been scheduled. Please go to the Job Queue Entries page to locate it and make further changes.';
     begin
         // [SCENARIO 108] Schedule an export for the Job Queue
@@ -182,7 +182,7 @@ codeunit 85565 "ADLSE Setup Tests"
 
         // [THEN] Check if the export is scheduled
         JobQueueEntry.SetRange("Object Type to Run", JobQueueEntry."Object Type to Run"::Report);
-        JobQueueEntry.SetRange("Object ID to Run", Report::"ADL Schedule Task Assignment");
+        JobQueueEntry.SetRange("Object ID to Run", Report::"AZD Schedule Task Assignment");
         LibraryAssert.RecordCount(JobQueueEntry, 1);
     end;
 

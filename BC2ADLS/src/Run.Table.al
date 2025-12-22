@@ -3,7 +3,7 @@
 namespace bc2adls;
 
 #pragma warning disable LC0004, LC0015
-table 11344444 "ADL Run"
+table 11344444 "AZD Run"
 #pragma warning restore
 {
     Access = Internal;
@@ -32,7 +32,7 @@ table 11344444 "ADL Run"
             Editable = false;
             Caption = 'Company name';
         }
-        field(4; State; Enum "ADL Run State")
+        field(4; State; Enum "AZD Run State")
         {
             Editable = false;
             Caption = 'State';
@@ -87,7 +87,7 @@ table 11344444 "ADL Run"
         ExportStoppedDueToCancelledSessionTxt: Label 'Export stopped as session was cancelled. Please check state of the export on the data lake before enabling this.';
         CouldNotUpdateExportRunStatusErr: Label 'Could not update the status of the export run for table to %1.', Comment = '%1: New status';
 
-    procedure GetLastRunDetails(TableID: Integer; var Status: Enum "ADL Run State"; var StartedTime: DateTime; var ErrorIfAny: Text[2048])
+    procedure GetLastRunDetails(TableID: Integer; var Status: Enum "AZD Run State"; var StartedTime: DateTime; var ErrorIfAny: Text[2048])
     begin
         if FindLastRun(TableID) then begin
             Status := Rec.State;
@@ -95,7 +95,7 @@ table 11344444 "ADL Run"
             ErrorIfAny := Rec.Error;
             exit;
         end;
-        Status := "ADL Run State"::None;
+        Status := "AZD Run State"::None;
         StartedTime := 0DT;
         ErrorIfAny := '';
     end;
@@ -107,22 +107,22 @@ table 11344444 "ADL Run"
         exit(Round(Ended - Started, 100));
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL run", 'i')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD run", 'i')]
     procedure RegisterStarted(TableID: Integer)
     begin
         Rec.Init();
         Rec."Table ID" := TableID;
         Rec."Company Name" := CopyStr(CompanyName(), 1, 30);
-        Rec.State := "ADL Run State"::InProcess;
+        Rec.State := "AZD Run State"::InProcess;
         Rec.Started := CurrentDateTime();
         Rec.Insert(true);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL run", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD run", 'm')]
     procedure RegisterEnded(TableID: Integer; EmitTelemetry: Boolean; TableCaption: Text)
     var
-        ADLSEExecution: Codeunit "ADL Execution";
-        ADLSEExternalEvents: Codeunit "ADL External Events";
+        ADLSEExecution: Codeunit "AZD Execution";
+        ADLSEExternalEvents: Codeunit "AZD External Events";
         CustomDimensions: Dictionary of [Text, Text];
         LastErrorMessage: Text;
     begin
@@ -136,9 +136,9 @@ table 11344444 "ADL Run"
                 FillErrorDetails(LastErrorMessage, EmitTelemetry, CustomDimensions);
 
         if Rec.Error = '' then
-            Rec.State := "ADL Run State"::Success
+            Rec.State := "AZD Run State"::Success
         else
-            Rec.State := "ADL Run State"::Failed;
+            Rec.State := "AZD Run State"::Failed;
 
         Rec.Ended := CurrentDateTime();
         ADLSEExternalEvents.OnTableExportRunEnded(Rec.ID, Rec.Started, Rec.Ended, Rec."Table ID", Rec.State);
@@ -162,10 +162,10 @@ table 11344444 "ADL Run"
             FillErrorDetails(LastErrorMessage, EmitTelemetry, CustomDimensions);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL run", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD run", 'm')]
     local procedure FillErrorDetails(LastErrorMessage: Text; EmitTelemetry: Boolean; CustomDimensions: Dictionary of [Text, Text])
     var
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEExecution: Codeunit "AZD Execution";
         LastErrorStack: Text;
     begin
         LastErrorStack := GetLastErrorCallStack();
@@ -180,34 +180,34 @@ table 11344444 "ADL Run"
         ClearLastError();
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL run", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD run", 'm')]
     procedure CancelAllRuns()
     begin
-        Rec.SetRange(State, "ADL Run State"::InProcess);
+        Rec.SetRange(State, "AZD Run State"::InProcess);
         Rec.ModifyAll(Ended, CurrentDateTime(), true);
-        Rec.ModifyAll(State, "ADL Run State"::Failed, true);
+        Rec.ModifyAll(State, "AZD Run State"::Failed, true);
         Rec.ModifyAll(Error, ExportStoppedDueToCancelledSessionTxt, true);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL run", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD run", 'm')]
     procedure CancelRun(TableID: Integer)
     begin
         if not FindLastRun(TableID) then
             exit;
         Rec.Validate(Ended, CurrentDateTime());
-        Rec.Validate(State, "ADL Run State"::Failed);
+        Rec.Validate(State, "AZD Run State"::Failed);
         Rec.Validate(Error, ExportStoppedDueToCancelledSessionTxt);
         Rec.Modify(true);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL run", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD run", 'r')]
     procedure OldRunsExist(): Boolean
     begin
         CommmonFilterOnOldRuns();
         exit(not Rec.IsEmpty());
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL run", 'd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD run", 'd')]
     procedure DeleteOldRuns()
     begin
         CommmonFilterOnOldRuns();
@@ -220,7 +220,7 @@ table 11344444 "ADL Run"
         DeleteOldRuns();
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL run", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD run", 'r')]
     local procedure FindLastRun(TableID: Integer) Found: Boolean
     begin
         Rec.SetCurrentKey(ID);
@@ -232,18 +232,18 @@ table 11344444 "ADL Run"
 
     local procedure FindLastRunInProcess(TableID: Integer; CustomDimensions: Dictionary of [Text, Text]): Boolean
     var
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEExecution: Codeunit "AZD Execution";
     begin
         if not FindLastRun(TableID) then begin
             ADLSEExecution.Log('ADLSE-034', ExportRunNotFoundErr, Verbosity::Error, CustomDimensions);
             exit(false);
         end;
-        exit(Rec.State = "ADL Run State"::InProcess);
+        exit(Rec.State = "AZD Run State"::InProcess);
     end;
 
     local procedure CommmonFilterOnOldRuns()
     begin
-        Rec.SetFilter(State, '<>%1', "ADL Run State"::InProcess);
+        Rec.SetFilter(State, '<>%1', "AZD Run State"::InProcess);
         Rec.SetRange("Company Name", CompanyName());
     end;
 }

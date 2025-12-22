@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-page 11344448 "ADL Setup API v12"
+page 11344448 "AZD Setup API v12"
 {
     PageType = API;
     APIPublisher = 'bc2adlsTeamMicrosoft';
@@ -10,7 +10,7 @@ page 11344448 "ADL Setup API v12"
     APIVersion = 'v1.2';
     EntityName = 'adlseSetup';
     EntitySetName = 'adlseSetup';
-    SourceTable = "ADL Setup";
+    SourceTable = "AZD Setup";
     InsertAllowed = false;
     DeleteAllowed = false;
     ModifyAllowed = true;
@@ -57,7 +57,7 @@ page 11344448 "ADL Setup API v12"
     [ServiceEnabled]
     procedure StartExport(var ActionContext: WebServiceActionContext)
     var
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEExecution: Codeunit "AZD Execution";
     begin
         ADLSEExecution.StartExport();
         SetActionResponse(ActionContext, Rec."SystemId");
@@ -66,7 +66,7 @@ page 11344448 "ADL Setup API v12"
     [ServiceEnabled]
     procedure StopExport(var ActionContext: WebServiceActionContext)
     var
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEExecution: Codeunit "AZD Execution";
     begin
         ADLSEExecution.StopExport();
         SetActionResponse(ActionContext, Rec."SystemId");
@@ -75,7 +75,7 @@ page 11344448 "ADL Setup API v12"
     [ServiceEnabled]
     procedure SchemaExport(var ActionContext: WebServiceActionContext)
     var
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEExecution: Codeunit "AZD Execution";
     begin
         ADLSEExecution.SchemaExport();
         SetActionResponse(ActionContext, Rec."SystemId");
@@ -84,7 +84,7 @@ page 11344448 "ADL Setup API v12"
     [ServiceEnabled]
     procedure ClearSchemaExportedOn(var ActionContext: WebServiceActionContext)
     var
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEExecution: Codeunit "AZD Execution";
     begin
         ADLSEExecution.ClearSchemaExportedOn();
         SetActionResponse(ActionContext, Rec."SystemId");
@@ -93,7 +93,7 @@ page 11344448 "ADL Setup API v12"
     [ServiceEnabled]
     procedure RefreshOptions(var ActionContext: WebServiceActionContext)
     var
-        ADLSEEnumTranslation: Record "ADL Enum Translation";
+        ADLSEEnumTranslation: Record "AZD Enum Translation";
     begin
         ADLSEEnumTranslation.RefreshOptions();
         SetActionResponse(ActionContext, Rec."SystemId");
@@ -102,7 +102,7 @@ page 11344448 "ADL Setup API v12"
     local procedure SetActionResponse(var ActionContext: WebServiceActionContext; AdlsId: Guid)
     var
     begin
-        SetActionResponse(ActionContext, Page::"ADL Setup API v12", AdlsId);
+        SetActionResponse(ActionContext, Page::"AZD Setup API v12", AdlsId);
     end;
 
     local procedure SetActionResponse(var ActionContext: WebServiceActionContext; PageId: Integer; DocumentId: Guid)

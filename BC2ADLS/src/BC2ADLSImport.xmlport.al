@@ -2,19 +2,19 @@ namespace bc2adls;
 
 using System.Utilities;
 
-xmlport 11344438 "ADL BC2ADLS Import"
+xmlport 11344438 "AZD BC2ADLS Import"
 {
     Caption = 'ADL BC2ADLS Import';
     UseRequestPage = false;
     Direction = Import;
-    Permissions = tabledata "ADL Field" = rmi,
-                  tabledata "ADL Table" = rmid;
+    Permissions = tabledata "AZD Field" = rmi,
+                  tabledata "AZD Table" = rmid;
 
     schema
     {
         textelement(Root)
         {
-            tableelement(ADLSETable; "ADL Table")
+            tableelement(ADLSETable; "AZD Table")
             {
                 MaxOccurs = Unbounded;
                 XmlName = 'ADLSETable';
@@ -26,7 +26,7 @@ xmlport 11344438 "ADL BC2ADLS Import"
                     Occurrence = Required;
                 }
 
-                tableelement(ADLSEField; "ADL Field")
+                tableelement(ADLSEField; "AZD Field")
                 {
                     MinOccurs = Zero;
                     SourceTableView = where(Enabled = const(true));
@@ -50,8 +50,8 @@ xmlport 11344438 "ADL BC2ADLS Import"
 
                     trigger OnBeforeInsertRecord()
                     var
-                        ADLSETableRec: Record "ADL Table";
-                        ADLSEFieldRec: Record "ADL Field";
+                        ADLSETableRec: Record "AZD Table";
+                        ADLSEFieldRec: Record "AZD Field";
                     begin
                         if not ADLSETableRec.Get(ADLSEField."Table ID") then begin
                             ADLSETableRec.Validate("Table ID", ADLSEField."Table ID");
@@ -79,7 +79,7 @@ xmlport 11344438 "ADL BC2ADLS Import"
 
     trigger OnPreXmlPort()
     var
-        ADLSETableRec: Record "ADL Table";
+        ADLSETableRec: Record "AZD Table";
         ConfirmManagement: Codeunit "Confirm Management";
         ConfirmQuestionMsg: Label 'With the import all existing ADL Tables and Fields will be deleted. Do you want to continue?';
     begin

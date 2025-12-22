@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-codeunit 11344441 "ADL Credentials"
+codeunit 11344441 "AZD Credentials"
 {
     Access = Internal;
     // The max sizes of the fields are determined based on the recommendations listed at 

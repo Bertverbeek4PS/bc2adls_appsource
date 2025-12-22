@@ -5,7 +5,7 @@ namespace bc2adls;
 using System.Reflection;
 using Microsoft.Finance.GeneralLedger.Ledger;
 
-codeunit 11344454 "ADL Util"
+codeunit 11344454 "AZD Util"
 {
     Access = Internal;
 
@@ -148,7 +148,7 @@ codeunit 11344454 "ADL Util"
 
     procedure GetDataLakeCompliantTableName(TableID: Integer) TableName: Text
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
         AllObjWithCaption: Record AllObjWithCaption;
         OrigTableName: Text;
     begin
@@ -184,7 +184,7 @@ codeunit 11344454 "ADL Util"
 
     procedure GetDataLakeCompliantFieldName(FieldRef: FieldRef): Text
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
         TableFields: Record Field;
         RecRef: RecordRef;
         NameToUse: Text;
@@ -221,7 +221,7 @@ codeunit 11344454 "ADL Util"
 
     procedure GetDataLakeCompliantName(Name: Text) Result: Text
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
         ResultBuilder: TextBuilder;
         Index: Integer;
         Letter: Text;
@@ -269,7 +269,7 @@ codeunit 11344454 "ADL Util"
 
     procedure ConvertFieldToText(FieldRef: FieldRef): Text
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
         DateTimeValue: DateTime;
         TimeValue: Time;
     begin
@@ -346,7 +346,7 @@ codeunit 11344454 "ADL Util"
 
     local procedure ConvertTimeToText(Variant: Variant): Text
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
         TimeValue: Time;
     begin
         if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then begin
@@ -395,8 +395,8 @@ codeunit 11344454 "ADL Util"
 
     procedure CreateCsvHeader(RecordRef: RecordRef; FieldIdList: List of [Integer]) RecordPayload: Text
     var
-        ADLSESetup: Record "ADL Setup";
-        ADLSECDMUtil: Codeunit "ADL CDM Util";
+        ADLSESetup: Record "AZD Setup";
+        ADLSECDMUtil: Codeunit "AZD CDM Util";
         FieldRef: FieldRef;
         FieldID: Integer;
         FieldsAdded: Integer;
@@ -435,7 +435,7 @@ codeunit 11344454 "ADL Util"
 
     procedure CreateCsvPayload(RecordRef: RecordRef; FieldIdList: List of [Integer]; AddHeaders: Boolean; Deletes: Boolean) RecordPayload: Text
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
         FieldRef: FieldRef;
         CurrDateTime: DateTime;
         PostingDate: Date;
@@ -503,7 +503,7 @@ codeunit 11344454 "ADL Util"
             exit(TableMetadata.DataPerCompany);
     end;
 
-    procedure CreateFakeRecordForDeletedAction(ADLSEDeletedRecord: Record "ADL Deleted Record"; var RecordRef: RecordRef)
+    procedure CreateFakeRecordForDeletedAction(ADLSEDeletedRecord: Record "AZD Deleted Record"; var RecordRef: RecordRef)
     var
         TimestampFieldRef: FieldRef;
         SystemIdFieldRef: FieldRef;

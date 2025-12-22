@@ -1,11 +1,11 @@
 namespace bc2adls;
 
-page 11344442 "ADL Export Categories"
+page 11344442 "AZD Export Categories"
 {
     ApplicationArea = Basic, Suite;
     Caption = 'Export Catgories';
     PageType = List;
-    SourceTable = "ADL Export Category Table";
+    SourceTable = "AZD Export Category Table";
     UsageCategory = None;
 
     layout

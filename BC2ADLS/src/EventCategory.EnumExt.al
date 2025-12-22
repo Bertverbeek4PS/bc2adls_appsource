@@ -2,7 +2,7 @@ namespace bc2adls;
 
 using System.Integration;
 
-enumextension 11344437 "ADL EventCategory" extends EventCategory
+enumextension 11344437 "AZD EventCategory" extends EventCategory
 {
     value(11344437; ADLSE)
     {

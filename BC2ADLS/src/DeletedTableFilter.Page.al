@@ -2,11 +2,11 @@ namespace bc2adls;
 
 using System.Reflection;
 
-page 11344439 "ADL Deleted Table Filter"
+page 11344439 "AZD Deleted Table Filter"
 {
     PageType = List;
     ApplicationArea = All;
-    SourceTable = "ADL Deleted Table Filter";
+    SourceTable = "AZD Deleted Table Filter";
     Caption = 'Deleted Table Filter';
 
     layout
@@ -30,10 +30,10 @@ page 11344439 "ADL Deleted Table Filter"
             }
         }
     }
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'r')]
     local procedure GetTableId(var TableMetadata: Record "Table Metadata")
     var
-        ADLSETable: Record "ADL Table";
+        ADLSETable: Record "AZD Table";
         TableFilterTxt: Text;
     begin
         ADLSETable.Reset();

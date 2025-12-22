@@ -1,18 +1,18 @@
 namespace bc2adls;
 
-xmlport 11344437 "ADL BC2ADLS Export"
+xmlport 11344437 "AZD BC2ADLS Export"
 {
     Caption = 'ADL BC2ADLS Export';
     UseRequestPage = false;
     Direction = Export;
-    Permissions = tabledata "ADL Field" = r,
-                  tabledata "ADL Table" = r;
+    Permissions = tabledata "AZD Field" = r,
+                  tabledata "AZD Table" = r;
 
     schema
     {
         textelement(Root)
         {
-            tableelement(ADLSETable; "ADL Table")
+            tableelement(ADLSETable; "AZD Table")
             {
                 MaxOccurs = Unbounded;
                 XmlName = 'ADLSETable';
@@ -23,7 +23,7 @@ xmlport 11344437 "ADL BC2ADLS Export"
                     Occurrence = Required;
                 }
 
-                tableelement(ADLSEField; "ADL Field")
+                tableelement(ADLSEField; "AZD Field")
                 {
                     MinOccurs = Zero;
                     SourceTableView = where(Enabled = const(true));

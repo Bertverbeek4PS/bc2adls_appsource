@@ -4,7 +4,7 @@ namespace bc2adls;
 
 using System.Text;
 
-codeunit 11344449 "ADL Gen 2 Util"
+codeunit 11344449 "AZD Gen 2 Util"
 {
     Access = Internal;
     SingleInstance = true;
@@ -31,32 +31,32 @@ codeunit 11344449 "ADL Gen 2 Util"
         CouldNotRenameDataBlobErr: Label 'Could not rename blob from %1 to %2: %3', Comment = '%1: source blob path, %2: target blob path, %3 - HTTP response message';
         LatestBlockTagTok: Label '<Latest>%1</Latest>', Comment = '%1: block ID', Locked = true;
 
-    procedure ContainerExists(ContainerPath: Text; ADLSECredentials: Codeunit "ADL Credentials"): Boolean
+    procedure ContainerExists(ContainerPath: Text; ADLSECredentials: Codeunit "AZD Credentials"): Boolean
     var
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
     begin
-        ADLSEHttp.SetMethod("ADL Http Method"::Get);
+        ADLSEHttp.SetMethod("AZD Http Method"::Get);
         ADLSEHttp.SetUrl(ContainerPath + GetContainerMetadataSuffixTxt);
         ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
         exit(ADLSEHttp.InvokeRestApi(Response)); // no error
     end;
 
-    procedure CreateContainer(ContainerPath: Text; ADLSECredentials: Codeunit "ADL Credentials")
+    procedure CreateContainer(ContainerPath: Text; ADLSECredentials: Codeunit "AZD Credentials")
     var
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
     begin
-        ADLSEHttp.SetMethod("ADL Http Method"::Put);
+        ADLSEHttp.SetMethod("AZD Http Method"::Put);
         ADLSEHttp.SetUrl(ContainerPath + CreateContainerSuffixTxt);
         ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
         if not ADLSEHttp.InvokeRestApi(Response) then
             Error(CoundNotCreateContainerErr, ContainerPath, Response);
     end;
 
-    procedure GetBlobContent(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials"; var BlobExists: Boolean) Content: JsonObject
+    procedure GetBlobContent(BlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials"; var BlobExists: Boolean) Content: JsonObject
     var
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         ContentToken: JsonToken;
         IsHandled: Boolean;
         Response: Text;
@@ -66,7 +66,7 @@ codeunit 11344449 "ADL Gen 2 Util"
         if IsHandled then
             exit(Content);
 
-        ADLSEHttp.SetMethod("ADL Http Method"::Get);
+        ADLSEHttp.SetMethod("AZD Http Method"::Get);
         ADLSEHttp.SetUrl(BlobPath);
         ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
         BlobExists := true;
@@ -84,9 +84,9 @@ codeunit 11344449 "ADL Gen 2 Util"
             Error(CouldNotReadDataInBlobErr, BlobPath, Response);
     end;
 
-    procedure GetBlobContentLength(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials") ContentLength: Integer
+    procedure GetBlobContentLength(BlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials") ContentLength: Integer
     var
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
         StatusCode: Integer;
         ContentLengthList: List of [Text];
@@ -97,7 +97,7 @@ codeunit 11344449 "ADL Gen 2 Util"
         if IsHandled then
             exit;
 
-        ADLSEHttp.SetMethod("ADL Http Method"::Head);
+        ADLSEHttp.SetMethod("AZD Http Method"::Head);
         ADLSEHttp.SetUrl(BlobPath);
         ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
         if not ADLSEHttp.InvokeRestApi(Response, StatusCode) then
@@ -110,7 +110,7 @@ codeunit 11344449 "ADL Gen 2 Util"
         Evaluate(ContentLength, ContentLengthList.Get(1));
     end;
 
-    procedure CreateOrUpdateJsonBlob(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials"; LeaseID: Text; Body: JsonObject)
+    procedure CreateOrUpdateJsonBlob(BlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials"; LeaseID: Text; Body: JsonObject)
     var
         BodyAsText: Text;
     begin
@@ -118,10 +118,10 @@ codeunit 11344449 "ADL Gen 2 Util"
         CreateBlockBlob(BlobPath, ADLSECredentials, LeaseID, BodyAsText, true);
     end;
 
-    local procedure CreateBlockBlob(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials"; LeaseID: Text; Body: Text; IsJson: Boolean)
+    local procedure CreateBlockBlob(BlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials"; LeaseID: Text; Body: Text; IsJson: Boolean)
     var
-        ADLSESetup: Record "ADL Setup";
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSESetup: Record "AZD Setup";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
         BlobPathOrg: Text;
         IsHandled: Boolean;
@@ -130,7 +130,7 @@ codeunit 11344449 "ADL Gen 2 Util"
         if IsHandled then
             exit;
 
-        ADLSEHttp.SetMethod("ADL Http Method"::Put);
+        ADLSEHttp.SetMethod("AZD Http Method"::Put);
 
         case ADLSESetup.GetStorageType() of
             ADLSESetup."Storage Type"::"Azure Data Lake":
@@ -160,16 +160,16 @@ codeunit 11344449 "ADL Gen 2 Util"
             AddBlockToDataBlob(BlobPathOrg, Body, 0, ADLSECredentials);
     end;
 
-    procedure CreateDataBlob(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials")
+    procedure CreateDataBlob(BlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials")
     begin
         CreateBlockBlob(BlobPath, ADLSECredentials, '', '', false);
     end;
 
     // Storage Type - Azure Data Lake Storage
-    procedure AddBlockToDataBlob(BlobPath: Text; Body: Text; ADLSECredentials: Codeunit "ADL Credentials") BlockID: Text
+    procedure AddBlockToDataBlob(BlobPath: Text; Body: Text; ADLSECredentials: Codeunit "AZD Credentials") BlockID: Text
     var
         Base64Convert: Codeunit "Base64 Convert";
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
         IsHandled: Boolean;
     begin
@@ -177,7 +177,7 @@ codeunit 11344449 "ADL Gen 2 Util"
         if IsHandled then
             exit;
 
-        ADLSEHttp.SetMethod("ADL Http Method"::Put);
+        ADLSEHttp.SetMethod("AZD Http Method"::Put);
         BlockID := Base64Convert.ToBase64(CreateGuid());
         ADLSEHttp.SetUrl(BlobPath + StrSubstNo(PutBlockSuffixTxt, BlockID));
         ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
@@ -187,9 +187,9 @@ codeunit 11344449 "ADL Gen 2 Util"
     end;
 
     // Storage Type - Microsoft Fabric
-    procedure AddBlockToDataBlob(BlobPath: Text; Body: Text; Position: Integer; ADLSECredentials: Codeunit "ADL Credentials")
+    procedure AddBlockToDataBlob(BlobPath: Text; Body: Text; Position: Integer; ADLSECredentials: Codeunit "AZD Credentials")
     var
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
         IsHandled: Boolean;
     begin
@@ -197,7 +197,7 @@ codeunit 11344449 "ADL Gen 2 Util"
         if IsHandled then
             exit;
 
-        ADLSEHttp.SetMethod("ADL Http Method"::Patch);
+        ADLSEHttp.SetMethod("AZD Http Method"::Patch);
         ADLSEHttp.SetUrl(BlobPath + '?position=' + Format(Position) + '&action=append&flush=true');
         ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
         ADLSEHttp.SetBody(Body);
@@ -205,9 +205,9 @@ codeunit 11344449 "ADL Gen 2 Util"
             Error(CouldNotAppendDataToBlobErr, BlobPath, Response);
     end;
 
-    procedure CommitAllBlocksOnDataBlob(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials"; BlockIDList: List of [Text])
+    procedure CommitAllBlocksOnDataBlob(BlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials"; BlockIDList: List of [Text])
     var
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
         Body: TextBuilder;
         BlockID: Text;
@@ -217,7 +217,7 @@ codeunit 11344449 "ADL Gen 2 Util"
         if IsHandled then
             exit;
 
-        ADLSEHttp.SetMethod("ADL Http Method"::Put);
+        ADLSEHttp.SetMethod("AZD Http Method"::Put);
         ADLSEHttp.SetUrl(BlobPath + PutLockListSuffixTxt);
         ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
 
@@ -231,14 +231,14 @@ codeunit 11344449 "ADL Gen 2 Util"
             Error(CouldNotCommitBlocksToDataBlobErr, BlobPath, Response);
     end;
 
-    procedure RenameDataBlob(SourceBlobPath: Text; TargetBlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials")
+    procedure RenameDataBlob(SourceBlobPath: Text; TargetBlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials")
     var
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
         SourceName: Text;
     begin
         // https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/create?view=rest-storageservices-datalakestoragegen2-2019-12-12
-        ADLSEHttp.SetMethod("ADL Http Method"::Put);
+        ADLSEHttp.SetMethod("AZD Http Method"::Put);
         ADLSEHttp.SetUrl(TargetBlobPath);
 
         //we just need the value past the DFS domain, i.e.: /{workspace_id}/{lakehouse_id}/Files/LandingZone/...
@@ -252,9 +252,9 @@ codeunit 11344449 "ADL Gen 2 Util"
             Error(CouldNotRenameDataBlobErr, SourceBlobPath, TargetBlobPath, Response);
     end;
 
-    procedure AcquireLease(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials"; var BlobExists: Boolean) LeaseID: Text
+    procedure AcquireLease(BlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials"; var BlobExists: Boolean) LeaseID: Text
     var
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
         LeaseIdHeaderValues: List of [Text];
         MaxMillisecondsToWaitFor: Integer;
@@ -262,7 +262,7 @@ codeunit 11344449 "ADL Gen 2 Util"
         FirstAcquireRequestAt: DateTime;
         StatusCode: Integer;
     begin
-        ADLSEHttp.SetMethod("ADL Http Method"::Put);
+        ADLSEHttp.SetMethod("AZD Http Method"::Put);
         ADLSEHttp.SetUrl(BlobPath + AcquireLeaseSuffixTxt);
         ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
         ADLSEHttp.AddHeader('x-ms-lease-action', 'acquire');
@@ -287,14 +287,14 @@ codeunit 11344449 "ADL Gen 2 Util"
         Error(TimedOutWaitingForLockOnBlobErr, BlobPath, AcquireLeaseTimeoutSecondsTxt, Response);
     end;
 
-    procedure ReleaseBlob(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials"; LeaseID: Text)
+    procedure ReleaseBlob(BlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials"; LeaseID: Text)
     var
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSEHttp: Codeunit "AZD Http";
         Response: Text;
     begin
         if LeaseID = '' then
             exit; // nothing has been leased
-        ADLSEHttp.SetMethod("ADL Http Method"::Put);
+        ADLSEHttp.SetMethod("AZD Http Method"::Put);
         ADLSEHttp.SetUrl(BlobPath + AcquireLeaseSuffixTxt);
         ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
         ADLSEHttp.AddHeader('x-ms-lease-action', 'release');
@@ -305,7 +305,7 @@ codeunit 11344449 "ADL Gen 2 Util"
 
     procedure IsMaxBlobFileSize(DataBlobPath: Text; BlobContentLength: Integer; PayloadLength: Integer): Boolean
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
         BlobTotalContentSize: BigInteger;
     begin
         if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Azure Data Lake" then
@@ -328,15 +328,15 @@ codeunit 11344449 "ADL Gen 2 Util"
         exit(true);
     end;
 
-    procedure RemoveDeltasFromDataLake(ADLSEntityName: Text; ADLSECredentials: Codeunit "ADL Credentials")
+    procedure RemoveDeltasFromDataLake(ADLSEntityName: Text; ADLSECredentials: Codeunit "AZD Credentials")
     begin
         RemoveDeltasFromDataLake(ADLSEntityName, ADLSECredentials, false);
     end;
 
-    procedure RemoveDeltasFromDataLake(ADLSEntityName: Text; ADLSECredentials: Codeunit "ADL Credentials"; AllCompanies: Boolean)
+    procedure RemoveDeltasFromDataLake(ADLSEntityName: Text; ADLSECredentials: Codeunit "AZD Credentials"; AllCompanies: Boolean)
     var
-        ADLSESetup: Record "ADL Setup";
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSESetup: Record "AZD Setup";
+        ADLSEHttp: Codeunit "AZD Http";
         IsHandled: Boolean;
         Response: Text;
         Url: Text;
@@ -355,17 +355,17 @@ codeunit 11344449 "ADL Gen 2 Util"
             Url := StrSubstNo(ADLSEContainerUrlTxt, ADLSESetup."Account Name", ADLSESetup.Container);
             Url += '/deltas/' + ADLSEntityName + '?recursive=true';
 
-            ADLSEHttp.SetMethod("ADL Http Method"::Delete);
+            ADLSEHttp.SetMethod("AZD Http Method"::Delete);
             ADLSEHttp.SetUrl(Url);
             ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
             ADLSEHttp.InvokeRestApi(Response)
         end;
     end;
 
-    procedure DropTableFromOpenMirroring(ADLSEntityName: Text; ADLSECredentials: Codeunit "ADL Credentials"; AllCompanies: Boolean)
+    procedure DropTableFromOpenMirroring(ADLSEntityName: Text; ADLSECredentials: Codeunit "AZD Credentials"; AllCompanies: Boolean)
     var
-        ADLSESetup: Record "ADL Setup";
-        ADLSEHttp: Codeunit "ADL Http";
+        ADLSESetup: Record "AZD Setup";
+        ADLSEHttp: Codeunit "AZD Http";
         IsHandled: Boolean;
         Response: Text;
         Url: Text;
@@ -383,7 +383,7 @@ codeunit 11344449 "ADL Gen 2 Util"
             Url := ADLSESetup.LandingZone;
             Url += '/' + ADLSEntityName + '?recursive=true';
 
-            ADLSEHttp.SetMethod("ADL Http Method"::Delete);
+            ADLSEHttp.SetMethod("AZD Http Method"::Delete);
             ADLSEHttp.SetUrl(Url);
             ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
             ADLSEHttp.InvokeRestApi(Response)
@@ -392,7 +392,7 @@ codeunit 11344449 "ADL Gen 2 Util"
 
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeGetBlobContent(BlobPath: Text; ADLSECredentials: Codeunit "ADL Credentials"; var BlobExists: Boolean; var Content: JsonObject; var IsHandled: Boolean)
+    local procedure OnBeforeGetBlobContent(BlobPath: Text; ADLSECredentials: Codeunit "AZD Credentials"; var BlobExists: Boolean; var Content: JsonObject; var IsHandled: Boolean)
     begin
     end;
 
@@ -417,12 +417,12 @@ codeunit 11344449 "ADL Gen 2 Util"
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeRemoveDeltasFromDataLake(ADLSEntityName: Text; ADLSECredentials: Codeunit "ADL Credentials"; AllCompanies: Boolean; var IsHandled: Boolean)
+    local procedure OnBeforeRemoveDeltasFromDataLake(ADLSEntityName: Text; ADLSECredentials: Codeunit "AZD Credentials"; AllCompanies: Boolean; var IsHandled: Boolean)
     begin
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnBeforeDropTableFromOpenMirroring(ADLSEntityName: Text; ADLSECredentials: Codeunit "ADL Credentials"; AllCompanies: Boolean; var IsHandled: Boolean)
+    local procedure OnBeforeDropTableFromOpenMirroring(ADLSEntityName: Text; ADLSECredentials: Codeunit "AZD Credentials"; AllCompanies: Boolean; var IsHandled: Boolean)
     begin
     end;
 }

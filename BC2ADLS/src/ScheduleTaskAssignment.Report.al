@@ -2,7 +2,7 @@ namespace bc2adls;
 
 using System.Threading;
 
-report 11344449 "ADL Schedule Task Assignment"
+report 11344449 "AZD Schedule Task Assignment"
 {
     ApplicationArea = Basic, Suite;
     Caption = 'Schedule Export';
@@ -11,12 +11,12 @@ report 11344449 "ADL Schedule Task Assignment"
 
     dataset
     {
-        dataitem(ADLSETable; "ADL Table")
+        dataitem(ADLSETable; "AZD Table")
         {
             RequestFilterFields = ExportCategory;
             trigger OnPreDataItem()
             var
-                ADLSEExecution: Codeunit "ADL Execution";
+                ADLSEExecution: Codeunit "AZD Execution";
             begin
                 ADLSEExecution.StartExport(ADLSETable);
             end;
@@ -134,7 +134,7 @@ report 11344449 "ADL Schedule Task Assignment"
         JobQueueCategory.InsertRec(JobCategoryCodeTxt, Description);
         JobQueueEntry.Init();
         JobQueueEntry.Validate("Object Type to Run", JobQueueEntry."Object Type to Run"::Report);
-        JobQueueEntry.Validate("Object ID to Run", Report::"ADL Schedule Task Assignment");
+        JobQueueEntry.Validate("Object ID to Run", Report::"AZD Schedule Task Assignment");
         JobQueueEntry.Insert(true);
 
         JobQueueEntry.Description := Description;

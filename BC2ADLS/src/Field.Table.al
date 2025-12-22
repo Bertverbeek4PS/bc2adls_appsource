@@ -5,14 +5,14 @@ namespace bc2adls;
 using System.Reflection;
 
 #pragma warning disable LC0015
-table 11344443 "ADL Field"
+table 11344443 "AZD Field"
 #pragma warning restore
 {
     Access = Internal;
     Caption = 'ADL Field';
     DataClassification = CustomerContent;
     DataPerCompany = false;
-    Permissions = tabledata "ADL Table" = r;
+    Permissions = tabledata "AZD Table" = r;
 
     fields
     {
@@ -21,11 +21,11 @@ table 11344443 "ADL Field"
             AllowInCustomizations = AsReadOnly;
             Editable = false;
             Caption = 'Table ID';
-            TableRelation = "ADL Table"."Table ID";
+            TableRelation = "AZD Table"."Table ID";
 
             trigger OnValidate()
             var
-                ADLSETable: Record "ADL Table";
+                ADLSETable: Record "AZD Table";
             begin
                 if not ADLSETable.Get(Rec."Table ID") then
                     Error(TableDoesNotExistErr, Rec."Table ID")
@@ -44,7 +44,7 @@ table 11344443 "ADL Field"
 
             trigger OnValidate()
             var
-                ADLSEExternalEvents: Codeunit "ADL External Events";
+                ADLSEExternalEvents: Codeunit "AZD External Events";
             begin
                 if Rec.Enabled then
                     Rec.CheckFieldToBeEnabled();
@@ -85,15 +85,15 @@ table 11344443 "ADL Field"
 
     trigger OnInsert()
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
     begin
         ADLSESetup.SchemaExported();
     end;
 
     trigger OnModify()
     var
-        ADLSESetup: Record "ADL Setup";
-        ADLSETable: Record "ADL Table";
+        ADLSESetup: Record "AZD Setup";
+        ADLSETable: Record "AZD Table";
     begin
         ADLSESetup.SchemaExported();
 
@@ -103,7 +103,7 @@ table 11344443 "ADL Field"
 
     trigger OnDelete()
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
     begin
         ADLSESetup.SchemaExported();
     end;
@@ -111,11 +111,11 @@ table 11344443 "ADL Field"
     var
         TableDoesNotExistErr: Label 'Table with ID %1 has not been set to be exported.', Comment = '%1 is the table ID';
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'ri')]
-    procedure InsertForTable(ADLSETable: Record "ADL Table")
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'ri')]
+    procedure InsertForTable(ADLSETable: Record "AZD Table")
     var
         Field: Record Field;
-        ADLSEField: Record "ADL Field";
+        ADLSEField: Record "AZD Field";
     begin
         Field.SetRange(TableNo, ADLSETable."Table ID");
         Field.SetFilter("No.", '<%1', 2000000000); // no system fields
@@ -135,8 +135,8 @@ table 11344443 "ADL Field"
     procedure CheckFieldToBeEnabled()
     var
         Field: Record Field;
-        ADLSESetup: Codeunit "ADL Setup";
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSESetup: Codeunit "AZD Setup";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
         Field.Get(Rec."Table ID", Rec."Field ID");
         ADLSEUtil.CheckFieldTypeForExport(Field);

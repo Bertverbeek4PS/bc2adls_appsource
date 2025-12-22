@@ -1,13 +1,13 @@
 namespace bc2adls;
 
 //A list page that is build on table Enum Translation
-page 11344441 "ADL Enum Translations Lang"
+page 11344441 "AZD Enum Translations Lang"
 {
     PageType = List;
     ApplicationArea = All;
     Caption = 'Enum Translations Language';
     UsageCategory = Lists;
-    SourceTable = "ADL Enum Translation Lang";
+    SourceTable = "AZD Enum Translation Lang";
 
 
     layout

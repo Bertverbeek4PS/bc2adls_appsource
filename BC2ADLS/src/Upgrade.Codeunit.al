@@ -4,15 +4,15 @@ namespace bc2adls;
 
 using System.Upgrade;
 
-codeunit 11344452 "ADL Upgrade"
+codeunit 11344452 "AZD Upgrade"
 {
     Subtype = Upgrade;
     Access = Internal;
 
     trigger OnCheckPreconditionsPerDatabase()
     var
-        ADLSEInstaller: Codeunit "ADL Installer";
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEInstaller: Codeunit "AZD Installer";
+        ADLSEExecution: Codeunit "AZD Execution";
         InvalidFieldsMap: Dictionary of [Integer, List of [Text]];
     begin
         InvalidFieldsMap := ADLSEInstaller.ListInvalidFieldsBeingExported();
@@ -36,7 +36,7 @@ codeunit 11344452 "ADL Upgrade"
 
     local procedure RetenPolLogEntryAdded()
     var
-        ADLSEInstaller: Codeunit "ADL Installer";
+        ADLSEInstaller: Codeunit "AZD Installer";
         UpgradeTag: Codeunit "Upgrade Tag";
     begin
         if UpgradeTag.HasUpgradeTag(GetRetenPolLogEntryAddedUpgradeTag()) then
@@ -57,17 +57,17 @@ codeunit 11344452 "ADL Upgrade"
 
     local procedure ConcatenateTableFieldPairs(TableIDFieldNameList: Dictionary of [Integer, List of [Text]]) Result: Text
     var
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
         TableID: Integer;
     begin
         foreach TableID in TableIDFieldNameList.Keys() do
             Result += StrSubstNo(TableFieldsTok, ADLSEUtil.GetTableCaption(TableID), ADLSEUtil.Concatenate(TableIDFieldNameList.Get(TableID)));
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Setup", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Setup", 'm')]
     local procedure DoContainerFieldFromIsolatedStorageToSetupField()
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
         AccountName: Text;
         StorageAccountKeyNameTok: Label 'adlse-storage-account', Locked = true;
     begin

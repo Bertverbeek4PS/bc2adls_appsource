@@ -4,7 +4,7 @@ namespace bc2adls;
 
 using System.DataAdministration;
 
-codeunit 11344448 "ADL Installer"
+codeunit 11344448 "AZD Installer"
 {
     Subtype = Install;
     Access = Internal;
@@ -21,16 +21,16 @@ codeunit 11344448 "ADL Installer"
 
     procedure AddAllowedTables()
     var
-        ADLSERun: Record "ADL Run";
+        ADLSERun: Record "AZD Run";
         RetenPolAllowedTables: Codeunit "Reten. Pol. Allowed Tables";
     begin
-        RetenPolAllowedTables.AddAllowedTable(Database::"ADL Run", ADLSERun.FieldNo(SystemModifiedAt));
+        RetenPolAllowedTables.AddAllowedTable(Database::"AZD Run", ADLSERun.FieldNo(SystemModifiedAt));
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'r')]
     procedure ListInvalidFieldsBeingExported() InvalidFieldsMap: Dictionary of [Integer, List of [Text]]
     var
-        ADLSETable: Record "ADL Table";
+        ADLSETable: Record "AZD Table";
         InvalidFields: List of [Text];
     begin
         // find the tables which export fields that have now been obsoleted or are invalid
@@ -43,12 +43,12 @@ codeunit 11344448 "ADL Installer"
             until ADLSETable.Next() = 0;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'rm')]
     local procedure DisableTablesExportingInvalidFields()
     var
-        ADLSETable: Record "ADL Table";
-        ADLSEUtil: Codeunit "ADL Util";
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSETable: Record "AZD Table";
+        ADLSEUtil: Codeunit "AZD Util";
+        ADLSEExecution: Codeunit "AZD Execution";
         InvalidFieldsMap: Dictionary of [Integer, List of [Text]];
         CustomDimensions: Dictionary of [Text, Text];
         TableID: Integer;

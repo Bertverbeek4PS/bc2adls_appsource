@@ -6,12 +6,12 @@ codeunit 85561 "ADLSE Library - bc2adls"
     end;
 
     var
-        ADLSESetup: Record "ADL Setup";
-        ADLSETable: Record "ADL Table";
-        ADLSEField: Record "ADL Field";
+        ADLSESetup: Record "AZD Setup";
+        ADLSETable: Record "AZD Table";
+        ADLSEField: Record "AZD Field";
         LibraryRandom: Codeunit "Library - Random";
 
-    procedure CreateAdlseSetup("Storage Type": Enum "ADL Storage Type")
+    procedure CreateAdlseSetup("Storage Type": Enum "AZD Storage Type")
     begin
         ADLSESetup.Init();
 
@@ -39,7 +39,7 @@ codeunit 85561 "ADLSE Library - bc2adls"
         exit(AllObjWithCaption."Object ID");
     end;
 
-    procedure GetRandomTable(): Record "ADL Table"
+    procedure GetRandomTable(): Record "AZD Table"
     begin
         ADLSETable.Reset();
         ADLSETable.SetRange(Enabled, true);
@@ -47,7 +47,7 @@ codeunit 85561 "ADLSE Library - bc2adls"
         exit(ADLSETable);
     end;
 
-    procedure GetRandomField(ADLSETable: Record "ADL Table"): Integer
+    procedure GetRandomField(ADLSETable: Record "AZD Table"): Integer
     var
         Field: Record Field;
     begin
@@ -96,7 +96,7 @@ codeunit 85561 "ADLSE Library - bc2adls"
 
     procedure MockCreateExport(TableId: Integer);
     var
-        ADLSERun: Record "ADL Run";
+        ADLSERun: Record "AZD Run";
         AllObjWithCaption: Record AllObjWithCaption;
     begin
         ADLSERun.RegisterStarted(TableId);
@@ -114,8 +114,8 @@ codeunit 85561 "ADLSE Library - bc2adls"
 
     procedure GetExpectedEntityJson(TableId: Integer) EntityJson: Text;
     var
-        ADLSECDMUtil: Codeunit "ADL CDM Util";
-        ADLSEExecute: Codeunit "ADL Execute";
+        ADLSECDMUtil: Codeunit "AZD CDM Util";
+        ADLSEExecute: Codeunit "AZD Execute";
         EntityContent: JsonObject;
         FieldIdList: List of [Integer];
     begin
@@ -127,7 +127,7 @@ codeunit 85561 "ADLSE Library - bc2adls"
 
     procedure GetExpectedManifestJson(TableId: Integer) ManifestJson: Text;
     var
-        ADLSECDMUtil: Codeunit "ADL CDM Util";
+        ADLSECDMUtil: Codeunit "AZD CDM Util";
         ManifestContent, EmptyJsonObject : JsonObject;
     begin
         ADLSESetup.GetSingleton();

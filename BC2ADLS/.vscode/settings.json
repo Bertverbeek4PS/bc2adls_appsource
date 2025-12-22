@@ -17,5 +17,6 @@
       "shortName": "BcLntr",
       "fileName": "BusinessCentral.LinterCop.dll"
     }
-  ]
+  ],
+  "xliffSync.baseFile": "BC2ADLS.g.xlf"
 }

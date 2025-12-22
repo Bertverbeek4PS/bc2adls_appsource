@@ -5,16 +5,16 @@ namespace bc2adls;
 using System.Reflection;
 
 #pragma warning disable LC0015
-table 11344450 "ADL Table"
+table 11344450 "AZD Table"
 #pragma warning restore
 {
     Access = Internal;
     Caption = 'ADL Table';
     DataClassification = CustomerContent;
     DataPerCompany = false;
-    Permissions = tabledata "ADL Field" = rd,
-                  tabledata "ADL Table Last Timestamp" = d,
-                  tabledata "ADL Deleted Record" = d;
+    Permissions = tabledata "AZD Field" = rd,
+                  tabledata "AZD Table Last Timestamp" = d,
+                  tabledata "AZD Deleted Record" = d;
 
     fields
     {
@@ -32,10 +32,10 @@ table 11344450 "ADL Table"
 
             trigger OnValidate()
             var
-                ADLSEExternalEvents: Codeunit "ADL External Events";
+                ADLSEExternalEvents: Codeunit "AZD External Events";
                 ADLSETableErr: Label 'The ADL Table table cannot be disabled.';
             begin
-                if Rec."Table ID" = Database::"ADL Table" then
+                if Rec."Table ID" = Database::"AZD Table" then
                     if xRec.Enabled = false then
                         Error(ADLSETableErr);
 
@@ -48,7 +48,7 @@ table 11344450 "ADL Table"
         field(10; ExportCategory; Code[50])
         {
             Caption = 'Export Category';
-            TableRelation = "ADL Export Category Table";
+            TableRelation = "AZD Export Category Table";
             ToolTip = 'Specifies the Export Category which can be linked to tables which are part of the export to Azure Datalake. The Category can be used to schedule the export.';
         }
         field(15; ExportFileNumber; Integer)
@@ -83,7 +83,7 @@ table 11344450 "ADL Table"
 
     trigger OnInsert()
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
     begin
         ADLSESetup.SchemaExported();
 
@@ -92,11 +92,11 @@ table 11344450 "ADL Table"
 
     trigger OnDelete()
     var
-        ADLSESetup: Record "ADL Setup";
-        ADLSETableField: Record "ADL Field";
-        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
-        ADLSEDeletedRecord: Record "ADL Deleted Record";
-        ADLSEExternalEvents: Codeunit "ADL External Events";
+        ADLSESetup: Record "AZD Setup";
+        ADLSETableField: Record "AZD Field";
+        ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
+        ADLSEDeletedRecord: Record "AZD Deleted Record";
+        ADLSEExternalEvents: Codeunit "AZD External Events";
     begin
         ADLSESetup.SchemaExported();
 
@@ -114,7 +114,7 @@ table 11344450 "ADL Table"
 
     trigger OnModify()
     var
-        ADLSESetup: Record "ADL Setup";
+        ADLSESetup: Record "AZD Setup";
     begin
         if (Rec."Table ID" <> xRec."Table ID") or (Rec.Enabled <> xRec.Enabled) then begin
             ADLSESetup.SchemaExported();
@@ -132,17 +132,17 @@ table 11344450 "ADL Table"
 
     procedure FieldsChosen(): Integer
     var
-        ADLSEField: Record "ADL Field";
+        ADLSEField: Record "AZD Field";
     begin
         ADLSEField.SetRange("Table ID", Rec."Table ID");
         ADLSEField.SetRange(Enabled, true);
         exit(ADLSEField.Count());
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'i')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'i')]
     procedure Add(TableID: Integer)
     var
-        ADLSEExternalEvents: Codeunit "ADL External Events";
+        ADLSEExternalEvents: Codeunit "AZD External Events";
     begin
         if not CheckTableCanBeExportedFrom(TableID) then
             Error(TableCannotBeExportedErr, TableID, GetLastErrorText());
@@ -167,7 +167,7 @@ table 11344450 "ADL Table"
     local procedure CheckTableOfTypeNormal(TableID: Integer)
     var
         TableMetadata: Record "Table Metadata";
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
         TableCaption: Text;
     begin
         TableCaption := ADLSEUtil.GetTableCaption(TableID);
@@ -181,16 +181,16 @@ table 11344450 "ADL Table"
 
     procedure CheckNotExporting()
     var
-        ADLSEUtil: Codeunit "ADL Util";
+        ADLSEUtil: Codeunit "AZD Util";
     begin
-        if GetLastRunState() = "ADL Run State"::InProcess then
+        if GetLastRunState() = "AZD Run State"::InProcess then
             Error(TableExportingDataErr, ADLSEUtil.GetTableCaption(Rec."Table ID"));
     end;
 
-    local procedure GetLastRunState(): Enum "ADL Run State"
+    local procedure GetLastRunState(): Enum "AZD Run State"
     var
-        ADLSERun: Record "ADL Run";
-        LastState: Enum "ADL Run State";
+        ADLSERun: Record "AZD Run";
+        LastState: Enum "AZD Run State";
         LastStarted: DateTime;
         LastErrorText: Text[2048];
     begin
@@ -198,20 +198,20 @@ table 11344450 "ADL Table"
         exit(LastState);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'rm')]
     procedure ResetSelected()
     begin
         ResetSelected(false);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'rm')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table Last Timestamp", 'rm')]
     procedure ResetSelected(AllCompanies: Boolean)
     var
-        ADLSEDeletedRecord: Record "ADL Deleted Record";
-        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
-        ADLSESetup: Record "ADL Setup";
-        ADLSECommunication: Codeunit "ADL Communication";
+        ADLSEDeletedRecord: Record "AZD Deleted Record";
+        ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
+        ADLSESetup: Record "AZD Setup";
+        ADLSECommunication: Codeunit "AZD Communication";
         Counter: Integer;
     begin
         if Rec.FindSet(true) then
@@ -261,12 +261,12 @@ table 11344450 "ADL Table"
             Message(TablesResetTxt, Counter, '.');
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'r')]
     local procedure CheckExportingOnlyValidFields()
     var
-        ADLSEField: Record "ADL Field";
+        ADLSEField: Record "AZD Field";
         Field: Record Field;
-        ADLSESetup: Codeunit "ADL Setup";
+        ADLSESetup: Codeunit "AZD Setup";
     begin
         ADLSEField.SetRange("Table ID", Rec."Table ID");
         ADLSEField.SetRange(Enabled, true);
@@ -277,13 +277,13 @@ table 11344450 "ADL Table"
             until ADLSEField.Next() = 0;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'r')]
     procedure ListInvalidFieldsBeingExported() FieldList: List of [Text]
     var
-        ADLSEField: Record "ADL Field";
-        ADLSESetup: Codeunit "ADL Setup";
-        ADLSEUtil: Codeunit "ADL Util";
-        ADLSEExecution: Codeunit "ADL Execution";
+        ADLSEField: Record "AZD Field";
+        ADLSESetup: Codeunit "AZD Setup";
+        ADLSEUtil: Codeunit "AZD Util";
+        ADLSEExecution: Codeunit "AZD Execution";
         CustomDimensions: Dictionary of [Text, Text];
         RemovedFieldNameLbl: Label '#[%1]', Locked = true;
     begin
@@ -305,10 +305,10 @@ table 11344450 "ADL Table"
         end;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'rm')]
     procedure AddAllFields()
     var
-        ADLSEFields: Record "ADL Field";
+        ADLSEFields: Record "AZD Field";
     begin
         ADLSEFields.InsertForTable(Rec);
         ADLSEFields.SetRange("Table ID", Rec."Table ID");
@@ -321,10 +321,10 @@ table 11344450 "ADL Table"
             until ADLSEFields.Next() = 0;
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table Last Timestamp", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table Last Timestamp", 'r')]
     procedure GetLastHeartbeat(): DateTime
     var
-        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
+        ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
     begin
         ADLSETableLastTimestamp.ReadIsolation(ReadIsolation::ReadUncommitted);
         if not ADLSETableLastTimestamp.ExistsUpdatedLastTimestamp(Rec."Table ID") then
@@ -343,10 +343,10 @@ table 11344450 "ADL Table"
             exit(ExpSessionId);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'r')]
     procedure GetCurrentSessionId(): Integer
     var
-        CurrentSession: Record "ADL Current Session";
+        CurrentSession: Record "AZD Current Session";
     begin
         CurrentSession.ReadIsolation(ReadIsolation::ReadUncommitted);
         if CurrentSession.Get(Rec."Table ID", CompanyName()) then
@@ -354,13 +354,13 @@ table 11344450 "ADL Table"
         exit(0);
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Current Session", 'd')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Run", 'm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Run", 'm')]
     procedure StopActiveSession()
     var
-        CurrentSession: Record "ADL Current Session";
-        Run: Record "ADL Run";
-        ADLSEUtil: Codeunit "ADL Util";
+        CurrentSession: Record "AZD Current Session";
+        Run: Record "AZD Run";
+        ADLSEUtil: Codeunit "AZD Util";
         ExpSessionId: Integer;
     begin
         ExpSessionId := GetActiveSessionId();
@@ -371,11 +371,11 @@ table 11344450 "ADL Table"
         Run.CancelRun(Rec."Table ID");
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Field", 'ri')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'ri')]
     local procedure AddPrimaryKeyFields()
     var
         Field: Record Field;
-        ADLSEField: Record "ADL Field";
+        ADLSEField: Record "AZD Field";
     begin
         Field.SetRange(TableNo, Rec."Table ID");
         Field.SetRange(IsPartOfPrimaryKey, true);
@@ -391,7 +391,7 @@ table 11344450 "ADL Table"
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterResetSelected(ADLSETable: Record "ADL Table")
+    local procedure OnAfterResetSelected(ADLSETable: Record "AZD Table")
     begin
 
     end;

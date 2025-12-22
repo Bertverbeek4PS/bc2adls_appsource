@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 namespace bc2adls;
 
-codeunit 11344439 "ADL Clear Tracked Deletions"
+codeunit 11344439 "AZD Clear Tracked Deletions"
 {
     /// This codeunit removes the tracked deleted records- those that track deletions of records from tables being exported, so 
     /// that the data lake becomes aware of them and removes those records from the final set of records. Once, these trackings 
@@ -19,13 +19,13 @@ codeunit 11344439 "ADL Clear Tracked Deletions"
     var
         TrackedDeletedRecordsRemovedMsg: Label 'Representations of deleted records that have been exported previously have been deleted.';
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Table", 'r')]
-    [InherentPermissions(PermissionObjectType::TableData, Database::"ADL Deleted Record", 'rd')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Deleted Record", 'rd')]
     local procedure ClearTrackedDeletedRecords()
     var
-        ADLSETable: Record "ADL Table";
-        ADLSETableLastTimestamp: Record "ADL Table Last Timestamp";
-        ADLSEDeletedRecord: Record "ADL Deleted Record";
+        ADLSETable: Record "AZD Table";
+        ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
+        ADLSEDeletedRecord: Record "AZD Deleted Record";
     begin
         ADLSETable.SetLoadFields("Table ID");
         if ADLSETable.FindSet() then
