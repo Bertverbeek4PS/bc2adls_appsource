@@ -1,11 +1,4 @@
-# AL-Go AppSource App Template
-
-This template repository can be used for managing AppSource Apps for Business Central.
-
-Please go to https://aka.ms/AL-Go to learn more.
-
-## Contributing
-
-Please read [this](https://github.com/microsoft/AL-Go/blob/main/Scenarios/Contribute.md) description on how to contribute to AL-Go for GitHub.
-
-We do not accept Pull Requests on the template repository directly.
+# Support and Contributing for bc2adls
+Please go to the following repo if you need support or want to contribute:
+[bc2adls repo](https://github.com/Bertverbeek4PS/bc2adls)
+This repo is only for the appsource code used to build the extension.
