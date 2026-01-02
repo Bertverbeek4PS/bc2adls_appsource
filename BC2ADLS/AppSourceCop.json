@@ -1,8 +1,5 @@
 {
-    "supportedCountries": [
-        "US",
-        "NL"
-    ],
-    "mandatorySuffix": "ADLSE",
-    "mandatoryAffixes": ["AZD"]
+    "mandatoryAffixes": ["AZD"],
+    "mandatoryPrefix": "AZD",
+    "supportedCountries": ["US","NL"]
 }
