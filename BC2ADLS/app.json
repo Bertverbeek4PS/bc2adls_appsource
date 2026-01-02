@@ -36,6 +36,11 @@
       "publisher": "The bc2adls team",
       "name": "Azure Data Lake Storage Export Tests",
       "id": "9776c32f-1167-42c4-b6a8-f3743c6a34c5"
+    },
+    {
+      "publisher": "The bc2adls team",
+      "name": "Azure Data Lake Storage Export",
+      "id": "1688530c-452c-4b06-8947-ab4bf5b26053"
     }
   ],
   "target": "Cloud",
