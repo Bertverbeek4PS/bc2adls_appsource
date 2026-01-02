@@ -39,8 +39,8 @@
     },
     {
       "publisher": "The bc2adls team",
-      "name": "Azure Data Lake Storage Export",
-      "id": "1688530c-452c-4b06-8947-ab4bf5b26053"
+      "name": "bc2adls_migration",
+      "id": "1a9249ee-60b8-4da4-9c8a-edea122adf7f"
     }
   ],
   "target": "Cloud",
