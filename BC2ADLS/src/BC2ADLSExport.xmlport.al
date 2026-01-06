@@ -22,6 +22,10 @@ xmlport 11344437 "AZD BC2ADLS Export"
                 {
                     Occurrence = Required;
                 }
+                fieldattribute(ExportCategory; ADLSETable.ExportCategory)
+                {
+                    Occurrence = Required;
+                }
 
                 tableelement(ADLSEField; "AZD Field")
                 {
