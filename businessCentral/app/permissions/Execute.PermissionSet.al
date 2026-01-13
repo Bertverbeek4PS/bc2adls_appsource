@@ -24,6 +24,8 @@ permissionset 11344438 "AZD - Execute"
                   tabledata "AZD Enum Translation Lang" = RIMD,
                   tabledata "AZD Deleted Table Filter" = R,
                   tabledata "AZD Export Category Table" = R,
+                  tabledata "AZD Companies Table" = R,
+                  tabledata "AZD Sync Companies" = R,
                   codeunit "AZD UpgradeTagNewCompanySubs" = X,
                   codeunit "AZD Upgrade" = X,
                   codeunit "AZD Util" = X,
@@ -36,6 +38,9 @@ permissionset 11344438 "AZD - Execute"
                   codeunit "AZD Execute" = X,
                   codeunit "AZD Execution" = X,
                   codeunit "AZD Wrapper Execute" = X,
+                  codeunit "AZD Company Run" = X,
+                  codeunit "AZD Multi Company Export" = X,
                   report "AZD Seek Data" = X,
+                  report "AZDScheduleMultiTaskAssign" = X,
                   xmlport "AZD BC2ADLS Export" = X;
 }
