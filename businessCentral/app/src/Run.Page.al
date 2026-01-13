@@ -94,4 +94,9 @@ page 11344444 "AZD Run"
         Rec.SetRange("Table ID", TableID);
         DisplayLogsForGivenTable := true;
     end;
+
+    procedure SetCompanyName(parCompanyName: Text)
+    begin
+        Rec.SetRange("Company Name", parCompanyName);
+    end;
 }

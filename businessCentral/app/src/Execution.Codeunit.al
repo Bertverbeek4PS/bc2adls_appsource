@@ -31,11 +31,13 @@ codeunit 11344443 "AZD Execution"
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'r')]
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Sync Companies", 'r')]
     internal procedure StartExport(var ADLSETable: Record "AZD Table")
     var
         ADLSESetupRec: Record "AZD Setup";
         ADLSEField: Record "AZD Field";
         ADLSECurrentSession: Record "AZD Current Session";
+        AZDSyncCompanies: Record "AZD Sync Companies";
         ADLSESetup: Codeunit "AZD Setup";
         ADLSECommunication: Codeunit "AZD Communication";
         ADLSESessionManager: Codeunit "AZD Session Manager";
@@ -46,6 +48,12 @@ codeunit 11344443 "AZD Execution"
         ADLSESetup.CheckSetup(ADLSESetupRec);
         EmitTelemetry := ADLSESetupRec."Emit telemetry";
         ADLSECurrentSession.CleanupSessions();
+
+        if AZDSyncCompanies.Get(CompanyName()) then begin// Possible Multi Company export Create session So that is can be stopped.
+            ADLSECurrentSession.Start(AZDSyncCompanies.RecordId.TableNo);
+            Commit(); //To make sure session is stored before starting exports
+        end;
+
         if ADLSESetupRec.GetStorageType() = ADLSESetupRec."Storage Type"::"Azure Data Lake" then //Because Fabric doesn't have do create a container
             ADLSECommunication.SetupBlobStorage();
         ADLSESessionManager.Init();
@@ -183,6 +191,36 @@ codeunit 11344443 "AZD Execution"
 
         if xmldata <> '' then begin
             ADLSEScheduleTaskAssignment.CreateJobQueueEntry(JobQueueEntry);
+            JobQueueEntry.SetReportParameters(xmldata);
+            JobQueueEntry.Modify();
+        end;
+    end;
+
+    internal procedure ScheduleMultiExport()
+    var
+        JobQueueEntry: Record "Job Queue Entry";
+        AZDScheduleMultiTaskAssign: Report AZDScheduleMultiTaskAssign;
+        SavedData: Text;
+        xmldata: Text;
+        Handled: Boolean;
+    begin
+        OnBeforeScheduleExport(Handled);
+        if Handled then
+            exit;
+
+        JobQueueEntry.SetFilter("User ID", UserId());
+        JobQueueEntry.SetRange("Object Type to Run", JobQueueEntry."Object Type to Run"::Report);
+        JobQueueEntry.SetRange("Object ID to Run", Report::AZDScheduleMultiTaskAssign);
+        JobQueueEntry.SetCurrentKey(SystemCreatedAt);
+        JobQueueEntry.SetAscending(SystemCreatedAt, false);
+
+        if JobQueueEntry.FindFirst() then
+            SavedData := JobQueueEntry.GetReportParameters();
+
+        xmldata := AZDScheduleMultiTaskAssign.RunRequestPage(SavedData);
+
+        if xmldata <> '' then begin
+            AZDScheduleMultiTaskAssign.CreateJobQueueEntry(JobQueueEntry);
             JobQueueEntry.SetReportParameters(xmldata);
             JobQueueEntry.Modify();
         end;

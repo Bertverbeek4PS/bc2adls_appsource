@@ -88,6 +88,8 @@ table 11344450 "AZD Table"
         ADLSESetup.SchemaExported();
 
         CheckTableOfTypeNormal(Rec."Table ID");
+
+        UpsertAllTableIds(0);
     end;
 
     trigger OnDelete()
@@ -122,6 +124,11 @@ table 11344450 "AZD Table"
         end;
     end;
 
+    trigger OnRename()
+    begin
+        UpsertAllTableIds(8);
+    end;
+
     var
         TableNotNormalErr: Label 'Table %1 is not a normal table.', Comment = '%1: caption of table';
         TableExportingDataErr: Label 'Data is being executed for table %1. Please wait for the export to finish before making changes.', Comment = '%1: table caption';
@@ -129,6 +136,9 @@ table 11344450 "AZD Table"
         TablesResetTxt: Label '%1 table(s) were reset %2', Comment = '%1 = number of tables that were reset, %2 = message if tables are exported';
         TableResetExportedTxt: Label 'and are exported to the lakehouse. Please run the notebook first.';
         StoppedByUserLbl: Label 'Session stopped by user.';
+        InvalidFieldNotificationSent: List of [Integer];
+        InvalidFieldConfiguredMsg: Label 'The following fields have been incorrectly enabled for exports in the table %1: %2', Comment = '%1 = table name; %2 = List of invalid field names';
+        WarnOfSchemaChangeQst: Label 'Data may have been exported from this table before. Changing the export schema now may cause unexpected side- effects. You may reset the table first so all the data shall be exported afresh. Do you still wish to continue?';
 
     procedure FieldsChosen(): Integer
     var
@@ -388,6 +398,72 @@ table 11344450 "AZD Table"
                     ADLSEField.Insert();
                 end;
             until Field.Next() = 0;
+    end;
+
+    local procedure UpsertAllTableIds(Rowmarker: Integer)
+    var
+        AZDCompaniesTable: Record "AZD Companies Table";
+        AZDSyncCompanies: Record "AZD Sync Companies";
+        SyncCompany: Text[30];
+    begin
+        // Rowmarker semantics used here:
+        // 0 = Insert -> add missing rows for this Sync Company across ALL table IDs (do not update existing rows)
+        // 1 = Modify -> update existing rows for this Sync Company across ALL table IDs (do not insert missing rows)
+        // 2 = Delete -> remove ALL rows for this Sync Company across ALL table IDs (except current row already being deleted)
+
+        SyncCompany := CopyStr(CompanyName(), 1, MaxStrLen(SyncCompany));
+        if SyncCompany = '' then
+            exit;
+
+        case Rowmarker of
+            2: // Delete: remove this company entry for all other tables (current one is already being deleted)
+                begin
+                    AZDCompaniesTable.SetRange("Table ID", Rec."Table ID");
+                    AZDCompaniesTable.DeleteAll(false);
+                end;
+
+            0: // Insert: add missing rows only
+                if AZDSyncCompanies.FindSet() then
+                    repeat
+                        AZDCompaniesTable.Init();
+                        AZDCompaniesTable."Table ID" := Rec."Table ID";
+                        AZDCompaniesTable."Sync Company" := AZDSyncCompanies."Sync Company";
+                        if AZDCompaniesTable.Insert(false) then;
+                    until AZDSyncCompanies.Next() = 0;
+            8: // Rename:
+                begin
+                    UpsertAllTableIds(2);
+                    UpsertAllTableIds(0);
+                end;
+        end;
+    end;
+
+    procedure DoChooseFields()
+    var
+        ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
+        ADLSESetup: Codeunit "AZD Setup";
+    begin
+        if ADLSETableLastTimestamp.ExistsUpdatedLastTimestamp(Rec."Table ID") then
+            if not Confirm(WarnOfSchemaChangeQst, false) then
+                exit;
+        ADLSESetup.ChooseFieldsToExport(Rec);
+    end;
+
+    procedure IssueNotificationIfInvalidFieldsConfiguredToBeExported()
+    var
+        ADLSEUtil: Codeunit "AZD Util";
+        InvalidFieldNotification: Notification;
+        InvalidFieldList: List of [Text];
+    begin
+        if InvalidFieldNotificationSent.Contains(Rec."Table ID") then
+            exit;
+        InvalidFieldList := Rec.ListInvalidFieldsBeingExported();
+        if InvalidFieldList.Count() = 0 then
+            exit;
+        InvalidFieldNotification.Message := StrSubstNo(InvalidFieldConfiguredMsg, ADLSEUtil.GetTableCaption(Rec."Table ID"), ADLSEUtil.Concatenate(InvalidFieldList));
+        InvalidFieldNotification.Scope := NotificationScope::LocalScope;
+        InvalidFieldNotification.Send();
+        InvalidFieldNotificationSent.Add(Rec."Table ID");
     end;
 
     [IntegrationEvent(false, false)]

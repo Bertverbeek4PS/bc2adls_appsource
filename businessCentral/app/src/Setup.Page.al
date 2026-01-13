@@ -365,6 +365,14 @@ page 11344447 "AZD Setup"
                 Image = Export;
                 RunObject = page "AZD Export Categories";
             }
+            action("Multi Company Export Setup")
+            {
+                Caption = 'Multi Company Export Setup';
+                ApplicationArea = All;
+                ToolTip = 'Specifies the company setup for exporting data from multiple companies.';
+                Image = Export;
+                RunObject = page "AZD Company Setup";
+            }
         }
         area(Promoted)
         {

@@ -3,6 +3,108 @@
   <file datatype="xml" source-language="en-US" target-language="nl-NL" original="BC2ADLS.g.xlf">
     <body>
       <group id="body">
+        <trans-unit id="Table 322321732 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>AZD Companies Table</source>
+          <target>Bedrijfstabel</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 401751910 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the error message from the last export of this table in this company.</source>
+          <target>Hiermee geeft u het foutbericht van de laatste export van deze tabel in dit bedrijf op.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Last Error - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 401751910 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last error</source>
+          <target>Laatste fout</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Last Error - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 48798192 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the status of the last export from this table in this company.</source>
+          <target>Hiermee geeft u de status van de laatste export van deze tabel in dit bedrijf op.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Last Run State - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 48798192 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last exported state</source>
+          <target>Laatst geëxporteerde status</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Last Run State - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 2081141301 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the time of the last export from this table in this company.</source>
+          <target>Hiermee geeft u het tijdstip van de laatste export van deze tabel in dit bedrijf op.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Last Started - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 2081141301 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last started at</source>
+          <target>Laatst gestart op</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Last Started - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 3199984955 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the timestamp of the deleted records in this table that was exported last.</source>
+          <target>Hiermee geeft u het tijdstempel van de verwijderde records in deze tabel op dat als laatste is geëxporteerd.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Last Timestamp Deleted - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 3199984955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last timestamp deleted</source>
+          <target>Laatste tijdstempel verwijderingen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Last Timestamp Deleted - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 3283300484 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the company this table is synced for.</source>
+          <target>Hiermee geeft u het bedrijf op waarvoor deze tabel wordt gesynchroniseerd.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Sync Company - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 3283300484 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Company</source>
+          <target>Sync bedrijf</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Sync Company - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 1393533604 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the caption of the table to be exported.</source>
+          <target>Hiermee geeft u het bijschrift van de te exporteren tabel op.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Table Caption - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 1393533604 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Caption</source>
+          <target>Tabelbijschrift</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Table Caption - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 3135334477 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the ID of the table to be exported.</source>
+          <target>Hiermee geeft u de id van de te exporteren tabel op.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Table ID - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 3135334477 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table ID</source>
+          <target>Tabel-id</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Table ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 3406449795 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the timestamp of the record in this table that was exported last.</source>
+          <target>Hiermee geeft u het tijdstempel van het record in deze tabel op dat als laatste is geëxporteerd.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Updated Last Timestamp - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 322321732 - Field 3406449795 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last timestamp</source>
+          <target>Laatste tijdstempel</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Companies Table - Field Updated Last Timestamp - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2452716164 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>ADL Current Session</source>
           <target>ADL Huidige sessie</target>
@@ -37,14 +139,12 @@
           <source>Company name</source>
           <target>Bedrijfsnaam</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Current Session - Field Company Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2452716164 - Field 1829104285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Session ID</source>
           <target>Sessie-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Current Session - Field Session ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2452716164 - Field 1196097820 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -57,7 +157,6 @@
           <source>Table ID</source>
           <target>Tabel-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Current Session - Field Table ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 944559425 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -77,7 +176,6 @@
           <target>Volgnummer</target>
           <target>Postnr.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Deleted Record - Field Entry No. - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 944559425 - Field 3076185996 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -90,7 +188,6 @@
           <source>Table ID</source>
           <target>Tabel-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Deleted Record - Field Table ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3786303744 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -109,7 +206,6 @@
           <source>Table Caption</source>
           <target>Tabelbijschrift</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Deleted Table Filter - Field Table Caption - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3786303744 - Field 1359954629 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -122,7 +218,6 @@
           <source>Table ID</source>
           <target>Tabel-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Deleted Table Filter - Field TableId - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 78661769 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -165,7 +260,6 @@
           <source>Table Id</source>
           <target>Tabel-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Enum Translation - Field Table Id - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4024257453 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -233,14 +327,12 @@
           <target>Taal</target>
           <target>Taalcode</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Enum Translation Lang - Field Language Code - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 4024257453 - Field 2066789741 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Table Id</source>
           <target>Tabel-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Enum Translation Lang - Field Table Id - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1198963999 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -259,7 +351,6 @@
           <source>Code</source>
           <target>Code</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Export Category Table - Field Code - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1198963999 - Field 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -273,7 +364,6 @@
           <target>Beschrijving</target>
           <target>Omschrijving</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Export Category Table - Field Description - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2243914143 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -305,7 +395,6 @@
           <target>Geactiveerd</target>
           <target>Ingeschakeld</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Field - Field Enabled - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2243914143 - Field 869342929 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -318,7 +407,6 @@
           <source>Field ID</source>
           <target>Veld-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Field - Field Field ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2243914143 - Field 2780874720 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -331,14 +419,12 @@
           <source>Field</source>
           <target>Veld</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Field - Field FieldCaption - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2243914143 - Field 3135334477 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Table ID</source>
           <target>Tabel-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Field - Field Table ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2338903474 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -369,7 +455,6 @@
           <source>Company name</source>
           <target>Bedrijfsnaam</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Run - Field Company Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2338903474 - Field 4241106586 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -394,7 +479,6 @@
           <source>Error</source>
           <target>Fout</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Run - Field Error - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2338903474 - Field 3641927271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -402,7 +486,6 @@
           <target>Id</target>
           <target>ID</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Run - Field ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2338903474 - Field 816905803 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -415,7 +498,6 @@
           <source>Started</source>
           <target>Gestart</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Run - Field Started - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2338903474 - Field 269761521 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -429,14 +511,12 @@
           <target>Staat/provincie</target>
           <target>Status</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Run - Field State - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2338903474 - Field 3135334477 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Table ID</source>
           <target>Tabel-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Run - Field Table ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3585497636 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -511,7 +591,6 @@
           <target>Accountnaam</target>
           <target>Rekening</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Setup - Field Account Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3585497636 - Field 394351785 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -668,7 +747,6 @@
           <source>Primary Key</source>
           <target>Primaire sleutel</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Setup - Field Primary Key - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3585497636 - Field 1702737111 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -711,7 +789,6 @@
           <source>Translations</source>
           <target>Vertalingen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Setup - Field Translations - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 3585497636 - Field 3808103248 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -760,14 +837,37 @@
           <source>Workspace</source>
           <target>Werkruimte</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Setup - Field Workspace - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 428549939 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>AZD Sync Companies</source>
+          <target>AZD Sync bedrijven</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Sync Companies - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 428549939 - Field 3283300484 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The company that is being Exported.</source>
+          <target>Het bedrijf dat wordt geëxporteerd.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Sync Companies - Field Sync Company - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Table 428549939 - Field 3283300484 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Company</source>
+          <target>Sync bedrijf</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Sync Companies - Field Sync Company - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1262020811 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>ADL Table</source>
           <target>ADL Tabel</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Table - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1262020811 - NamedType 1170006682" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The following fields have been incorrectly enabled for exports in the table %1: %2</source>
+          <target>De volgende velden zijn onjuist ingeschakeld voor export in tabel %1: %2</target>
+          <note from="Developer" annotates="general" priority="2">%1 = table name; %2 = List of invalid field names</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Table - NamedType InvalidFieldConfiguredMsg</note>
         </trans-unit>
         <trans-unit id="Table 1262020811 - NamedType 2570556267" size-unit="char" translate="yes" xml:space="preserve">
           <source>Session stopped by user.</source>
@@ -805,6 +905,12 @@
           <note from="Developer" annotates="general" priority="2">%1 = number of tables that were reset, %2 = message if tables are exported</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Table - NamedType TablesResetTxt</note>
         </trans-unit>
+        <trans-unit id="Table 1262020811 - NamedType 814265038" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Data may have been exported from this table before. Changing the export schema now may cause unexpected side- effects. You may reset the table first so all the data shall be exported afresh. Do you still wish to continue?</source>
+          <target>Er zijn mogelijk eerder gegevens uit deze tabel geëxporteerd. Het schema nu wijzigen kan onverwachte gevolgen hebben. U kunt de tabel eerst resetten zodat alle gegevens opnieuw worden geëxporteerd. Wilt u doorgaan?</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table AZD Table - NamedType WarnOfSchemaChangeQst</note>
+        </trans-unit>
         <trans-unit id="Table 1262020811 - Field 2891538263 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the state of the table. Set this checkmark to export this table, otherwise not.</source>
           <target>Hiermee geeft u de status van de tabel aan. Vink aan om deze tabel te exporteren, anders niet.</target>
@@ -816,7 +922,6 @@
           <target>Geactiveerd</target>
           <target>Ingeschakeld</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Table - Field Enabled - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1262020811 - Field 2891538263 - Method 2126772001 - NamedType 1652289272" size-unit="char" translate="yes" xml:space="preserve">
@@ -859,7 +964,6 @@
           <source>Table ID</source>
           <target>Tabel-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Table - Field Table ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1228724135 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -884,7 +988,6 @@
           <source>Company name</source>
           <target>Bedrijfsnaam</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Table Last Timestamp - Field Company Name - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1228724135 - Field 68953080 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -897,7 +1000,6 @@
           <source>Table ID</source>
           <target>Tabel-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Table AZD Table Last Timestamp - Field Table ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 1228724135 - Field 3406449795 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1074,6 +1176,12 @@
           <note from="Developer" annotates="general" priority="2">%1: http method name</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit AZD Http - NamedType UnsupportedMethodErr</note>
         </trans-unit>
+        <trans-unit id="Codeunit 3173371767 - NamedType 1611599047" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Data export started for %1 tables in %2 Companies. Please refresh this page to see the latest export state for the tables. Only those tables that either have had changes since the last export or failed to export last time have been included. The tables for which the exports could not be started have been queued up for later.</source>
+          <target>Data-export is gestart voor %1 tabellen in %2 bedrijven. Vernieuw deze pagina om de laatste exportstatus van de tabellen te bekijken. Alleen tabellen met wijzigingen sinds de laatste export of tabellen waarbij de export eerder is mislukt, zijn opgenomen. Tabellen waarvoor de export niet kon worden gestart, zijn in de wachtrij geplaatst.</target>
+          <note from="Developer" annotates="general" priority="2">%1 = Total number of tables to start the export for. %2 = Total number of companies to export for.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit AZD Multi Company Export - NamedType ExportStartedTxt</note>
+        </trans-unit>
         <trans-unit id="Codeunit 3585497636 - NamedType 3126772150" size-unit="char" translate="yes" xml:space="preserve">
           <source>The field %1 of class %2 is not supported.</source>
           <target>Veld %1 van klasse %2 wordt niet ondersteund.</target>
@@ -1120,7 +1228,6 @@
           <source>The field %1 of type %2 is not supported.</source>
           <target>Het veld %1 van het type %2 wordt niet ondersteund.</target>
           <note from="Developer" annotates="general" priority="2">%1 = field name, %2 = field type</note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit AZD Util - NamedType FieldTypeNotSupportedErr</note>
         </trans-unit>
         <trans-unit id="Page 2057870358 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1140,6 +1247,360 @@
           <target>Exportcategorie</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Assign Export Category - Control Export Category - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export Companies to Azure Data Lake Storage</source>
+          <target>Bedrijven exporteren naar Azure Data Lake Storage</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Control 1048092865 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the earliest start date/time of the scheduled job queue entry for this company.</source>
+          <target>Hiermee geeft u de vroegste startdatum/-tijd van het geplande taakwachtrij-item voor dit bedrijf op.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Control JobEarliestStartDateTime - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Control 1048092865 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Earliest Start</source>
+          <target>Vroegste start</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Control JobEarliestStartDateTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Control 3431134426 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the caption of the object executed by the scheduled job queue entry.</source>
+          <target>Hiermee geeft u het bijschrift van het object op dat door het geplande taakwachtrij-item wordt uitgevoerd.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Control JobObjectCaptiontoRun - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Control 3431134426 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Object Caption</source>
+          <target>Taakobject bijschrift</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Control JobObjectCaptiontoRun - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Control 1491630615 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the object ID of the job queue entry assigned to schedule the export.</source>
+          <target>Hiermee geeft u de object-id op van het taakwachtrij-item dat is toegewezen om de export te plannen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Control JobObjectIDtoRun - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Control 1491630615 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Object ID</source>
+          <target>Taakobject-id</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Control JobObjectIDtoRun - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Control 2205926325 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the current status of the scheduled export job for this company.</source>
+          <target>Hiermee geeft u de huidige status van de geplande exporttaak voor dit bedrijf op.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Control JobStatus - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Control 2205926325 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Status</source>
+          <target>Taakstatus</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Control JobStatus - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Control 2205926325 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ready,In Process,Error,On Hold,Finished,On Hold with Inactivity Timeout,Waiting, </source>
+          <target>Gereed,In verwerking,Fout,In wacht,Voltooid,In wacht met inactiviteitstimeout,Wachten, </target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Control JobStatus - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 4028359056 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Export Categories available for scheduling the export to Datalake.</source>
+          <target>Hiermee geeft u de exportcategorieen op die beschikbaar zijn voor planning van de export naar Datalake.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action Export Category - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 4028359056 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export Category</source>
+          <target>Exportcategorie</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action Export Category - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 4219020610 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the scheduled Job Queues for the export to Datalake.</source>
+          <target>Hiermee geeft u de geplande taakwachtrijen voor de export naar Datalake op.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action Job Queue - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 4219020610 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Job Queue</source>
+          <target>Taakwachtrij</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action Job Queue - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 1894152308 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Removes the entries in the deleted record list that have already been exported. The codeunit AZD Clear Tracked Deletions may be invoked using a job queue entry for the same end.</source>
+          <target>Verwijdert de items uit de lijst met verwijderde records die al zijn geëxporteerd. De codeunit AZD Clear Tracked Deletions kan met een taakwachtrij-item worden aangeroepen voor hetzelfde doel.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action ClearDeletedRecordsList - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 1894152308 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear tracked deleted records</source>
+          <target>Verwijderde records opschonen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action ClearDeletedRecordsList - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 4030820591 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This will clear the schema exported on field. If this is cleared you can change the schema and export it again.</source>
+          <target>Dit wist het veld schema geëxporteerd op. Als dit is gewist kunt u het schema wijzigen en opnieuw exporteren.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action ClearSchemaExported - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 4030820591 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clear schema export date</source>
+          <target>Schema-exportdatum wissen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action ClearSchemaExported - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 3248599582 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Starts the export process by spawning different sessions for each table. The action is disabled in case there are export processes currently running, also in other companies.</source>
+          <target>Start het exportproces door verschillende sessies per tabel te starten. Actie is uitgeschakeld als er exportprocessen lopen, ook in andere bedrijven.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action ExportNow - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 3248599582 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export All Companies</source>
+          <target>Alle bedrijven exporteren</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action ExportNow - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 3799305664 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Starts the export process for the selected company.</source>
+          <target>Start het exportproces voor het geselecteerde bedrijf.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action ExportSelectedCompanyNow - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 3799305664 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export Selected Company</source>
+          <target>Geselecteerd bedrijf exporteren</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action ExportSelectedCompanyNow - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 2019212495 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schedules the export process as a job queue entry.</source>
+          <target>Plant het exportproces als taakwachtrij-item.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action Schedule - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 2019212495 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schedule export</source>
+          <target>Export plannen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action Schedule - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 438010895 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This will export the schema of the tables selected in the setup to the lake. This is a one-time operation and should be done before the first export of data.</source>
+          <target>Exporteert het schema van de in de setup geselecteerde tabellen naar de lake. Eenmalige actie, uitvoeren vóór de eerste data-export.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action SchemaExport - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 438010895 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schema export</source>
+          <target>Schema exporteren</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action SchemaExport - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 222153392 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Tries to stop all sessions that are exporting data, including those that are running in other companies.</source>
+          <target>Probeert alle sessies te stoppen die gegevens exporteren, ook die in andere bedrijven.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action StopExport - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2216295665 - Action 222153392 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Stop export</source>
+          <target>Export stoppen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup - Action StopExport - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Company Tables</source>
+          <target>Bedrijfstabellen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Control 3126421183 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies if any field has been chosen to be exported. Click on Choose Fields action to add fields to export.</source>
+          <target>Hiermee geeft u aan of een veld is gekozen om te exporteren. Klik op Velden kiezen om velden toe te voegen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Control FieldsChosen - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Control 3126421183 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source># Fields selected</source>
+          <target># Velden geselecteerd</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Control FieldsChosen - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Control 401751910 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last error</source>
+          <target>Laatste fout</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Control Last Error - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Control 2081141301 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last started at</source>
+          <target>Laatst gestart op</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Control Last Started - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Control 3199984955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last timestamp deleted</source>
+          <target>Laatste tijdstempel verwijderingen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Control Last Timestamp Deleted - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Control 2065755396 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the No. of Records for the table.</source>
+          <target>Hiermee geeft u het aantal records voor de tabel op.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Control No. of Records - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Control 2065755396 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No. of Records</source>
+          <target>Aantal records</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Control No. of Records - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Control 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last exported state</source>
+          <target>Laatst geëxporteerde status</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Control Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Control 3406449795 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last timestamp</source>
+          <target>Laatste tijdstempel</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Control Updated Last Timestamp - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 3293503457 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add a table to be exported.</source>
+          <target>Voegt een tabel toe om te exporteren.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action AddTable - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 3293503457 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Add</source>
+          <target>Toevoegen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action AddTable - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 1150345799 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assign an Export Category to the Table.</source>
+          <target>Wijs een exportcategorie toe aan de tabel.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action AssignExportCategory - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 1150345799 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Assign Export Category</source>
+          <target>Exportcategorie toewijzen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action AssignExportCategory - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 4207383944 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Select the fields of this table to be exported.</source>
+          <target>Selecteer de velden van deze tabel die moeten worden geëxporteerd.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action ChooseFields - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 4207383944 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Choose fields</source>
+          <target>Velden kiezen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action ChooseFields - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 2159590881 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Removes a table that had been added to the list meant for export.</source>
+          <target>Verwijdert een tabel die was toegevoegd aan de exportlijst.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action DeleteTable - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 2159590881 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Delete</source>
+          <target>Verwijderen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action DeleteTable - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 3017859583 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Exports a file with BC2ADLS tables and fields.</source>
+          <target>Exporteert een bestand met BC2ADLS-tabellen en -velden.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action ExportBC2ADLS - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 3017859583 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export</source>
+          <target>Exporteren</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action ExportBC2ADLS - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 3624488056 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import a file with BC2ADLS tables and fields.</source>
+          <target>Importeert een bestand met BC2ADLS-tabellen en -velden.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action ImportBC2ADLS - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 3624488056 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Import</source>
+          <target>Importeren</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action ImportBC2ADLS - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 447668913 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View the execution logs for this table in the currently opened company.</source>
+          <target>Bekijk de uitvoerlogs voor deze tabel in het huidige bedrijf.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action Logs - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 447668913 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Execution logs</source>
+          <target>Uitvoerlogs</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action Logs - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 2026913255 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refresh all Last Run State.</source>
+          <target>Vernieuw alle Laatste uitvoerstatus.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action Refresh - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 2026913255 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Refresh</source>
+          <target>Vernieuwen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action Refresh - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 685580383 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Set the selected tables to export all of its data again.</source>
+          <target>Stelt de geselecteerde tabellen opnieuw in zodat alle gegevens opnieuw worden geëxporteerd.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action Reset - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 685580383 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reset</source>
+          <target>Opnieuw instellen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action Reset - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 685580383 - Method 1377591017 - NamedType 170709568" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Current Company,All Companies</source>
+          <target>Huidig bedrijf,Alle bedrijven</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action Reset - Method OnAction - NamedType OptionStringLbl</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 685580383 - Method 1377591017 - NamedType 3685235527" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to reset the selected tables for all companies?</source>
+          <target>Wilt u de geselecteerde tabellen resetten voor alle bedrijven?</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action Reset - Method OnAction - NamedType ResetTablesForAllCompaniesQst</note>
+        </trans-unit>
+        <trans-unit id="Page 1106916926 - Action 685580383 - Method 1377591017 - NamedType 3768686394" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to reset the selected tables for the current company or all companies?</source>
+          <target>Wilt u de geselecteerde tabellen resetten voor het huidige bedrijf of alle bedrijven?</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Company Setup Tables - Action Reset - Method OnAction - NamedType ResetTablesQst</note>
         </trans-unit>
         <trans-unit id="Page 3786303744 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Deleted Table Filter</source>
@@ -1163,7 +1624,6 @@
           <source>Translations</source>
           <target>Vertalingen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Enum Translations - Action Translations - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1996920864 - Action 3117171503 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1183,7 +1643,6 @@
           <target>Verwerken</target>
           <target>Proces</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Enum Translations - Action Category_Process - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1865259772 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1202,7 +1661,6 @@
           <source>Code</source>
           <target>Code</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Export Categories - Control Code - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 942552919 - Control 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1210,7 +1668,6 @@
           <target>Beschrijving</target>
           <target>Omschrijving</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Export Categories - Control Description - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2338903474 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1229,7 +1686,6 @@
           <source>Duration</source>
           <target>Duur</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Run - Control Duration - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2338903474 - Control 1595823452 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1242,7 +1698,6 @@
           <source>Table</source>
           <target>Tabel</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Run - Control TableCaption - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2338903474 - Action 2457075619 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1285,7 +1740,6 @@
           <source>Connection</source>
           <target>Verbinding</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Control ConnectionSettings - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3585497636 - Control 1703233268 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1304,7 +1758,6 @@
           <source>Client ID</source>
           <target>Client-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Control Client ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3585497636 - Control 2002479657 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1341,14 +1794,12 @@
           <source>Tenant ID</source>
           <target>Tenant-id</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Control Tenant ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3585497636 - Control 3266712818 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Data Format</source>
           <target>Gegevensopmaak</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Control DataFormatSettings - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3585497636 - Control 858049707 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1361,7 +1812,6 @@
           <source>Tables</source>
           <target>Tabellen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Control Tables - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3585497636 - Action 1213376883 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1410,8 +1860,19 @@
           <source>Job Queue</source>
           <target>Taakwachtrij</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Action Job Queue - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3585497636 - Action 597923383 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the company setup for exporting data from multiple companies.</source>
+          <target>Hiermee geeft u de bedrijfsinstellingen op voor het exporteren van gegevens uit meerdere bedrijven.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Action Multi Company Export Setup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3585497636 - Action 597923383 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Multi Company Export Setup</source>
+          <target>Multi-bedrijf export instellen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Action Multi Company Export Setup - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3585497636 - Action 1894152308 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Removes the entries in the deleted record list that have already been exported. The codeunit ADL Clear Tracked Deletions may be invoked using a job queue entry for the same end.</source>
@@ -1459,7 +1920,6 @@
           <source>Export</source>
           <target>Exporteren</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Action ExportNow - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3585497636 - Action 3321239466 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1515,7 +1975,6 @@
           <target>Verwerken</target>
           <target>Proces</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup - Action Category_Process - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1646551067 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1564,7 +2023,6 @@
           <source>Number</source>
           <target>Nummer</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Fields - Control Field ID - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1646551067 - Control 4079677382 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1578,7 +2036,6 @@
           <target>Soort</target>
           <target>Type</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Fields - Control Field Type - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1646551067 - Control 3909250225 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1627,7 +2084,6 @@
           <source>Tables</source>
           <target>Tabellen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1369837935 - NamedType 704878071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1635,18 +2091,6 @@
           <target>Tabel%1</target>
           <note from="Developer" annotates="general" priority="2">%1 = Table ID</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - NamedType AbsentTableCaptionLbl</note>
-        </trans-unit>
-        <trans-unit id="Page 1369837935 - NamedType 1170006682" size-unit="char" translate="yes" xml:space="preserve">
-          <source>The following fields have been incorrectly enabled for exports in the table %1: %2</source>
-          <target>De volgende velden zijn onjuist ingeschakeld voor export in tabel %1: %2</target>
-          <note from="Developer" annotates="general" priority="2">%1 = table name; %2 = List of invalid field names</note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - NamedType InvalidFieldConfiguredMsg</note>
-        </trans-unit>
-        <trans-unit id="Page 1369837935 - NamedType 814265038" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Data may have been exported from this table before. Changing the export schema now may cause unexpected side- effects. You may reset the table first so all the data shall be exported afresh. Do you still wish to continue?</source>
-          <target>Er zijn mogelijk eerder gegevens uit deze tabel geëxporteerd. Het schema nu wijzigen kan onverwachte gevolgen hebben. U kunt de tabel eerst resetten zodat alle gegevens opnieuw worden geëxporteerd. Wilt u doorgaan?</target>
-          <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - NamedType WarnOfSchemaChangeQst</note>
         </trans-unit>
         <trans-unit id="Page 1369837935 - Control 2740688609 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the ID of the active export session for this table in this company, if any.</source>
@@ -1677,7 +2121,6 @@
           <target>Geactiveerd</target>
           <target>Ingeschakeld</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - Control Enabled - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1369837935 - Control 2174822216 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -1792,7 +2235,6 @@
           <source>Table</source>
           <target>Tabel</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - Control TableCaption - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1369837935 - Action 3293503457 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1805,7 +2247,6 @@
           <source>Add</source>
           <target>Toevoegen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - Action AddTable - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1369837935 - Action 1150345799 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1842,7 +2283,6 @@
           <source>Delete</source>
           <target>Verwijderen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - Action DeleteTable - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1369837935 - Action 3017859583 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1855,7 +2295,6 @@
           <source>Export</source>
           <target>Exporteren</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - Action ExportBC2ADLS - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1369837935 - Action 3624488056 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1868,7 +2307,6 @@
           <source>Import</source>
           <target>Importeren</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - Action ImportBC2ADLS - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1369837935 - Action 447668913 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1893,7 +2331,6 @@
           <source>Reset</source>
           <target>Opnieuw instellen</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Page AZD Setup Tables - Action Reset - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 1369837935 - Action 685580383 - Method 1377591017 - NamedType 170709568" size-unit="char" translate="yes" xml:space="preserve">
@@ -1936,7 +2373,6 @@
           <source>Options</source>
           <target>Opties</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control Options - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1658525264 - Control 1857404785 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1962,7 +2398,6 @@
           <target>Beschrijving</target>
           <target>Omschrijving</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control JobQueueDescription - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1658525264 - Control 3432288156 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
@@ -1981,14 +2416,12 @@
           <source>Recurrence</source>
           <target>Herhaling</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control Daysgrid - Property Caption</note>
         </trans-unit>
         <trans-unit id="Report 1658525264 - Control 3378722424 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies that the job queue entry runs on Mondays.</source>
           <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op maandagen.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control RunOnMondaysControl - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Report 1658525264 - Control 3378722424 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -2013,7 +2446,6 @@
           <source>Specifies that the job queue entry runs on Thursdays.</source>
           <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op donderdagen.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control RunOnThursdayControl - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Report 1658525264 - Control 927317389 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -2026,7 +2458,6 @@
           <source>Specifies that the job queue entry runs on Wednesdays.</source>
           <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op woensdagen.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control RunOnWednesdayControl - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Report 1658525264 - Control 744271359 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -2039,7 +2470,6 @@
           <source>Specifies that the job queue entry runs on Fridays.</source>
           <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op vrijdagen.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control RunOnFridayControl - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Report 1658525264 - Control 2512501250 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -2052,7 +2482,6 @@
           <source>Specifies that the job queue entry runs on Saturdays.</source>
           <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op zaterdagen.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control RunOnSaturdayControl - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Report 1658525264 - Control 3456145774 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -2065,7 +2494,6 @@
           <source>Specifies that the job queue entry runs on Sundays.</source>
           <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op zondagen.</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control RunOnSundaysControl - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Report 1658525264 - Control 2622257132 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -2073,6 +2501,145 @@
           <target>Uitvoeren op zondag</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Report AZD Schedule Task Assignment - Control RunOnSundaysControl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Schedule Multi Company Export</source>
+          <target>Multi-bedrijf export plannen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <target>Opties</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control Options - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 1857404785 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the date and time when the job queue must be executed for the first time.</source>
+          <target>Hiermee geeft u de datum en tijd op waarop de taakwachtrij voor het eerst moet worden uitgevoerd.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control EarliestStartDateTimeControl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 1857404785 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Earliest Start Date / Time </source>
+          <target>Eerste startdatum/-tijd</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control EarliestStartDateTimeControl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 3072426636 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the description that is displayed in the job queue.</source>
+          <target>Hiermee geeft u de omschrijving op die in de taakwachtrij wordt weergegeven.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control JobQueueDescription - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 3072426636 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <target>Beschrijving</target>
+          <target>[NAB: SUGGESTION]Omschrijving</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control JobQueueDescription - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 426703991 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the minimum number of minutes that are to elapse between runs of a job queue entry. The value cannot be less than one minute.</source>
+          <target>Hiermee geeft u het minimumaantal minuten op dat tussen uitvoeringen van een taakwachtrij-item moet zitten. Waarde kan niet kleiner dan een minuut zijn.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control NoofMinutesBetweenRuns - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 426703991 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No of minutes between runs</source>
+          <target>Aantal minuten tussen uitvoeringen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control NoofMinutesBetweenRuns - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 1963606369 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Recurrence</source>
+          <target>Herhaling</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control Daysgrid - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 3378722424 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that the job queue entry runs on Mondays.</source>
+          <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op maandagen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnMondaysControl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 3378722424 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run On Mondays</source>
+          <target>Uitvoeren op maandag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnMondaysControl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 927317389 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that the job queue entry runs on Thursdays.</source>
+          <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op donderdagen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnThursdayControl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 927317389 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run On Thursdays</source>
+          <target>Uitvoeren op donderdag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnThursdayControl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 528853273 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that the job queue entry runs on Tuesdays.</source>
+          <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op dinsdagen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnTuesdaysControl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 528853273 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run On Tuesdays</source>
+          <target>Uitvoeren op dinsdag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnTuesdaysControl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 744271359 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that the job queue entry runs on Wednesdays.</source>
+          <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op woensdagen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnWednesdayControl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 744271359 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run On Wednesdays</source>
+          <target>Uitvoeren op woensdag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnWednesdayControl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 2512501250 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that the job queue entry runs on Fridays.</source>
+          <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op vrijdagen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnFridayControl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 2512501250 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run On Fridays</source>
+          <target>Uitvoeren op vrijdag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnFridayControl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 3456145774 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that the job queue entry runs on Saturdays.</source>
+          <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op zaterdagen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnSaturdayControl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 3456145774 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run On Saturdays</source>
+          <target>Uitvoeren op zaterdag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnSaturdayControl - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 2622257132 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies that the job queue entry runs on Sundays.</source>
+          <target>Hiermee wordt opgegeven dat het taakwachtrij-item wordt uitgevoerd op zondagen.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnSundaysControl - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 1003610033 - Control 2622257132 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Run On Sundays</source>
+          <target>Uitvoeren op zondag</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report AZDScheduleMultiTaskAssign - Control RunOnSundaysControl - Property Caption</note>
         </trans-unit>
         <trans-unit id="XmlPort 4262497758 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>ADL BC2ADLS Export</source>
@@ -2087,8 +2654,8 @@
           <note from="Xliff Generator" annotates="general" priority="3">XmlPort AZD BC2ADLS Import - Property Caption</note>
         </trans-unit>
         <trans-unit id="XmlPort 3980278925 - Method 24927850 - NamedType 1273762815" size-unit="char" translate="yes" xml:space="preserve">
-          <source>With the import all existing ADL Tables and Fields will be deleted. Do you want to continue?</source>
-          <target>Bij het importeren worden alle bestaande ADL-tabellen en -velden verwijderd. Wilt u doorgaan?</target>
+          <source>With the import all existing ADLSE Tables and Fields will be deleted. Do you want to continue?</source>
+          <target>Bij het importeren worden alle bestaande ADLSE-tabellen en -velden verwijderd. Wilt u doorgaan?</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">XmlPort AZD BC2ADLS Import - Method OnPreXmlPort - NamedType ConfirmQuestionMsg</note>
         </trans-unit>
@@ -2108,7 +2675,6 @@
           <source>Failed</source>
           <target>Mislukt</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum AZD Run State - EnumValue Failed - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 1662683307 - EnumValue 1675045056 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
@@ -2127,7 +2693,6 @@
           <source>Success</source>
           <target>Geslaagd</target>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="NAB AL Tool Refresh Xlf" annotates="general" priority="3">Suggested translation inserted.</note>
           <note from="Xliff Generator" annotates="general" priority="3">Enum AZD Run State - EnumValue Success - Property Caption</note>
         </trans-unit>
         <trans-unit id="Enum 2878624034 - EnumValue 109158254 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
