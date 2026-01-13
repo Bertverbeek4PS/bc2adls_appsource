@@ -220,7 +220,7 @@ page 11344454 "AZD Company Setup Tables"
                 var
                     AZDTable: Record "AZD Table";
                 begin
-                    XmlPort.Run(XmlPort::"BC2ADLS Import", false, true, AZDTable);
+                    XmlPort.Run(XmlPort::"AZD BC2ADLS Import", false, true, AZDTable);
                     CurrPage.Update(false);
                 end;
             }
@@ -235,7 +235,7 @@ page 11344454 "AZD Company Setup Tables"
                     AZDTable: Record "AZD Table";
                 begin
                     AZDTable.Reset();
-                    XmlPort.Run(XmlPort::"BC2ADLS Export", false, false, AZDTable);
+                    XmlPort.Run(XmlPort::"AZD BC2ADLS Export", false, false, AZDTable);
                     CurrPage.Update(false);
                 end;
             }

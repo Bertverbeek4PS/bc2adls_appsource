@@ -1,7 +1,7 @@
 namespace bc2adls;
 
 using System.Reflection;
-codeunit 11344454 "AZD Company Run"
+codeunit 11344451 "AZD Company Run"
 {
 
     Permissions = tabledata "AZD Companies Table" = RIMD;
