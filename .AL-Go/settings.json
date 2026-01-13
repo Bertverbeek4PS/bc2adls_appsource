@@ -4,7 +4,11 @@
   "appSourceCopMandatoryAffixes": [
     "AZD"
   ],
-  "appFolders": ["BC2ADLS"],
-  "testFolders": ["BC2ADLS.Test"],
+   "appFolders": [
+    "businessCentral\\app"
+  ],
+  "testFolders": [
+    "businessCentral\\test"
+  ],
   "bcptTestFolders": []
 }

@@ -1674,7 +1674,7 @@
           <note from="Xliff Generator" annotates="general" priority="3">XmlPort AZD BC2ADLS Import - Property Caption</note>
         </trans-unit>
         <trans-unit id="XmlPort 3980278925 - Method 24927850 - NamedType 1273762815" size-unit="char" translate="yes" xml:space="preserve">
-          <source>With the import all existing ADL Tables and Fields will be deleted. Do you want to continue?</source>
+          <source>With the import all existing ADLSE Tables and Fields will be deleted. Do you want to continue?</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">XmlPort AZD BC2ADLS Import - Method OnPreXmlPort - NamedType ConfirmQuestionMsg</note>
         </trans-unit>
