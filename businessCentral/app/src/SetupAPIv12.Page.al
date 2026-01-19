@@ -105,7 +105,7 @@ page 11344448 "AZD Setup API v12"
     procedure StartMultiCompanyExport(var ActionContext: WebServiceActionContext)
     var
         TempJobQueueEntry: Record "Job Queue Entry" temporary;
-        ADLSEMultiCompanyExport: Codeunit "ADLSE Multi Company Export";
+        ADLSEMultiCompanyExport: Codeunit "AZD Multi Company Export";
     begin
         TempJobQueueEntry.Init();
         TempJobQueueEntry.Insert(false);
