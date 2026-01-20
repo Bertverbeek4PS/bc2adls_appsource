@@ -1,4 +1,4 @@
-codeunit 85561 "ADLSE Library - bc2adls"
+codeunit 85561 "AZD Library - bc2adls"
 {
     trigger OnRun()
     begin

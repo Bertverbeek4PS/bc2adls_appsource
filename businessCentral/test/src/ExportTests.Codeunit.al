@@ -1,4 +1,4 @@
-codeunit 85566 "ADLSE Export Tests"
+codeunit 85566 "AZD Export Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;
@@ -9,7 +9,7 @@ codeunit 85566 "ADLSE Export Tests"
 
     var
         ADLSETable: Record "AZD Table";
-        ADLSLibrarybc2adls: Codeunit "ADLSE Library - bc2adls";
+        ADLSLibrarybc2adls: Codeunit "AZD Library - bc2adls";
         LibraryAssert: Codeunit "Library Assert";
         LibraryDialogHandler: Codeunit "Library - Dialog Handler";
         LibraryERM: Codeunit "Library - ERM";
@@ -22,7 +22,7 @@ codeunit 85566 "ADLSE Export Tests"
         ADLSERun: Record "AZD Run";
         ReasonCode: Record "Reason Code";
         ADLSEExecute: Codeunit "AZD Execute";
-        ADLSEGen2UtilMock: Codeunit "ADLSE Gen 2 Util Mock";
+        ADLSEGen2UtilMock: Codeunit "AZD Gen 2 Util Mock";
         ADLSESessionManager: Codeunit "AZD Session Manager";
         i: Integer;
         ExpectedEntityBlobPathTok: Label 'https://bc2adls.blob.core.windows.net/bc2adls/ReasonCode-231.cdm.json', Locked = true;
@@ -69,7 +69,7 @@ codeunit 85566 "ADLSE Export Tests"
         ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
         ReasonCode: Record "Reason Code";
         ADLSEExecute: Codeunit "AZD Execute";
-        ADLSEGen2UtilMock: Codeunit "ADLSE Gen 2 Util Mock";
+        ADLSEGen2UtilMock: Codeunit "AZD Gen 2 Util Mock";
         ADLSESessionManager: Codeunit "AZD Session Manager";
         TempBlob: Codeunit "Temp Blob";
         FieldRef: FieldRef;
@@ -134,17 +134,17 @@ codeunit 85566 "ADLSE Export Tests"
         LibraryTestInitialize: Codeunit "Library - Test Initialize";
 
     begin
-        LibraryTestInitialize.OnTestInitialize(Codeunit::"ADLSE Export Tests");
+        LibraryTestInitialize.OnTestInitialize(Codeunit::"AZD Export Tests");
 
         if IsInitialized then
             exit;
 
-        LibraryTestInitialize.OnBeforeTestSuiteInitialize(Codeunit::"ADLSE Export Tests");
+        LibraryTestInitialize.OnBeforeTestSuiteInitialize(Codeunit::"AZD Export Tests");
 
         IsInitialized := true;
         Commit();
 
-        LibraryTestInitialize.OnAfterTestSuiteInitialize(Codeunit::"ADLSE Export Tests");
+        LibraryTestInitialize.OnAfterTestSuiteInitialize(Codeunit::"AZD Export Tests");
     end;
 
     [MessageHandler]

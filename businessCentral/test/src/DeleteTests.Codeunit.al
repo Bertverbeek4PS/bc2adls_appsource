@@ -1,4 +1,4 @@
-codeunit 85563 "ADLSE Delete Tests"
+codeunit 85563 "AZD Delete Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;
@@ -9,7 +9,7 @@ codeunit 85563 "ADLSE Delete Tests"
 
     var
         ADLSETable: Record "AZD Table";
-        ADLSELibrarybc2adls: Codeunit "ADLSE Library - bc2adls";
+        ADLSELibrarybc2adls: Codeunit "AZD Library - bc2adls";
         LibraryUtility: Codeunit "Library - Utility";
         LibraryAssert: Codeunit "Library Assert";
         "Storage Type": Enum "AZD Storage Type";
@@ -42,11 +42,11 @@ codeunit 85563 "ADLSE Delete Tests"
         // [WHEN] a record is deleted   
         DeletePaymentTerms(PaymentTerms, PaymentTermGuid);
 
-        // [THEN] Check if the record is marked as deleted in the "ADLSE Deleted Record" table
+        // [THEN] Check if the record is marked as deleted in the "AZD Deleted Record" table
         ADLSEDeletedRecord.Reset();
         ADLSEDeletedRecord.SetRange("Table ID", PaymentTerms.RecordId.TableNo);
         if ADLSEDeletedRecord.FindFirst() then
-            LibraryAssert.AreEqual(PaymentTermGuid, ADLSEDeletedRecord."System ID", 'The record is not inserted in the "ADLSE Deleted Record" table');
+            LibraryAssert.AreEqual(PaymentTermGuid, ADLSEDeletedRecord."System ID", 'The record is not inserted in the "AZD Deleted Record" table');
     end;
 
     [Test]
@@ -78,7 +78,7 @@ codeunit 85563 "ADLSE Delete Tests"
         ADLSETable.Get(PaymentTerms.RecordId.TableNo);
         ADLSETable.ResetSelected();
 
-        // [THEN] Check if the record is marked as deleted in the "ADLSE Deleted Record" table
+        // [THEN] Check if the record is marked as deleted in the "AZD Deleted Record" table
         BigInt := 0;
         ADLSETableLastTimestamp.Reset();
         ADLSETableLastTimestamp.SetRange("Table ID", PaymentTerms.RecordId.TableNo);
@@ -116,7 +116,7 @@ codeunit 85563 "ADLSE Delete Tests"
         // [WHEN] When the user clears the tracked deleted records
         Codeunit.Run(Codeunit::"AZD Clear Tracked Deletions");
 
-        // [THEN] Check if the record is marked as deleted in the "ADLSE Deleted Record" table
+        // [THEN] Check if the record is marked as deleted in the "AZD Deleted Record" table
         LibraryAssert.TableIsEmpty(Database::"AZD Deleted Record");
     end;
 
@@ -140,17 +140,17 @@ codeunit 85563 "ADLSE Delete Tests"
         LibraryTestInitialize: Codeunit "Library - Test Initialize";
 
     begin
-        LibraryTestInitialize.OnTestInitialize(Codeunit::"ADLSE Delete Tests");
+        LibraryTestInitialize.OnTestInitialize(Codeunit::"AZD Delete Tests");
 
         if IsInitialized then
             exit;
 
-        LibraryTestInitialize.OnBeforeTestSuiteInitialize(Codeunit::"ADLSE Delete Tests");
+        LibraryTestInitialize.OnBeforeTestSuiteInitialize(Codeunit::"AZD Delete Tests");
 
         IsInitialized := true;
         Commit();
 
-        LibraryTestInitialize.OnAfterTestSuiteInitialize(Codeunit::"ADLSE Delete Tests");
+        LibraryTestInitialize.OnAfterTestSuiteInitialize(Codeunit::"AZD Delete Tests");
     end;
 
     [MessageHandler]

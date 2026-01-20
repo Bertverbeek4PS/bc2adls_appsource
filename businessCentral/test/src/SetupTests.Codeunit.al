@@ -1,4 +1,4 @@
-codeunit 85565 "ADLSE Setup Tests"
+codeunit 85565 "AZD Setup Tests"
 {
     Subtype = Test;
     TestPermissions = Disabled;
@@ -11,7 +11,7 @@ codeunit 85565 "ADLSE Setup Tests"
         ADLSESetup: Record "AZD Setup";
         ADLSETable: Record "AZD Table";
         ADLSEField: Record "AZD Field";
-        ADLSELibrarybc2adls: Codeunit "ADLSE Library - bc2adls";
+        ADLSELibrarybc2adls: Codeunit "AZD Library - bc2adls";
         LibraryUtility: Codeunit "Library - Utility";
         LibraryRandom: Codeunit "Library - Random";
         LibraryAssert: Codeunit "Library Assert";
@@ -191,17 +191,17 @@ codeunit 85565 "ADLSE Setup Tests"
         LibraryTestInitialize: Codeunit "Library - Test Initialize";
 
     begin
-        LibraryTestInitialize.OnTestInitialize(Codeunit::"ADLSE Setup Tests");
+        LibraryTestInitialize.OnTestInitialize(Codeunit::"AZD Setup Tests");
 
         if IsInitialized then
             exit;
 
-        LibraryTestInitialize.OnBeforeTestSuiteInitialize(Codeunit::"ADLSE Setup Tests");
+        LibraryTestInitialize.OnBeforeTestSuiteInitialize(Codeunit::"AZD Setup Tests");
 
         IsInitialized := true;
         Commit();
 
-        LibraryTestInitialize.OnAfterTestSuiteInitialize(Codeunit::"ADLSE Setup Tests");
+        LibraryTestInitialize.OnAfterTestSuiteInitialize(Codeunit::"AZD Setup Tests");
     end;
 
 
