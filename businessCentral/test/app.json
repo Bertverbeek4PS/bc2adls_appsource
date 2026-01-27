@@ -2,7 +2,7 @@
   "id": "9776c32f-1167-42c4-b6a8-f3743c6a34c5",
   "name": "BC2ADLS.Test",
   "publisher": "The bc2adls team",
-  "version": "27.48.0.0",
+  "version": "27.49.0.0",
   "brief": "Tests for Azure Data Lake Storage Export",
   "description": "Tests for Azure Data Lake Storage Export",
   "privacyStatement": "",
@@ -46,7 +46,7 @@
       "publisher": "The bc2adls team",
       "name": "Azure Data Lake Storage Export",
       "id": "7a4530b3-2449-40ad-9779-97f4663ce51f",
-      "version": "27.44.0.0"
+      "version": "27.49.0.0"
     }
   ],
   "screenshots": [],
