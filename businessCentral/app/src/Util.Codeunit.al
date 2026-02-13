@@ -565,13 +565,17 @@ codeunit 11344454 "AZD Util"
     end;
 
     [IntegrationEvent(false, false)]
-    local procedure OnAfterGetDataLakeCompliantFieldName(FieldRef: FieldRef; var CompliantFieldName: Text)
     local procedure OnAfterCreateCsvHeader(RecordRef: RecordRef; FieldIdList: List of [Integer]; var RecordPayload: Text)
     begin
     end;
 
     [IntegrationEvent(false, false)]
     local procedure OnAfterCreateCsvPayload(RecordRef: RecordRef; FieldIdList: List of [Integer]; AddHeaders: Boolean; Deletes: Boolean; var RecordPayload: Text)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterGetDataLakeCompliantFieldName(FieldRef: FieldRef; var CompliantFieldName: Text)
     begin
     end;
 }
