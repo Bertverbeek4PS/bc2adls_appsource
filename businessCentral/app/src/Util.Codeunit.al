@@ -199,6 +199,7 @@ codeunit 11344454 "AZD Util"
         TableFields: Record Field;
         RecRef: RecordRef;
         NameToUse: Text;
+        CompliantFieldName: Text;
     begin
         ADLSESetup.GetSingleton();
         if ADLSESetup."Use Field Captions" then
@@ -208,18 +209,22 @@ codeunit 11344454 "AZD Util"
         if ADLSESetup."Use IDs for Duplicates Only" then begin
             RecRef := FieldRef.Record();
             TableFields.SetRange(TableNo, RecRef.Number());
-            if ADLSESetup."Use Field Captions" then
-                TableFields.SetRange("Field Caption", NameToUse)
+            if ADLSESetup."Use Field Captions" then begin
+                TableFields.SetRange("Field Caption", NameToUse);
+                TableFields.SetFilter("No.", '<>%1', FieldRef.Number());
+                if TableFields.IsEmpty() then // there is not a duplicate field name/caption
+                    CompliantFieldName := GetDataLakeCompliantName(NameToUse)
+                else
+                    CompliantFieldName := StrSubstNo(ConcatNameIdTok, GetDataLakeCompliantName(NameToUse), FieldRef.Number());
+            end
             else
-                exit(GetDataLakeCompliantName(NameToUse));
-
-            TableFields.SetFilter("No.", '<>%1', FieldRef.Number());
-            if TableFields.IsEmpty() then // there is not a duplicate field name/caption
-                exit(GetDataLakeCompliantName(NameToUse))
-            else
-                exit(StrSubstNo(ConcatNameIdTok, GetDataLakeCompliantName(NameToUse), FieldRef.Number()));
+                CompliantFieldName := GetDataLakeCompliantName(NameToUse);
         end else
-            exit(StrSubstNo(ConcatNameIdTok, GetDataLakeCompliantName(NameToUse), FieldRef.Number()));
+            CompliantFieldName := StrSubstNo(ConcatNameIdTok, GetDataLakeCompliantName(NameToUse), FieldRef.Number());
+
+        OnAfterGetDataLakeCompliantFieldName(FieldRef, CompliantFieldName);
+
+        exit(CompliantFieldName);
     end;
 
     internal procedure GetTableName(TableID: Integer) TableName: Text
@@ -566,6 +571,11 @@ codeunit 11344454 "AZD Util"
 
     [IntegrationEvent(false, false)]
     local procedure OnAfterCreateCsvPayload(RecordRef: RecordRef; FieldIdList: List of [Integer]; AddHeaders: Boolean; Deletes: Boolean; var RecordPayload: Text)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterGetDataLakeCompliantFieldName(FieldRef: FieldRef; var CompliantFieldName: Text)
     begin
     end;
 }
