@@ -274,7 +274,7 @@ table 11344446 "AZD Setup"
         Insert();
     end;
 
-    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Setup", 'r')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Setup", 'R')]
     procedure Exists(): Boolean
     begin
         exit(Rec.Get(GetPrimaryKeyValue()));
