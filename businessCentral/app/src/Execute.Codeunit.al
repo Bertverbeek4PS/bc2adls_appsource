@@ -260,7 +260,6 @@ codeunit 11344442 "AZD Execute"
     var
         ADLSEDeletedRecord: Record "AZD Deleted Record";
         ADLSESetup: Record "AZD Setup";
-        ADLSETable: Record "AZD Table";
         ADLSESeekData: Report "AZD Seek Data";
         ADLSEUtil: Codeunit "AZD Util";
         ADLSEExecution: Codeunit "AZD Execution";
@@ -277,13 +276,6 @@ codeunit 11344442 "AZD Execute"
         SetFilterForDeletes(TableID, DeletedLastEntryNo, ADLSEDeletedRecord);
 
         if ADLSESeekData.FindRecords(ADLSEDeletedRecord) then begin
-            //Addin the number when open mirroring is used
-            if DidUpserts then
-                if (ADLSESetup."Storage Type" = ADLSESetup."Storage Type"::"Open Mirroring") then begin
-                    ADLSETable.Get(TableID);
-                    ADLSETable.ExportFileNumber := ADLSETable.ExportFileNumber + 1;
-                    ADLSETable.Modify(true);
-                end;
             RecordRef.Open(ADLSEDeletedRecord."Table ID");
 
             FixDeletedRecordThatAreInTable(ADLSEDeletedRecord);

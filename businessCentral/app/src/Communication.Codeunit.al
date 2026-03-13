@@ -176,13 +176,11 @@ codeunit 11344440 "AZD Communication"
     local procedure CreateDataBlob(CheckOnly: Boolean) Created: Boolean
     var
         ADLSESetup: Record "AZD Setup";
-        ADLSETable: Record "AZD Table";
         ADLSEUtil: Codeunit "AZD Util";
         ADLSEGen2Util: Codeunit "AZD Gen 2 Util";
         ADLSEExecution: Codeunit "AZD Execution";
         CustomDimension: Dictionary of [Text, Text];
         FileIdentifer: Guid;
-        FileIdentiferTxt: Text;
     begin
         if DataBlobPath <> '' then
             // Microsoft Fabric has a limit on the blob size. Create a new blob before reaching this limit
@@ -201,22 +199,11 @@ codeunit 11344440 "AZD Communication"
                 BlobContentLength := 0;
             end;
 
-        if ADLSESetup.GetStorageType() <> ADLSESetup."Storage Type"::"Open Mirroring" then
-            FileIdentifer := CreateGuid()
-        else begin
-            //https://learn.microsoft.com/en-us/fabric/database/mirrored-database/open-mirroring-landing-zone-format#data-file-and-format-in-the-landing-zone
-            if ADLSETable.Get(TableID) then;
-            if ADLSETable.ExportFileNumber = 0 then begin
-                ADLSETable.ExportFileNumber := 1;
-                ADLSETable.Modify(true);
-            end;
-            FileIdentiferTxt := Format(ADLSETable.ExportFileNumber);
-            FileIdentiferTxt := FileIdentiferTxt.PadLeft(20, '0');
-        end;
+        FileIdentifer := CreateGuid();
 
         if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then begin
-            DataBlobPath := StrSubstNo(FileCsvTempTok, EntityName, FileIdentiferTxt);
-            DataBlobPathComplete := StrSubstNo(FileCsvTok, EntityName, FileIdentiferTxt);
+            DataBlobPath := StrSubstNo(FileCsvTempTok, EntityName, ADLSEUtil.ToText(FileIdentifer));
+            DataBlobPathComplete := StrSubstNo(FileCsvTok, EntityName, ADLSEUtil.ToText(FileIdentifer));
         end else
             DataBlobPath := StrSubstNo(DeltasFileCsvTok, EntityName, ADLSEUtil.ToText(FileIdentifer));
 
@@ -368,9 +355,9 @@ codeunit 11344440 "AZD Communication"
                 end;
             ADLSESetup."Storage Type"::"Microsoft Fabric", ADLSESetup."Storage Type"::"Open Mirroring":
                 begin
-                    if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then begin
+                  if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then begin
                         DataBlobPath := '';
-                        CreateDataBlob();
+                        CreateDataBlob();  
                     end;
                     ADLSEGen2Util.AddBlockToDataBlob(GetBaseUrl() + DataBlobPath, Payload.ToText(), BlobContentLength, ADLSECredentials);
                     BlobContentLength := ADLSEGen2Util.GetBlobContentLength(GetBaseUrl() + DataBlobPath, ADLSECredentials);
@@ -383,10 +370,6 @@ codeunit 11344440 "AZD Communication"
         Payload.Clear();
         LastRecordOnPayloadTimeStamp := 0;
         NumberOfFlushes += 1;
-
-        // increase export file number of the table when open mirroring is used
-        if (ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring") then
-            IncreaseExportFileNumber(TableID);
 
         ADLSE.OnTableExported(TableID, LastFlushedTimeStamp);
         if EmitTelemetry then begin
@@ -496,12 +479,8 @@ codeunit 11344440 "AZD Communication"
         ADLSEExecute.UpdateInProgressTableTimestamp(ADLSETable, Timestamp, Deletes);
     end;
 
-    local procedure IncreaseExportFileNumber(TableIdToUpdate: Integer)
-    begin
-        IncreaseExportFileNumber_InCurrSession(TableIdToUpdate);
-    end;
-
-    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'rm')]
+#if not CLEAN27
+    [Obsolete('ExportFileNumber is no longer used. Open Mirroring now uses GUIDs for file names.', '27.0')]
     procedure IncreaseExportFileNumber_InCurrSession(TableIdToUpdate: Integer)
     var
         ADLSESetup: Record "AZD Setup";
@@ -511,8 +490,9 @@ codeunit 11344440 "AZD Communication"
             ADLSETable.Get(TableIdToUpdate);
             ADLSETable.ExportFileNumber := ADLSETable.ExportFileNumber + 1;
             ADLSETable.Modify(true);
-            Commit(); //Needs to be committed right away to be visible for other sessions
+            Commit();
         end;
     end;
+#endif
 }
 

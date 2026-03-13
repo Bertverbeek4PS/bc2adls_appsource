@@ -73,6 +73,9 @@ page 11344451 "AZD Setup Tables"
                     ApplicationArea = All;
                     Editable = false;
                     ToolTip = 'Specifies last file number used when exporting data from this table.';
+                    Visible = false;
+                    ObsoleteState = Pending;
+                    ObsoleteReason = 'Open Mirroring now uses GUIDs for file names instead of sequential numbering.';
                 }
                 field(LastHartbeat; Rec.GetLastHeartbeat())
                 {
