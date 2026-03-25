@@ -14,7 +14,7 @@ codeunit 11344440 "AZD Communication"
         DataBlobPathComplete: Text;
         DataBlobBlockIDs: List of [Text];
         BlobContentLength: Integer;
-        LastRecordOnPayloadTimeStamp: BigInteger;
+        HighestTimeStampOnPayload: BigInteger;
         Payload: TextBuilder;
         LastFlushedTimeStamp: BigInteger;
         NumberOfFlushes: Integer;
@@ -32,7 +32,7 @@ codeunit 11344440 "AZD Communication"
         SingleRecordTooLargeErr: Label 'A single record payload exceeded the max payload size. Please adjust the payload size or reduce the fields to be exported for the record.';
         DeltasFileCsvTok: Label '/deltas/%1/%2.csv', Comment = '%1: Entity, %2: File identifier guid', Locked = true;
         FileCsvTok: Label '/%1/%2.csv', Comment = '%1: Entity, %2: File identifier guid', Locked = true;
-        FileCsvTempTok: Label '/%1/%2.csv.tmp', Comment = '%1: Entity, %2: File identifier guid', Locked = true;
+        FileCsvTempTok: Label '/%1/_%2.csv.tmp', Comment = '%1: Entity, %2: File identifier guid', Locked = true;
         ExportOfSchemaNotPerformendTxt: Label 'Please export the schema first before trying to export the data.';
         EntitySchemaChangedErr: Label 'The schema of the table %1 has changed. %2', Comment = '%1 = Entity name, %2 = NotAllowedOnSimultaneousExportTxt';
         CdmSchemaChangedErr: Label 'There may have been a change in the tables to export. %1', Comment = '%1 = NotAllowedOnSimultaneousExportTxt';
@@ -287,7 +287,8 @@ codeunit 11344440 "AZD Communication"
         LastTimestampExported := LastFlushedTimeStamp;
 
         Payload.Append(RecordPayLoad);
-        LastRecordOnPayloadTimeStamp := RecordTimeStamp;
+        if RecordTimeStamp > HighestTimeStampOnPayload then
+            HighestTimeStampOnPayload := RecordTimeStamp;
     end;
 
     [TryFunction]
@@ -355,9 +356,9 @@ codeunit 11344440 "AZD Communication"
                 end;
             ADLSESetup."Storage Type"::"Microsoft Fabric", ADLSESetup."Storage Type"::"Open Mirroring":
                 begin
-                  if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then begin
+                    if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then begin
                         DataBlobPath := '';
-                        CreateDataBlob();  
+                        CreateDataBlob();
                     end;
                     ADLSEGen2Util.AddBlockToDataBlob(GetBaseUrl() + DataBlobPath, Payload.ToText(), BlobContentLength, ADLSECredentials);
                     BlobContentLength := ADLSEGen2Util.GetBlobContentLength(GetBaseUrl() + DataBlobPath, ADLSECredentials);
@@ -366,9 +367,9 @@ codeunit 11344440 "AZD Communication"
                 end;
         end;
 
-        LastFlushedTimeStamp := LastRecordOnPayloadTimeStamp;
+        LastFlushedTimeStamp := HighestTimeStampOnPayload;
         Payload.Clear();
-        LastRecordOnPayloadTimeStamp := 0;
+        HighestTimeStampOnPayload := 0;
         NumberOfFlushes += 1;
 
         ADLSE.OnTableExported(TableID, LastFlushedTimeStamp);
