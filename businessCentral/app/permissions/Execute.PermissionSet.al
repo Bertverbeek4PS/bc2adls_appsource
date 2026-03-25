@@ -34,6 +34,7 @@ permissionset 11344438 "AZD - Execute"
                   codeunit "AZD Communication" = X,
                   codeunit "AZD Session Manager" = X,
                   codeunit "AZD Http" = X,
+                  codeunit "AZD Token Cache" = X,
                   codeunit "AZD Gen 2 Util" = X,
                   codeunit "AZD Execute" = X,
                   codeunit "AZD Execution" = X,
