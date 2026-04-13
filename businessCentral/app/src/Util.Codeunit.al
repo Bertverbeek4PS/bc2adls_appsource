@@ -533,6 +533,10 @@ codeunit 11344454 "AZD Util"
         TimestampFieldRef: FieldRef;
         SystemIdFieldRef: FieldRef;
         SystemDateFieldRef: FieldRef;
+        PKFieldRef: FieldRef;
+        PKValues: JsonObject;
+        FieldNoText: Text;
+        FieldNo: Integer;
     begin
         TimestampFieldRef := RecordRef.Field(0);
         TimestampFieldRef.Value(ADLSEDeletedRecord."Deletion Timestamp");
@@ -543,6 +547,63 @@ codeunit 11344454 "AZD Util"
         SystemDateFieldRef.Value(0DT);
         SystemDateFieldRef := RecordRef.Field(RecordRef.SystemModifiedAtNo());
         SystemDateFieldRef.Value(0DT);
+
+        if ADLSEDeletedRecord."Primary Key Values" <> '' then begin
+            PKValues.ReadFrom(ADLSEDeletedRecord."Primary Key Values");
+            foreach FieldNoText in PKValues.Keys() do begin
+                Evaluate(FieldNo, FieldNoText);
+                PKFieldRef := RecordRef.Field(FieldNo);
+                SetFieldRefValueFromText(PKFieldRef, GetTextValueForKeyInJson(PKValues, FieldNoText));
+            end;
+        end;
+    end;
+
+    local procedure SetFieldRefValueFromText(var PKFieldRef: FieldRef; TextValue: Text)
+    var
+        IntValue: Integer;
+        BigIntValue: BigInteger;
+        DecimalValue: Decimal;
+        GuidValue: Guid;
+        DateValue: Date;
+        BoolValue: Boolean;
+    begin
+        case PKFieldRef.Type() of
+            PKFieldRef.Type::Integer:
+                begin
+                    Evaluate(IntValue, TextValue, 9);
+                    PKFieldRef.Value(IntValue);
+                end;
+            PKFieldRef.Type::BigInteger:
+                begin
+                    Evaluate(BigIntValue, TextValue, 9);
+                    PKFieldRef.Value(BigIntValue);
+                end;
+            PKFieldRef.Type::Decimal:
+                begin
+                    Evaluate(DecimalValue, TextValue, 9);
+                    PKFieldRef.Value(DecimalValue);
+                end;
+            PKFieldRef.Type::Boolean:
+                begin
+                    Evaluate(BoolValue, TextValue, 9);
+                    PKFieldRef.Value(BoolValue);
+                end;
+            PKFieldRef.Type::Guid:
+                begin
+                    Evaluate(GuidValue, TextValue);
+                    PKFieldRef.Value(GuidValue);
+                end;
+            PKFieldRef.Type::Date:
+                begin
+                    Evaluate(DateValue, TextValue, 9);
+                    PKFieldRef.Value(DateValue);
+                end;
+            PKFieldRef.Type::Code,
+            PKFieldRef.Type::Text:
+                PKFieldRef.Value(TextValue);
+            else
+                PKFieldRef.Value(TextValue);
+        end;
     end;
 
     internal procedure GetTextValueForKeyInJson(Object: JsonObject; "Key": Text): Text

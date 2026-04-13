@@ -216,6 +216,18 @@ table 11344446 "AZD Setup"
             ToolTip = 'Specifies if you want to export the closing date column in G/L Entries.';
             InitValue = false;
         }
+        field(85; "Use Primary Key for Mirroring"; Boolean)
+        {
+            Caption = 'Use Primary Key for Mirroring';
+            ToolTip = 'Specifies if the primary key fields of tables should be used as key columns in the Open Mirroring metadata instead of SystemId. Enable this if records are recreated with new SystemIds causing duplicates in the mirrored database.';
+            InitValue = false;
+
+            trigger OnValidate()
+            begin
+                if Rec."Schema Exported On" <> 0DT then
+                    Error(ErrorInfo.Create(SchemaAlreadyExportedErr, true));
+            end;
+        }
         field(105; "Use Certificate Authentication"; Boolean)
         {
             Caption = 'Use Certificate Authentication';

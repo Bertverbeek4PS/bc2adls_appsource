@@ -182,6 +182,11 @@ page 11344447 "AZD Setup"
                 {
                     Importance = Additional;
                 }
+                field("Use Primary Key for Mirroring"; Rec."Use Primary Key for Mirroring")
+                {
+                    Importance = Additional;
+                    Visible = FabricOpenMirroring;
+                }
             }
 
             group(DataFormatSettings)
