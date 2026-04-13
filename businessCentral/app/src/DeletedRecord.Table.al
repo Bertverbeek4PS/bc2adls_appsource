@@ -72,7 +72,6 @@ table 11344438 "AZD Deleted Record"
         PKValues: JsonObject;
         PKText: Text;
         i: Integer;
-        PrimaryKeyValuesTooLongErr: Label 'Primary key values for table %1 exceed the maximum supported length of %2 characters.', Comment = '%1 = Table number, %2 = Max length';
     begin
         if RecordRef.IsTemporary() then
             exit;
@@ -111,9 +110,8 @@ table 11344438 "AZD Deleted Record"
                 PKValues.Add(Format(PKFieldRef.Number()), Format(PKFieldRef.Value(), 0, 9));
             end;
             PKValues.WriteTo(PKText);
-            if StrLen(PKText) > MaxStrLen("Primary Key Values") then
-                Error(PrimaryKeyValuesTooLongErr, RecordRef.Number(), MaxStrLen("Primary Key Values"));
-            "Primary Key Values" := PKText;
+            if StrLen(PKText) <= MaxStrLen("Primary Key Values") then
+                "Primary Key Values" := PKText;
         end;
 
         Insert();

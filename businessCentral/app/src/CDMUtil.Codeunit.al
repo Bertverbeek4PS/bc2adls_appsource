@@ -81,7 +81,7 @@ codeunit 11344438 "AZD CDM Util" // Refer Common Data Model https://docs.microso
             end;
         end else begin
             // Default: use SystemId as key column
-            SystemIdFieldRef := RecordRef.Field(2000000000);
+            SystemIdFieldRef := RecordRef.Field(RecordRef.SystemIdNo());
             Imports.Add(ADLSEUtil.GetDataLakeCompliantFieldName(SystemIdFieldRef));
         end;
         if ADLSEUtil.IsTablePerCompany(TableID) then

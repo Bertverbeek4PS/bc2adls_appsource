@@ -558,7 +558,7 @@ codeunit 11344454 "AZD Util"
                         end;
     end;
 
-    local procedure SetFieldRefValueFromText(var PKFieldRef: FieldRef; TextValue: Text)
+    local procedure SetFieldRefValueFromText(var PKFieldRef: FieldRef; TextValue: Text): Boolean
     var
         IntValue: Integer;
         BigIntValue: BigInteger;
@@ -574,56 +574,66 @@ codeunit 11344454 "AZD Util"
             PKFieldRef.Type::Integer,
             PKFieldRef.Type::Option:
                 begin
-                    Evaluate(IntValue, TextValue, 9);
+                    if not Evaluate(IntValue, TextValue, 9) then
+                        exit(false);
                     PKFieldRef.Value(IntValue);
                 end;
             PKFieldRef.Type::BigInteger,
             PKFieldRef.Type::Duration:
                 begin
-                    Evaluate(BigIntValue, TextValue, 9);
+                    if not Evaluate(BigIntValue, TextValue, 9) then
+                        exit(false);
                     PKFieldRef.Value(BigIntValue);
                 end;
             PKFieldRef.Type::Decimal:
                 begin
-                    Evaluate(DecimalValue, TextValue, 9);
+                    if not Evaluate(DecimalValue, TextValue, 9) then
+                        exit(false);
                     PKFieldRef.Value(DecimalValue);
                 end;
             PKFieldRef.Type::Boolean:
                 begin
-                    Evaluate(BoolValue, TextValue, 9);
+                    if not Evaluate(BoolValue, TextValue, 9) then
+                        exit(false);
                     PKFieldRef.Value(BoolValue);
                 end;
             PKFieldRef.Type::Guid:
                 begin
-                    Evaluate(GuidValue, TextValue);
+                    if not Evaluate(GuidValue, TextValue) then
+                        exit(false);
                     PKFieldRef.Value(GuidValue);
                 end;
             PKFieldRef.Type::Date:
                 begin
-                    Evaluate(DateValue, TextValue, 9);
+                    if not Evaluate(DateValue, TextValue, 9) then
+                        exit(false);
                     PKFieldRef.Value(DateValue);
                 end;
             PKFieldRef.Type::DateTime:
                 begin
-                    Evaluate(DateTimeValue, TextValue, 9);
+                    if not Evaluate(DateTimeValue, TextValue, 9) then
+                        exit(false);
                     PKFieldRef.Value(DateTimeValue);
                 end;
             PKFieldRef.Type::Time:
                 begin
-                    Evaluate(TimeValue, TextValue, 9);
+                    if not Evaluate(TimeValue, TextValue, 9) then
+                        exit(false);
                     PKFieldRef.Value(TimeValue);
                 end;
             PKFieldRef.Type::DateFormula:
                 begin
-                    Evaluate(DateFormulaValue, TextValue, 9);
+                    if not Evaluate(DateFormulaValue, TextValue, 9) then
+                        exit(false);
                     PKFieldRef.Value(DateFormulaValue);
                 end;
             PKFieldRef.Type::Code,
             PKFieldRef.Type::Text:
                 PKFieldRef.Value(TextValue);
             else
-                PKFieldRef.Value(TextValue);
+                exit(false);
         end;
+        exit(true);
     end;
 
     internal procedure GetTextValueForKeyInJson(Object: JsonObject; "Key": Text): Text
