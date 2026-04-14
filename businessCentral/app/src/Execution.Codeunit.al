@@ -42,16 +42,19 @@ codeunit 11344443 "AZD Execution"
         ADLSECommunication: Codeunit "AZD Communication";
         ADLSESessionManager: Codeunit "AZD Session Manager";
         ADLSEExternalEvents: Codeunit "AZD External Events";
+        ADLSEUtil: Codeunit "AZD Util";
         Counter: Integer;
         Started: Integer;
+        HasSyncCompanyRecord: Boolean;
     begin
         ADLSESetup.CheckSetup(ADLSESetupRec);
         EmitTelemetry := ADLSESetupRec."Emit telemetry";
         ADLSECurrentSession.CleanupSessions();
 
-        if AZDSyncCompanies.Get(CompanyName()) then begin// Possible Multi Company export Create session So that is can be stopped.
+        HasSyncCompanyRecord := AZDSyncCompanies.Get(CompanyName());
+        if HasSyncCompanyRecord then begin // Possible Multi Company export Create session So that is can be stopped.
             ADLSECurrentSession.Start(AZDSyncCompanies.RecordId.TableNo);
-            Commit(); //To make sure session is stored before starting exports
+            Commit(); // To make sure session is stored before starting exports
         end;
 
         if ADLSESetupRec.GetStorageType() = ADLSESetupRec."Storage Type"::"Azure Data Lake" then //Because Fabric doesn't have do create a container
@@ -72,6 +75,11 @@ codeunit 11344443 "AZD Execution"
                     if ADLSESessionManager.StartExport(ADLSETable."Table ID", EmitTelemetry) then
                         Started += 1;
             until ADLSETable.Next() = 0;
+
+        if HasSyncCompanyRecord then begin
+            Commit(); // End the read-only transaction before deleting
+            ADLSECurrentSession.Stop(Database::"AZD Sync Companies", EmitTelemetry, ADLSEUtil.GetTableCaption(Database::"AZD Sync Companies"));
+        end;
 
         Message(ExportStartedTxt, Started, Counter);
         if EmitTelemetry then
