@@ -84,6 +84,8 @@ codeunit 11344443 "AZD Execution"
         Message(ExportStartedTxt, Started, Counter);
         if EmitTelemetry then
             Log('ADLSE-001', StrSubstNo(ExportStartedTxt, Started, Counter), Verbosity::Normal);
+
+        OnAfterStartExport(ADLSETable);
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Setup", 'r')]
@@ -294,5 +296,10 @@ codeunit 11344443 "AZD Execution"
     local procedure OnBeforeScheduleExport(var Handled: Boolean)
     begin
 
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterStartExport(var ADLSETable: Record "AZD Table")
+    begin
     end;
 }

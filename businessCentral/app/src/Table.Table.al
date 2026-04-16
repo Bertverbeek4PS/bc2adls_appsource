@@ -8,7 +8,6 @@ using System.Reflection;
 table 11344450 "AZD Table"
 #pragma warning restore
 {
-    Access = Internal;
     Caption = 'ADL Table';
     DataClassification = CustomerContent;
     DataPerCompany = false;
@@ -23,12 +22,14 @@ table 11344450 "AZD Table"
             AllowInCustomizations = AsReadOnly;
             Editable = false;
             Caption = 'Table ID';
+            Access = Internal;
         }
         field(3; Enabled; Boolean)
         {
             Editable = false;
             Caption = 'Enabled';
             ToolTip = 'Specifies the state of the table. Set this checkmark to export this table, otherwise not.';
+            Access = Internal;
 
             trigger OnValidate()
             var
@@ -50,6 +51,7 @@ table 11344450 "AZD Table"
             Caption = 'Export Category';
             TableRelation = "AZD Export Category Table";
             ToolTip = 'Specifies the Export Category which can be linked to tables which are part of the export to Azure Datalake. The Category can be used to schedule the export.';
+            Access = Internal;
         }
         field(15; ExportFileNumber; Integer)
         {
@@ -57,11 +59,13 @@ table 11344450 "AZD Table"
             AllowInCustomizations = AsReadOnly;
             ObsoleteState = Pending;
             ObsoleteReason = 'Open Mirroring now uses GUIDs for file names instead of sequential numbering.';
+            Access = Internal;
         }
         field(17; "Initial Load Start Date"; Date)
         {
             Caption = 'Initial Load Start Date';
             ToolTip = 'Specifies the starting date for the initial data load. Only records with SystemModifiedAt >= this date will be exported on the first export. Leave blank to export all historical data.';
+            Access = Internal;
         }
     }
 
@@ -142,7 +146,7 @@ table 11344450 "AZD Table"
         InvalidFieldConfiguredMsg: Label 'The following fields have been incorrectly enabled for exports in the table %1: %2', Comment = '%1 = table name; %2 = List of invalid field names';
         WarnOfSchemaChangeQst: Label 'Data may have been exported from this table before. Changing the export schema now may cause unexpected side- effects. You may reset the table first so all the data shall be exported afresh. Do you still wish to continue?';
 
-    procedure FieldsChosen(): Integer
+    internal procedure FieldsChosen(): Integer
     var
         ADLSEField: Record "AZD Field";
     begin
@@ -152,7 +156,7 @@ table 11344450 "AZD Table"
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'i')]
-    procedure Add(TableID: Integer)
+    internal procedure Add(TableID: Integer)
     var
         ADLSEExternalEvents: Codeunit "AZD External Events";
     begin
@@ -191,7 +195,7 @@ table 11344450 "AZD Table"
             Error(TableNotNormalErr, TableCaption);
     end;
 
-    procedure CheckNotExporting()
+    internal procedure CheckNotExporting()
     var
         ADLSEUtil: Codeunit "AZD Util";
     begin
@@ -211,14 +215,14 @@ table 11344450 "AZD Table"
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'rm')]
-    procedure ResetSelected()
+    internal procedure ResetSelected()
     begin
         ResetSelected(false);
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'rm')]
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table Last Timestamp", 'rm')]
-    procedure ResetSelected(AllCompanies: Boolean)
+    internal procedure ResetSelected(AllCompanies: Boolean)
     var
         ADLSEDeletedRecord: Record "AZD Deleted Record";
         ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
@@ -289,7 +293,7 @@ table 11344450 "AZD Table"
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'r')]
-    procedure ListInvalidFieldsBeingExported() FieldList: List of [Text]
+    internal procedure ListInvalidFieldsBeingExported() FieldList: List of [Text]
     var
         ADLSEField: Record "AZD Field";
         ADLSESetup: Codeunit "AZD Setup";
@@ -317,7 +321,7 @@ table 11344450 "AZD Table"
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'rm')]
-    procedure AddAllFields()
+    internal procedure AddAllFields()
     var
         ADLSEFields: Record "AZD Field";
     begin
@@ -333,7 +337,7 @@ table 11344450 "AZD Table"
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table Last Timestamp", 'r')]
-    procedure GetLastHeartbeat(): DateTime
+    internal procedure GetLastHeartbeat(): DateTime
     var
         ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
     begin
@@ -343,7 +347,7 @@ table 11344450 "AZD Table"
         exit(ADLSETableLastTimestamp.SystemModifiedAt)
     end;
 
-    procedure GetActiveSessionId(): Integer
+    internal procedure GetActiveSessionId(): Integer
     var
         ExpSessionId: Integer;
     begin
@@ -355,7 +359,7 @@ table 11344450 "AZD Table"
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'r')]
-    procedure GetCurrentSessionId(): Integer
+    internal procedure GetCurrentSessionId(): Integer
     var
         CurrentSession: Record "AZD Current Session";
     begin
@@ -367,7 +371,7 @@ table 11344450 "AZD Table"
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'd')]
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Run", 'm')]
-    procedure StopActiveSession()
+    internal procedure StopActiveSession()
     var
         CurrentSession: Record "AZD Current Session";
         Run: Record "AZD Run";
@@ -439,7 +443,7 @@ table 11344450 "AZD Table"
         end;
     end;
 
-    procedure DoChooseFields()
+    internal procedure DoChooseFields()
     var
         ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
         ADLSESetup: Codeunit "AZD Setup";
@@ -450,7 +454,7 @@ table 11344450 "AZD Table"
         ADLSESetup.ChooseFieldsToExport(Rec);
     end;
 
-    procedure IssueNotificationIfInvalidFieldsConfiguredToBeExported()
+    internal procedure IssueNotificationIfInvalidFieldsConfiguredToBeExported()
     var
         ADLSEUtil: Codeunit "AZD Util";
         InvalidFieldNotification: Notification;
