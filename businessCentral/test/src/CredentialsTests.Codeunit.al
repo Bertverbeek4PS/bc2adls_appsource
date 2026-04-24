@@ -181,6 +181,60 @@ codeunit 85573 "AZD Credentials Tests"
         LibraryAssert.AreEqual(TestSecret, ADLSECredentials2.GetClientSecret(), 'Client secret should persist');
     end;
 
+    [Test]
+    procedure TestSetAndGetClientCertificate()
+    var
+        ADLSECredentials: Codeunit "AZD Credentials";
+        TestCertificate: Text;
+    begin
+        // [SCENARIO] SetClientCertificate stores and GetClientCertificate retrieves the certificate
+        // [GIVEN] A credentials instance
+        Initialize();
+        TestCertificate := 'test-certificate-base64-' + Format(CreateGuid());
+
+        // [WHEN] SetClientCertificate is called followed by Init and GetClientCertificate
+        ADLSECredentials.SetClientCertificate(TestCertificate);
+        ADLSECredentials.Init();
+
+        // [THEN] The stored value is retrieved
+        LibraryAssert.AreEqual(TestCertificate, ADLSECredentials.GetClientCertificate(), 'Certificate should match');
+    end;
+
+    [Test]
+    procedure TestIsClientCertificateSet_WithValue_ReturnsTrue()
+    var
+        ADLSECredentials: Codeunit "AZD Credentials";
+    begin
+        // [SCENARIO] IsClientCertificateSet returns true when certificate is set
+        // [GIVEN] A credentials instance with a certificate set
+        Initialize();
+        ADLSECredentials.SetClientCertificate('test-cert-' + Format(CreateGuid()));
+        ADLSECredentials.Init();
+
+        // [WHEN] IsClientCertificateSet is called
+        // [THEN] Returns true
+        LibraryAssert.IsTrue(ADLSECredentials.IsClientCertificateSet(), 'IsClientCertificateSet should return true');
+    end;
+
+    [Test]
+    procedure TestSetAndGetClientCertificatePassword()
+    var
+        ADLSECredentials: Codeunit "AZD Credentials";
+        TestPassword: Text;
+    begin
+        // [SCENARIO] SetClientCertificatePassword stores and GetClientCertificatePassword retrieves the password
+        // [GIVEN] A credentials instance
+        Initialize();
+        TestPassword := 'test-cert-password-' + Format(CreateGuid());
+
+        // [WHEN] SetClientCertificatePassword is called followed by Init and GetClientCertificatePassword
+        ADLSECredentials.SetClientCertificatePassword(TestPassword);
+        ADLSECredentials.Init();
+
+        // [THEN] The stored value is retrieved
+        LibraryAssert.AreEqual(TestPassword, ADLSECredentials.GetClientCertificatePassword(), 'Certificate password should match');
+    end;
+
     local procedure Initialize()
     var
         LibraryTestInitialize: Codeunit "Library - Test Initialize";
