@@ -32,14 +32,14 @@ codeunit 85561 "AZD Library - bc2adls"
 
     procedure InsertTable(): Integer
     var
-        AllObjWithCaption: Record AllObjWithCaption;
+        TableMetadata: Record "Table Metadata";
         RandonInt: Integer;
     begin
-        AllObjWithCaption.SetRange("Object Type", AllObjWithCaption."Object Type"::Table);
-        RandonInt := LibraryRandom.RandIntInRange(1, AllObjWithCaption.Count());
-        AllObjWithCaption.next(RandonInt);
-        ADLSETable.Add(AllObjWithCaption."Object ID");
-        exit(AllObjWithCaption."Object ID");
+        TableMetadata.SetRange(TableType, TableMetadata.TableType::Normal);
+        RandonInt := LibraryRandom.RandIntInRange(1, TableMetadata.Count());
+        TableMetadata.Next(RandonInt);
+        ADLSETable.Add(TableMetadata.ID);
+        exit(TableMetadata.ID);
     end;
 
     procedure GetRandomTable(): Record "AZD Table"
