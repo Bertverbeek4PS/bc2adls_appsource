@@ -33,6 +33,11 @@ table 11344438 "AZD Deleted Record"
             Editable = false;
             Caption = 'Deletion Timestamp';
         }
+        field(5; "Primary Key Values"; Text[2048])
+        {
+            Editable = false;
+            Caption = 'Primary Key Values';
+        }
     }
 
     keys
@@ -62,6 +67,11 @@ table 11344438 "AZD Deleted Record"
         ADLSEUtil: Codeunit "AZD Util";
         SystemIdFieldRef: FieldRef;
         TimestampFieldRef: FieldRef;
+        PKFieldRef: FieldRef;
+        KeyRef: KeyRef;
+        PKValues: JsonObject;
+        PKText: Text;
+        i: Integer;
     begin
         if RecordRef.IsTemporary() then
             exit;
@@ -73,11 +83,11 @@ table 11344438 "AZD Deleted Record"
         if IsNullGuid(SystemIdFieldRef.Value()) then
             exit;
 
+        ADLSESetup.GetSingleton();
+
         //Handle deletes in table on tenant level and deleted in another company
-        if not ADLSEUtil.IsTablePerCompany(RecordRef.Number()) then begin
-            ADLSESetup.GetSingleton();
+        if not ADLSEUtil.IsTablePerCompany(RecordRef.Number()) then
             ChangeCompany(ADLSESetup."Export Company Database Tables");
-        end;
 
         // Do not log a deletion if its for a record that is created after the last sync
         // TODO: This requires tracking the SystemModifiedAt of the last time stamp 
@@ -92,6 +102,18 @@ table 11344438 "AZD Deleted Record"
         TimestampFieldRef := RecordRef.Field(0);
         "Deletion Timestamp" := TimestampFieldRef.Value();
         "Deletion Timestamp" += 1; // to mark an update that is greater than the last time stamp on this record
+
+        if ADLSESetup."Use Primary Key for Mirroring" then begin
+            KeyRef := RecordRef.KeyIndex(1);
+            for i := 1 to KeyRef.FieldCount() do begin
+                PKFieldRef := KeyRef.FieldIndex(i);
+                PKValues.Add(Format(PKFieldRef.Number()), Format(PKFieldRef.Value(), 0, 9));
+            end;
+            PKValues.WriteTo(PKText);
+            if StrLen(PKText) <= MaxStrLen("Primary Key Values") then
+                "Primary Key Values" := PKText;
+        end;
+
         Insert();
     end;
 }

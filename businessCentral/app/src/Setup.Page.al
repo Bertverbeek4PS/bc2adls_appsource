@@ -182,6 +182,24 @@ page 11344447 "AZD Setup"
                 {
                     Importance = Additional;
                 }
+                field("Use Primary Key for Mirroring"; Rec."Use Primary Key for Mirroring")
+                {
+                    Importance = Additional;
+                    Editable = FabricOpenMirroring;
+
+                    trigger OnValidate()
+                    var
+                        ADLSETable: Record "AZD Table";
+                    begin
+                        if not Confirm(UsePrimaryKeyForMirroringConfirmQst) then begin
+                            Rec."Use Primary Key for Mirroring" := xRec."Use Primary Key for Mirroring";
+                            exit;
+                        end;
+                        Rec."Schema Exported On" := 0DT;
+                        ADLSETable.Reset();
+                        ADLSETable.ResetSelected();
+                    end;
+                }
             }
 
             group(DataFormatSettings)
@@ -498,6 +516,7 @@ page 11344447 "AZD Setup"
         OldLogsExist: Boolean;
         FailureNotificationID: Guid;
         ExportFailureNotificationMsg: Label 'Data from one or more tables failed to export on the last run. Please check the tables below to see the error(s).';
+        UsePrimaryKeyForMirroringConfirmQst: Label 'Changing this setting requires clearing the exported schema and resetting all tables. All data will be re-exported from scratch on the next run. Do you want to continue?';
 
     local procedure UpdateAuthVisibility()
     begin
