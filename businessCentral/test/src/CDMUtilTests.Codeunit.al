@@ -405,9 +405,9 @@ codeunit 85569 "AZD CDM Util Tests"
     [Test]
     procedure TestCreateEntityContent_OpenMirroring_DefaultUsesSystemId()
     var
-        ADLSETable: Record "ADLSE Table";
-        ADLSECDMUtil: Codeunit "ADLSE CDM Util";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSETable: Record "AZD Table";
+        ADLSECDMUtil: Codeunit "AZD CDM Util";
+        ADLSEUtil: Codeunit "AZD Util";
         RecordRef: RecordRef;
         SystemIdFieldRef: FieldRef;
         EntityContent: JsonObject;
@@ -443,10 +443,10 @@ codeunit 85569 "AZD CDM Util Tests"
     [Test]
     procedure TestCreateEntityContent_OpenMirroring_PKMirroringUsesPrimaryKey()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETable: Record "ADLSE Table";
-        ADLSECDMUtil: Codeunit "ADLSE CDM Util";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSESetup: Record "AZD Setup";
+        ADLSETable: Record "AZD Table";
+        ADLSECDMUtil: Codeunit "AZD CDM Util";
+        ADLSEUtil: Codeunit "AZD Util";
         RecordRef: RecordRef;
         KeyRef: KeyRef;
         SystemIdFieldRef: FieldRef;
@@ -500,9 +500,9 @@ codeunit 85569 "AZD CDM Util Tests"
     [Test]
     procedure TestCreateEntityContent_OpenMirroring_PKMirroringIncludesCompanyForPerCompanyTable()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETable: Record "ADLSE Table";
-        ADLSECDMUtil: Codeunit "ADLSE CDM Util";
+        ADLSESetup: Record "AZD Setup";
+        ADLSETable: Record "AZD Table";
+        ADLSECDMUtil: Codeunit "AZD CDM Util";
         EntityContent: JsonObject;
         Token: JsonToken;
         KeyColumns: JsonArray;

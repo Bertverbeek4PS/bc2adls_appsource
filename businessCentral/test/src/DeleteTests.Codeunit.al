@@ -123,11 +123,11 @@ codeunit 85563 "AZD Delete Tests"
     [Test]
     procedure DeleteARecordWithPKMirroringStoresPrimaryKeyValues()
     var
-        ADLSESetup: Record "ADLSE Setup";
-        ADLSETableLastTimestamp: Record "ADLSE Table Last Timestamp";
+        ADLSESetup: Record "AZD Setup";
+        ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
         PaymentTerms: Record "Payment Terms";
-        ADLSEDeletedRecord: Record "ADLSE Deleted Record";
-        ADLSEUtil: Codeunit "ADLSE Util";
+        ADLSEDeletedRecord: Record "AZD Deleted Record";
+        ADLSEUtil: Codeunit "AZD Util";
         RecordRef: RecordRef;
         PKFieldRef: FieldRef;
         PaymentTermGuid: Guid;

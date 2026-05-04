@@ -189,7 +189,7 @@ page 11344447 "AZD Setup"
 
                     trigger OnValidate()
                     var
-                        ADLSETable: Record "ADLSE Table";
+                        ADLSETable: Record "AZD Table";
                     begin
                         if not Confirm(UsePrimaryKeyForMirroringConfirmQst) then begin
                             Rec."Use Primary Key for Mirroring" := xRec."Use Primary Key for Mirroring";
