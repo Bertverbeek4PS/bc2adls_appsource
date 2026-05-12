@@ -23,6 +23,7 @@ codeunit 11344440 "AZD Communication"
         DefaultContainerName: Text;
         MaxSizeOfPayloadMiB: Integer;
         EmitTelemetry: Boolean;
+        IsFullExport: Boolean;
         DeltaCdmManifestNameTxt: Label 'deltas.manifest.cdm.json', Locked = true;
         DataCdmManifestNameTxt: Label 'data.manifest.cdm.json', Locked = true;
         EntityManifestNameTemplateTxt: Label '%1.cdm.json', Locked = true, Comment = '%1 = Entity name';
@@ -31,6 +32,8 @@ codeunit 11344440 "AZD Communication"
         CannotAddedMoreBlocksErr: Label 'The number of blocks that can be added to the blob has reached its maximum limit.';
         SingleRecordTooLargeErr: Label 'A single record payload exceeded the max payload size. Please adjust the payload size or reduce the fields to be exported for the record.';
         DeltasFileCsvTok: Label '/deltas/%1/%2.csv', Comment = '%1: Entity, %2: File identifier guid', Locked = true;
+        DeltasFileCsvFullTok: Label '/deltas/%1/%2_full.csv', Comment = '%1: Entity, %2: File identifier guid', Locked = true;
+        DeltasFileCsvIncrementalTok: Label '/deltas/%1/%2_incremental.csv', Comment = '%1: Entity, %2: File identifier guid', Locked = true;
         FileCsvTok: Label '/%1/%2.csv', Comment = '%1: Entity, %2: File identifier guid', Locked = true;
         FileCsvTempTok: Label '/%1/_%2.csv.tmp', Comment = '%1: Entity, %2: File identifier guid', Locked = true;
         ExportOfSchemaNotPerformendTxt: Label 'Please export the schema first before trying to export the data.';
@@ -88,6 +91,7 @@ codeunit 11344440 "AZD Communication"
         EntityName := ADLSEUtil.GetDataLakeCompliantTableName(TableID);
 
         LastFlushedTimeStamp := LastFlushedTimeStampValue;
+        IsFullExport := LastFlushedTimeStampValue = 0;
         ADLSESetup.GetSingleton();
         MaxSizeOfPayloadMiB := ADLSESetup.MaxPayloadSizeMiB;
         EmitTelemetry := EmitTelemetryValue;
@@ -205,7 +209,15 @@ codeunit 11344440 "AZD Communication"
             DataBlobPath := StrSubstNo(FileCsvTempTok, EntityName, ADLSEUtil.ToText(FileIdentifer));
             DataBlobPathComplete := StrSubstNo(FileCsvTok, EntityName, ADLSEUtil.ToText(FileIdentifer));
         end else
-            DataBlobPath := StrSubstNo(DeltasFileCsvTok, EntityName, ADLSEUtil.ToText(FileIdentifer));
+            if (ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Azure Data Lake")
+                and ADLSESetup."Distinguish Full Incremental"
+            then
+                if IsFullExport then
+                    DataBlobPath := StrSubstNo(DeltasFileCsvFullTok, EntityName, ADLSEUtil.ToText(FileIdentifer))
+                else
+                    DataBlobPath := StrSubstNo(DeltasFileCsvIncrementalTok, EntityName, ADLSEUtil.ToText(FileIdentifer))
+            else
+                DataBlobPath := StrSubstNo(DeltasFileCsvTok, EntityName, ADLSEUtil.ToText(FileIdentifer));
 
         if not CheckOnly then
             ADLSEGen2Util.CreateDataBlob(GetBaseUrl() + DataBlobPath, ADLSECredentials);

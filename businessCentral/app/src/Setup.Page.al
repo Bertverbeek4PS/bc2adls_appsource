@@ -200,6 +200,11 @@ page 11344447 "AZD Setup"
                         ADLSETable.ResetSelected();
                     end;
                 }
+                field("Distinguish Full Incremental"; Rec."Distinguish Full Incremental")
+                {
+                    Importance = Additional;
+                    Editable = AzureDataLake;
+                }
             }
 
             group(DataFormatSettings)
