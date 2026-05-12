@@ -92,8 +92,29 @@ table 11344446 "AZD Setup"
 
             trigger OnValidate()
             begin
-                if Rec."Storage Type" = Rec."Storage Type"::"Open Mirroring" then
+                if Rec."Storage Type" = "ADLSE Storage Type"::"Open Mirroring" then
                     Rec."Delete Table" := true;
+                case Rec."Storage Type" of
+                    "ADLSE Storage Type"::"Azure Data Lake":
+                        begin
+                            Rec.Workspace := '';
+                            Rec.Lakehouse := '';
+                            Rec.LandingZone := '';
+                        end;
+                    "ADLSE Storage Type"::"Microsoft Fabric":
+                        begin
+                            Rec.LandingZone := '';
+                            Rec.Container := '';
+                            Rec."Account Name" := '';
+                        end;
+                    "ADLSE Storage Type"::"Open Mirroring":
+                        begin
+                            Rec.Workspace := '';
+                            Rec.Lakehouse := '';
+                            Rec.Container := '';
+                            Rec."Account Name" := '';
+                        end;
+                end;
             end;
         }
 
@@ -105,6 +126,8 @@ table 11344446 "AZD Setup"
             var
                 ValidGuid: Guid;
             begin
+                if Rec."Storage Type" = "ADLSE Storage Type"::"Open Mirroring" then
+                    exit;
                 if not Evaluate(ValidGuid, Rec.Workspace) then
                     if (StrLen(Rec.Workspace) < 3) or (StrLen(Rec.Workspace) > 24)
                         or TextCharactersOtherThan(Rec.Workspace, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_')
@@ -120,6 +143,8 @@ table 11344446 "AZD Setup"
             var
                 ValidGuid: Guid;
             begin
+                if Rec."Storage Type" = "ADLSE Storage Type"::"Open Mirroring" then
+                    exit;
                 if not Evaluate(ValidGuid, Rec.Lakehouse) then
                     if (StrLen(Rec.Lakehouse) < 3) or (StrLen(Rec.Lakehouse) > 24)
                         or TextCharactersOtherThan(Rec.Lakehouse, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_')
