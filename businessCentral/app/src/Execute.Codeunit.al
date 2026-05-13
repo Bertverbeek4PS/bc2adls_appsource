@@ -4,7 +4,6 @@ namespace bc2adls;
 
 codeunit 11344442 "AZD Execute"
 {
-    Access = Internal;
     TableNo = "AZD Table";
     Permissions = tabledata "AZD Table" = rm;
 
@@ -128,7 +127,7 @@ codeunit 11344442 "AZD Execute"
         ExportTableDeletes(TableID, ADLSECommunicationDeletions, DeletedLastEntryNo, DidUpserts);
     end;
 
-    procedure UpdatedRecordsExist(TableID: Integer; UpdatedLastTimeStamp: BigInteger): Boolean
+    internal procedure UpdatedRecordsExist(TableID: Integer; UpdatedLastTimeStamp: BigInteger): Boolean
     var
         ADLSESeekData: Report "AZD Seek Data";
         RecordRef: RecordRef;
@@ -239,7 +238,7 @@ codeunit 11344442 "AZD Execute"
             ADLSEExecution.Log('ADLSE-009', 'Updated records exported', Verbosity::Normal);
     end;
 
-    procedure DeletedRecordsExist(TableID: Integer; DeletedLastEntryNo: BigInteger): Boolean
+    internal procedure DeletedRecordsExist(TableID: Integer; DeletedLastEntryNo: BigInteger): Boolean
     var
         ADLSEDeletedRecord: Record "AZD Deleted Record";
         ADLSESeekData: Report "AZD Seek Data";
@@ -309,7 +308,7 @@ codeunit 11344442 "AZD Execute"
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Deleted Record", 'rd')]
-    procedure FixDeletedRecordThatAreInTable(var ADLSEDeletedRecord: Record "AZD Deleted Record")
+    internal procedure FixDeletedRecordThatAreInTable(var ADLSEDeletedRecord: Record "AZD Deleted Record")
     var
         RecordRef: RecordRef;
     begin
@@ -329,7 +328,7 @@ codeunit 11344442 "AZD Execute"
     end;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'r')]
-    procedure CreateFieldListForTable(TableID: Integer) FieldIdList: List of [Integer]
+    internal procedure CreateFieldListForTable(TableID: Integer) FieldIdList: List of [Integer]
     var
         ADLSEField: Record "AZD Field";
         ADLSEUtil: Codeunit "AZD Util";
@@ -382,9 +381,11 @@ codeunit 11344442 "AZD Execute"
             if EmitTelemetry then
                 ADLSEExecution.Log('ADLSE-041', 'All exports are finished', Verbosity::Normal);
         end;
+
+        OnAfterSetStateFinished(ADLSETable, TableCaption);
     end;
 
-    procedure UpdateInProgressTableTimestamp(var Rec: Record "AZD Table"; LastTimestamp: BigInteger; Deletes: Boolean)
+    internal procedure UpdateInProgressTableTimestamp(var Rec: Record "AZD Table"; LastTimestamp: BigInteger; Deletes: Boolean)
     var
         ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
         ADLSEExecution: Codeunit "AZD Execution";
@@ -421,7 +422,7 @@ codeunit 11344442 "AZD Execute"
         Commit(); // to save the last time stamps into the database.
     end;
 
-    procedure ExportSchema(tableId: Integer)
+    internal procedure ExportSchema(tableId: Integer)
     var
         ADLSESetup: Record "AZD Setup";
         ADLSETableLastTimestamp: Record "AZD Table Last Timestamp";
@@ -462,6 +463,11 @@ codeunit 11344442 "AZD Execute"
 
         ADLSECommunication.CreateEntityContent();
         ADLSECommunication.UpdateCdmJsons(EntityJsonNeedsUpdate, ManifestJsonsNeedsUpdate);
+    end;
+
+    [IntegrationEvent(false, false)]
+    internal procedure OnAfterSetStateFinished(var ADLSETable: Record "AZD Table"; TableCaption: Text)
+    begin
     end;
 
 }
