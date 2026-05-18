@@ -239,10 +239,6 @@ table 11344450 "AZD Table"
     begin
         if Rec.FindSet(true) then
             repeat
-                if not Rec.Enabled then begin
-                    Rec.Enabled := true;
-                    Rec.Modify(true);
-                end;
                 ADLSESetup.GetSingleton();
 
                 if not AllCompanies then begin
@@ -270,8 +266,6 @@ table 11344450 "AZD Table"
 
                 if (ADLSESetup."Delete Table") then
                     ADLSECommunication.ResetTableExport(Rec."Table ID", AllCompanies);
-
-                Rec.Modify(true);
 
                 OnAfterResetSelected(Rec);
 
