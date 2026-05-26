@@ -101,6 +101,30 @@ codeunit 11344446 "AZD Setup"
         ADLSECredentials.Check();
     end;
 
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Setup", 'rm')]
+    [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Current Session", 'd')]
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::System.DataAdministration."Environment Cleanup", OnClearDatabaseConfig, '', false, false)]
+    local procedure EnvironmentCleanup_OnClearDatabaseConfig(SourceEnv: Enum System.DataAdministration."Environment Type"; DestinationEnv: Enum System.DataAdministration."Environment Type")
+    var
+        ADLSESetup: Record "AZD Setup";
+        ADLSECurrentSession: Record "AZD Current Session";
+    begin
+        if DestinationEnv <> DestinationEnv::Sandbox then
+            exit;
+        if not ADLSESetup.Exists() then
+            exit;
+        ADLSESetup.GetSingleton();
+        ADLSESetup."Schema Exported On" := 0DT;
+        ADLSESetup.Workspace := '';
+        ADLSESetup.Lakehouse := '';
+        ADLSESetup.LandingZone := '';
+        ADLSESetup.Container := '';
+        ADLSESetup."Account Name" := '';
+        ADLSESetup.Modify(false);
+        ADLSECurrentSession.DeleteAll(true);
+    end;
+
+
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Field", 'rd')]
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table", 'rd')]
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Setup", 'm')]
