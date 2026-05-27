@@ -128,8 +128,9 @@ page 11344454 "AZD Company Setup Tables"
                 var
                     AZDTable: Record "AZD Table";
                 begin
-                    AZDTable.Get(Rec."Table ID");
-                    AZDTable.Delete(true);
+                    Rec.Delete(true);
+                    if AZDTable.Get(Rec."Table ID") then
+                        AZDTable.Delete(true);
                     CurrPage.Update();
                 end;
             }
