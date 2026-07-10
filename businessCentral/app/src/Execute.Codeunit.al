@@ -472,7 +472,7 @@ codeunit 11344442 "AZD Execute"
     end;
 
     [IntegrationEvent(false, false)]
-    internal procedure OnExportFinished(var ADLSETable: Record "ADLSE Table"; TableCaption: Text)
+    internal procedure OnExportFinished(var ADLSETable: Record "AZD Table"; TableCaption: Text)
     begin
     end;
 
