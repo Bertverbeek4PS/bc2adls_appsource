@@ -366,3 +366,4 @@ cache_*
 metadata.json
 *.zip
 SignApp.ps1
+.tools/*
