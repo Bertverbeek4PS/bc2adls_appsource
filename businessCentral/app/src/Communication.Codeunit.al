@@ -17,6 +17,9 @@ codeunit 11344440 "AZD Communication"
         HighestTimeStampOnPayload: BigInteger;
         Payload: TextBuilder;
         LastFlushedTimeStamp: BigInteger;
+        LastFlushedDeletedEntryNo: BigInteger;
+        HighestDeletedEntryNoOnPayload: BigInteger;
+        CombineUpsertsAndDeletes: Boolean;
         NumberOfFlushes: Integer;
         EntityName: Text;
         EntityJson: JsonObject;
@@ -100,6 +103,13 @@ codeunit 11344440 "AZD Communication"
             CustomDimensions.Add('Last flushed time stamp', Format(LastFlushedTimeStampValue));
             ADLSEExecution.Log('ADLSE-041', 'Initialized ADL Communication to write to the lake.', Verbosity::Verbose);
         end;
+    end;
+
+    procedure EnableCombinedExport(DeletedLastEntryNoValue: BigInteger)
+    begin
+        // Enables writing both upserts and deletes through this single instance into one file (Open Mirroring delta exports).
+        CombineUpsertsAndDeletes := true;
+        LastFlushedDeletedEntryNo := DeletedLastEntryNoValue;
     end;
 
     procedure CheckEntity(CdmDataFormat: Enum "AZD CDM Format"; var EntityJsonNeedsUpdate: Boolean; var ManifestJsonsNeedsUpdate: Boolean; SchemaUpdate: Boolean)
@@ -296,11 +306,18 @@ codeunit 11344440 "AZD Communication"
             if ADLSESetup."Storage Type" = ADLSESetup."Storage Type"::"Open Mirroring" then
                 UpdateInProgressTimeStampOnTable(RecordRef.Number(), RecordTimeStamp, Deletes);
         end;
-        LastTimestampExported := LastFlushedTimeStamp;
+        if CombineUpsertsAndDeletes and Deletes then
+            LastTimestampExported := LastFlushedDeletedEntryNo
+        else
+            LastTimestampExported := LastFlushedTimeStamp;
 
         Payload.Append(RecordPayLoad);
-        if RecordTimeStamp > HighestTimeStampOnPayload then
-            HighestTimeStampOnPayload := RecordTimeStamp;
+        if CombineUpsertsAndDeletes and Deletes then begin
+            if RecordTimeStamp > HighestDeletedEntryNoOnPayload then
+                HighestDeletedEntryNoOnPayload := RecordTimeStamp;
+        end else
+            if RecordTimeStamp > HighestTimeStampOnPayload then
+                HighestTimeStampOnPayload := RecordTimeStamp;
     end;
 
     [TryFunction]
@@ -308,6 +325,15 @@ codeunit 11344440 "AZD Communication"
     begin
         ClearLastError();
         LastTimestampExported := Finish();
+    end;
+
+    [TryFunction]
+    procedure TryFinish(var LastUpdatedTimeStampExported: BigInteger; var LastDeletedEntryNoExported: BigInteger)
+    begin
+        ClearLastError();
+        Finish();
+        LastUpdatedTimeStampExported := LastFlushedTimeStamp;
+        LastDeletedEntryNoExported := LastFlushedDeletedEntryNo;
     end;
 
     local procedure Finish() LastTimestampExported: BigInteger
@@ -379,9 +405,18 @@ codeunit 11344440 "AZD Communication"
                 end;
         end;
 
-        LastFlushedTimeStamp := HighestTimeStampOnPayload;
+        if CombineUpsertsAndDeletes then begin
+            // Upsert timestamps and delete entry numbers have different meanings, so track them separately.
+            // Retain the previous value when the flushed payload contained no records of that kind (values are always > 0).
+            if HighestTimeStampOnPayload > 0 then
+                LastFlushedTimeStamp := HighestTimeStampOnPayload;
+            if HighestDeletedEntryNoOnPayload > 0 then
+                LastFlushedDeletedEntryNo := HighestDeletedEntryNoOnPayload;
+        end else
+            LastFlushedTimeStamp := HighestTimeStampOnPayload;
         Payload.Clear();
         HighestTimeStampOnPayload := 0;
+        HighestDeletedEntryNoOnPayload := 0;
         NumberOfFlushes += 1;
 
         ADLSE.OnTableExported(TableID, LastFlushedTimeStamp);
