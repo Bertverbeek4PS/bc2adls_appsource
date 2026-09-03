@@ -63,6 +63,7 @@ table 11344451 "AZD Table Last Timestamp"
     var
         SaveUpsertLastTimestampFailedErr: Label 'Could not save the last time stamp for the upserts on table %1.', Comment = '%1: table caption';
         SaveDeletionLastTimestampFailedErr: Label 'Could not save the last time stamp for the deletions on table %1.', Comment = '%1: table caption';
+        TimestampAscendingSortViewLbl: Label 'Sorting(Timestamp) Order(Ascending)', Locked = true;
 
     [InherentPermissions(PermissionObjectType::TableData, Database::"AZD Table Last Timestamp", 'r')]
     procedure ExistsUpdatedLastTimestamp(TableID: Integer): Boolean
@@ -104,14 +105,18 @@ table 11344451 "AZD Table Last Timestamp"
         RecordRef.Open(TableID);
         FilterDateTime := CreateDateTime(StartDate, 0T);
 
+        RecordRef.SetView(TimestampAscendingSortViewLbl);
         ModifiedAtFieldRef := RecordRef.Field(RecordRef.SystemModifiedAtNo());
         ModifiedAtFieldRef.SetFilter('>=%1', FilterDateTime);
 
         if RecordRef.FindFirst() then begin
+            // Fence is exclusive downstream (TimeStamp > fence), so back off by one to keep this record.
             TimestampFieldRef := RecordRef.Field(0);
             MinTimestamp := TimestampFieldRef.Value();
+            MinTimestamp := MinTimestamp - 1;
         end else begin
             RecordRef.Reset();
+            RecordRef.SetView(TimestampAscendingSortViewLbl);
             ModifiedAtFieldRef := RecordRef.Field(RecordRef.SystemModifiedAtNo());
             ModifiedAtFieldRef.SetFilter('<%1', FilterDateTime);
 

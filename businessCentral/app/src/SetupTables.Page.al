@@ -123,6 +123,11 @@ page 11344451 "AZD Setup Tables"
                     Caption = 'Initial Load Start Date';
                     ApplicationArea = All;
                 }
+                field("Initial Load End Date"; Rec."Initial Load End Date")
+                {
+                    Caption = 'Initial Load End Date';
+                    ApplicationArea = All;
+                }
             }
         }
     }
