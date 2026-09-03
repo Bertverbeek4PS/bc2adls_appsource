@@ -243,7 +243,7 @@ table 11344450 "AZD Table"
 
                 if not AllCompanies then begin
                     if ADLSESetup."Storage Type" = ADLSESetup."Storage Type"::"Open Mirroring" then begin
-                        if ADLSETableLastTimestamp.Get(CompanyName(), Rec."Table ID") then
+                        if ADLSETableLastTimestamp.Get(ADLSETableLastTimestamp.GetCompanyNameToLookFor(Rec."Table ID"), Rec."Table ID") then
                             ADLSETableLastTimestamp.Delete(true);
                     end
                     else begin
