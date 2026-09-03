@@ -210,7 +210,7 @@ table 11344451 "AZD Table Last Timestamp"
             Rec."Deleted Last Entry No." := Timestamp;
     end;
 
-    local procedure GetCompanyNameToLookFor(TableID: Integer): Text
+    internal procedure GetCompanyNameToLookFor(TableID: Integer): Text
     var
         ADLSEUtil: Codeunit "AZD Util";
     begin
