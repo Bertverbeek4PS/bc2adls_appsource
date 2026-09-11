@@ -336,6 +336,19 @@ codeunit 11344440 "AZD Communication"
         LastDeletedEntryNoExported := LastFlushedDeletedEntryNo;
     end;
 
+    [TryFunction]
+    procedure TryExportEmptyFullLoad()
+    var
+        ADLSEUtil: Codeunit "AZD Util";
+        RecordRef: RecordRef;
+    begin
+        // Writes a header-only CSV so Fabric Open Mirroring receives a snapshot file even for tables without records.
+        ClearLastError();
+        RecordRef.Open(TableID);
+        Payload.Append(ADLSEUtil.CreateCsvHeader(RecordRef, FieldIdList));
+        FlushPayload();
+    end;
+
     local procedure Finish() LastTimestampExported: BigInteger
     var
         ADLSESetup: Record "AZD Setup";
