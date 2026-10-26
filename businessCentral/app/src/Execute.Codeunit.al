@@ -354,16 +354,20 @@ codeunit 11344442 "AZD Execute"
                         ADLSEUtil.CreateFakeRecordForDeletedAction(ADLSEDeletedRecord, RecordRef);
                         if ADLSECommunication.TryCollectAndSendRecord(RecordRef, ADLSEDeletedRecord."Entry No.", FlushedTimeStamp, true) then
                             DeletedLastEntryNo := FlushedTimeStamp
-                        else
+                        else begin
                             ErrorMessage.Message := StrSubstNo('%1%2', GetLastErrorText(), GetLastErrorCallStack());
+                            Error(ErrorMessage);
+                        end;
                     end;
                 until ADLSEDeletedRecord.Next() = 0;
 
             if DoFinish then
                 if ADLSECommunication.TryFinish(FlushedTimeStamp) then
                     DeletedLastEntryNo := FlushedTimeStamp
-                else
+                else begin
                     ErrorMessage.Message := StrSubstNo('%1%2', GetLastErrorText(), GetLastErrorCallStack());
+                    Error(ErrorMessage);
+                end;
         end;
         if EmitTelemetry then
             ADLSEExecution.Log('ADLSE-011', 'Deleted records exported', Verbosity::Normal, CustomDimensions);
