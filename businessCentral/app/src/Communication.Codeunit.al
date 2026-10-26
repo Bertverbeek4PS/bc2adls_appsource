@@ -16,6 +16,7 @@ codeunit 11344440 "AZD Communication"
         BlobContentLength: Integer;
         HighestTimeStampOnPayload: BigInteger;
         Payload: TextBuilder;
+        CsvHeader: Text;
         LastFlushedTimeStamp: BigInteger;
         LastFlushedDeletedEntryNo: BigInteger;
         HighestDeletedEntryNoOnPayload: BigInteger;
@@ -86,9 +87,13 @@ codeunit 11344440 "AZD Communication"
         ADLSEUtil: Codeunit "AZD Util";
         ADLSEExecution: Codeunit "AZD Execution";
         CustomDimensions: Dictionary of [Text, Text];
+        RecordRef: RecordRef;
     begin
         TableID := TableIDValue;
         FieldIdList := FieldIdListValue;
+        RecordRef.Open(TableID);
+        CsvHeader := ADLSEUtil.CreateCsvHeader(RecordRef, FieldIdList);
+        RecordRef.Close();
 
         ADLSECredentials.Init();
         EntityName := ADLSEUtil.GetDataLakeCompliantTableName(TableID);
@@ -198,7 +203,7 @@ codeunit 11344440 "AZD Communication"
     begin
         if DataBlobPath <> '' then
             // Microsoft Fabric has a limit on the blob size. Create a new blob before reaching this limit
-            if not ADLSEGen2Util.IsMaxBlobFileSize(DataBlobPath, BlobContentLength, Payload.Length()) then
+            if not ADLSEGen2Util.IsMaxBlobFileSize(DataBlobPath, BlobContentLength, StrLen(CsvHeader) + Payload.Length()) then
                 exit // no need to create a new blob
             else begin
                 if EmitTelemetry then begin
@@ -274,15 +279,14 @@ codeunit 11344440 "AZD Communication"
     procedure TryCollectAndSendRecord(RecordRef: RecordRef; RecordTimeStamp: BigInteger; var LastTimestampExported: BigInteger; Deletes: Boolean)
     var
         ADLSESetup: Record "AZD Setup";
-        DataBlobCreated: Boolean;
     begin
         ClearLastError();
         ADLSESetup.GetSingleton();
-        DataBlobCreated := CreateDataBlob(ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring");
-        LastTimestampExported := CollectAndSendRecord(RecordRef, RecordTimeStamp, DataBlobCreated, Deletes);
+        CreateDataBlob(ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring");
+        LastTimestampExported := CollectAndSendRecord(RecordRef, RecordTimeStamp, Deletes);
     end;
 
-    local procedure CollectAndSendRecord(RecordRef: RecordRef; RecordTimeStamp: BigInteger; DataBlobCreated: Boolean; Deletes: Boolean) LastTimestampExported: BigInteger
+    local procedure CollectAndSendRecord(RecordRef: RecordRef; RecordTimeStamp: BigInteger; Deletes: Boolean) LastTimestampExported: BigInteger
     var
         ADLSESetup: Record "AZD Setup";
         ADLSEUtil: Codeunit "AZD Util";
@@ -292,17 +296,12 @@ codeunit 11344440 "AZD Communication"
         if NumberOfFlushes = 50000 then // https://docs.microsoft.com/en-us/rest/api/storageservices/put-block#remarks
             Error(CannotAddedMoreBlocksErr);
 
-        // Add headers into the existing Payload
-        if (DataBlobCreated) and (Payload.Length() <> 0) then
-            Payload.Insert(1, ADLSEUtil.CreateCsvHeader(RecordRef, FieldIdList));
-
-        RecordPayLoad := ADLSEUtil.CreateCsvPayload(RecordRef, FieldIdList, Payload.Length() = 0, Deletes);
+        RecordPayLoad := ADLSEUtil.CreateCsvPayload(RecordRef, FieldIdList, false, Deletes);
+        if StrLen(CsvHeader) + StrLen(RecordPayLoad) + 2 > MaxPayloadSize() then
+            Error(SingleRecordTooLargeErr);
         // check if payload exceeds the limit
-        if Payload.Length() + StrLen(RecordPayLoad) + 2 > MaxPayloadSize() then begin // the 2 is to account for new line characters
-            if Payload.Length() = 0 then
-                // the record alone exceeds the max payload size
-                Error(SingleRecordTooLargeErr);
-            FlushPayload();
+        if StrLen(CsvHeader) + Payload.Length() + StrLen(RecordPayLoad) + 2 > MaxPayloadSize() then begin // the 2 is to account for new line characters
+            FlushPayload(false);
             if ADLSESetup."Storage Type" = ADLSESetup."Storage Type"::"Open Mirroring" then
                 UpdateInProgressTimeStampOnTable(RecordRef.Number(), RecordTimeStamp, Deletes);
         end;
@@ -338,15 +337,10 @@ codeunit 11344440 "AZD Communication"
 
     [TryFunction]
     procedure TryExportEmptyFullLoad()
-    var
-        ADLSEUtil: Codeunit "AZD Util";
-        RecordRef: RecordRef;
     begin
         // Writes a header-only CSV so Fabric Open Mirroring receives a snapshot file even for tables without records.
         ClearLastError();
-        RecordRef.Open(TableID);
-        Payload.Append(ADLSEUtil.CreateCsvHeader(RecordRef, FieldIdList));
-        FlushPayload();
+        FlushPayload(true);
     end;
 
     local procedure Finish() LastTimestampExported: BigInteger
@@ -356,7 +350,7 @@ codeunit 11344440 "AZD Communication"
         if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then
             if (DataBlobPath = '') and (Payload.Length() > 0) then
                 CreateDataBlob();
-        FlushPayload();
+        FlushPayload(false);
 
         LastTimestampExported := LastFlushedTimeStamp;
     end;
@@ -373,7 +367,7 @@ codeunit 11344440 "AZD Communication"
         exit(MaxCapacityOfTextBuilder);
     end;
 
-    local procedure FlushPayload()
+    local procedure FlushPayload(ExportEmptyFullLoad: Boolean)
     var
         ADLSESetup: Record "AZD Setup";
         ADLSEGen2Util: Codeunit "AZD Gen 2 Util";
@@ -381,9 +375,18 @@ codeunit 11344440 "AZD Communication"
         ADLSE: Codeunit AZD;
         CustomDimensions: Dictionary of [Text, Text];
         BlockID: Text;
+        PayloadToSend: TextBuilder;
     begin
-        if Payload.Length() = 0 then
+        if (Payload.Length() = 0) and not ExportEmptyFullLoad then
             exit;
+
+        // Build the file header separately so failed writes never alter the buffered records.
+        if (NumberOfFlushes = 0) or
+            (ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring") or
+            ((ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Microsoft Fabric") and (BlobContentLength = 0))
+        then
+            PayloadToSend.Append(CsvHeader);
+        PayloadToSend.Append(Payload.ToText());
 
         if EmitTelemetry then begin
             CustomDimensions.Add('Length of payload', Format(Payload.Length()));
@@ -393,7 +396,7 @@ codeunit 11344440 "AZD Communication"
         case ADLSESetup.GetStorageType() of
             ADLSESetup."Storage Type"::"Azure Data Lake":
                 begin
-                    BlockID := ADLSEGen2Util.AddBlockToDataBlob(GetBaseUrl() + DataBlobPath, Payload.ToText(), ADLSECredentials);
+                    BlockID := ADLSEGen2Util.AddBlockToDataBlob(GetBaseUrl() + DataBlobPath, PayloadToSend.ToText(), ADLSECredentials);
                     if EmitTelemetry then begin
                         Clear(CustomDimensions);
                         CustomDimensions.Add('Block ID', BlockID);
@@ -411,7 +414,7 @@ codeunit 11344440 "AZD Communication"
                         DataBlobPath := '';
                         CreateDataBlob();
                     end;
-                    ADLSEGen2Util.AddBlockToDataBlob(GetBaseUrl() + DataBlobPath, Payload.ToText(), BlobContentLength, ADLSECredentials);
+                    ADLSEGen2Util.AddBlockToDataBlob(GetBaseUrl() + DataBlobPath, PayloadToSend.ToText(), BlobContentLength, ADLSECredentials);
                     BlobContentLength := ADLSEGen2Util.GetBlobContentLength(GetBaseUrl() + DataBlobPath, ADLSECredentials);
                     if ADLSESetup.GetStorageType() = ADLSESetup."Storage Type"::"Open Mirroring" then
                         RenameDataBlob();
